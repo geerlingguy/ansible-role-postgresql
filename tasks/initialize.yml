@@ -1,4 +1,10 @@
 ---
+- name: Set PGDATA environment variable.
+  template:
+    src: postgres.sh.j2
+    dest: /etc/profile.d/postgres.sh
+    mode: 0644
+
 - name: Ensure PostgreSQL data directory exists.
   file:
     path: "{{ postgresql_data_dir }}"
@@ -14,6 +20,6 @@
 
 - name: Ensure PostgreSQL database is initialized.
   command: "initdb -D {{ postgresql_data_dir }}"
-  when: pgdata_dir_version.stat.exists
+  when: not pgdata_dir_version.stat.exists
   become: yes
   become_user: "{{ postgresql_user }}"

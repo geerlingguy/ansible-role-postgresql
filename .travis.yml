@@ -45,5 +45,10 @@ script:
   # Check PostgreSQL status.
   - 'docker exec -u postgres "$(cat ${container_id})" pg_ctl -D /var/lib/pgsql/data status'
 
+after_failure:
+  # Check what happened on systemd systems.
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm systemctl -l status postgresql.service'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm journalctl -xe --no-pager'
+
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
