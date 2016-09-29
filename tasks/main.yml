@@ -1,0 +1,16 @@
+---
+# Variable configuration.
+- include: variables.yml
+
+# Setup/install tasks.
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+# Configure PostgreSQL.
+- include: configure.yml
+- include: secure-installation.yml
+- include: databases.yml
+- include: users.yml

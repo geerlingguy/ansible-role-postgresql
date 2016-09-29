@@ -1,0 +1,6 @@
+---
+__postgresql_daemon: postgresql
+__postgresql_packages:
+  - postgresql
+  - postgresql-contrib
+  - libpq-dev

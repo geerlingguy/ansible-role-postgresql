@@ -1,0 +1,22 @@
+---
+# RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
+postgresql_enablerepo: ""
+
+# Databases to ensure exist.
+postgresql_databases: []
+  # - name: example
+  #   lc_collate: 'en_US.UTF-8' # optional
+  #   lc_ctype: 'en_US.UTF-8' # optional
+  #   encoding: 'UTF-8' # optional
+
+# Users to ensure exist.
+postgresql_users: []
+  # - name: jdoe
+  #   password: supersecure # optional
+  #   login_host: example.com # optional, defaults to 'localhost'
+  #   login_password: supersecure # optional
+  #   login_user: admin # optional, defaults to 'postgres'
+  #   port: 1234 # optional, defaults to 5432
+  #   priv: table:priv1,priv2 # optional
+  #   role_attr_flags: CREATEDB,NOSUPERUSER # optional
+  #   state: present # optional

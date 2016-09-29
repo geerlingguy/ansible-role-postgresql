@@ -1,0 +1,14 @@
+---
+# Variable configuration.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Define postgresql_packages.
+  set_fact:
+    postgresql_packages: "{{ __postgresql_packages | list }}"
+  when: postgresql_packages is not defined
+
+- name: Define postgresql_daemon.
+  set_fact:
+    postgresql_daemon: "{{ __postgresql_daemon }}"
+  when: postgresql_daemon is not defined

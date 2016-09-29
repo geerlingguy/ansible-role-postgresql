@@ -1,0 +1,14 @@
+---
+- name: Ensure PostgreSQL users are present.
+  postgresql_user:
+    name: "{{ item.name }}"
+    password: "{{ item.password | default(omit) }}"
+    login_host: "{{ item.login_host | default('localhost') }}"
+    login_password: "{{ item.login_password | default(omit) }}"
+    login_user: "{{ item.login_user | default(postgres) }}"
+    port: "{{ item.port | default('5432') }}"
+    priv: "{{ item.priv | default(omit) }}"
+    role_attr_flags: "{{ item.role_attr_flags | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ postgresql_users }}"
+  no_log: true
