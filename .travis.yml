@@ -43,8 +43,7 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Check PostgreSQL status.
-  - 'docker exec "$(cat ${container_id})" cat /etc/passwd'
-  - 'docker exec "$(cat ${container_id})" -u postgres pg_ctl status'
+  - 'docker exec -u postgres "$(cat ${container_id})" pg_ctl status'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
