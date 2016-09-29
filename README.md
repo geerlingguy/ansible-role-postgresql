@@ -21,6 +21,10 @@ Available variables are listed below, along with default values (see `defaults/m
 
 TODO.
 
+    postgresql_data_dir: /var/lib/pgsql/data
+
+TODO.
+
     postgresql_user: postgres
     postgresql_group: postgres
 
