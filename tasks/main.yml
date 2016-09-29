@@ -9,8 +9,13 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
+- name: Ensure PostgreSQL is started and enabled on boot.
+  service:
+    name: "{{ postgresql_daemon }}"
+    state: started
+    enabled: yes
+
 # Configure PostgreSQL.
-- include: configure.yml
-- include: secure-installation.yml
+- include: initialize.yml
 - include: databases.yml
 - include: users.yml

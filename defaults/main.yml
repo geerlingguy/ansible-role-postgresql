@@ -2,6 +2,11 @@
 # RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
 postgresql_enablerepo: ""
 
+postgresql_data_dir: /var/lib/pgsql/data
+
+postgresql_user: postgres
+postgresql_group: postgres
+
 # Databases to ensure exist.
 postgresql_databases: []
   # - name: example

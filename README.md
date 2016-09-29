@@ -21,6 +21,11 @@ Available variables are listed below, along with default values (see `defaults/m
 
 TODO.
 
+    postgresql_user: postgres
+    postgresql_group: postgres
+
+TODO.
+
     postgresql_databases:
       - name: example
         lc_collate: 'en_US.UTF-8' # optional
