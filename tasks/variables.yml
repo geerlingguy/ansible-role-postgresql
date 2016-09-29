@@ -1,7 +1,12 @@
 ---
 # Variable configuration.
-- name: Include OS-specific variables.
+- name: Include OS-specific variables (Debian).
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
+  when: ansible_os_family == 'Debian'
+
+- name: Include OS-specific variables (RedHat).
   include_vars: "{{ ansible_os_family }}.yml"
+  when: ansible_os_family == 'RedHat'
 
 - name: Define postgresql_packages.
   set_fact:
@@ -12,3 +17,13 @@
   set_fact:
     postgresql_daemon: "{{ __postgresql_daemon }}"
   when: postgresql_daemon is not defined
+
+- name: Define postgresql_version.
+  set_fact:
+    postgresql_version: "{{ __postgresql_version }}"
+  when: postgresql_version is not defined
+
+- name: Define postgresql_bin_path.
+  set_fact:
+    postgresql_bin_path: "{{ __postgresql_bin_path }}"
+  when: postgresql_bin_path is not defined

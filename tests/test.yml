@@ -1,6 +1,12 @@
 ---
 - hosts: all
 
+  vars:
+    postgresql_databases:
+      - name: example
+    postgresql_users:
+      - name: jdoe
+
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=yes

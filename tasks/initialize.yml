@@ -1,5 +1,5 @@
 ---
-- name: Set PGDATA environment variable.
+- name: Set PostgreSQL environment variables.
   template:
     src: postgres.sh.j2
     dest: /etc/profile.d/postgres.sh
@@ -19,7 +19,7 @@
   register: pgdata_dir_version
 
 - name: Ensure PostgreSQL database is initialized.
-  command: "initdb -D {{ postgresql_data_dir }}"
+  command: "{{ postgresql_bin_path }}/initdb -D {{ postgresql_data_dir }}"
   when: not pgdata_dir_version.stat.exists
   become: yes
   become_user: "{{ postgresql_user }}"

@@ -1,4 +1,6 @@
 ---
+__postgresql_version: "9.2"
+__postgresql_bin_path: "/usr/bin"
 __postgresql_daemon: postgresql
 __postgresql_packages:
   - postgresql

@@ -51,6 +51,13 @@ TODO.
 
 TODO.
 
+    postgresql_version: [OS-specific]
+    postgresql_bin_path: [OS-specific]
+    postgresql_daemon: [OS-specific]
+    postgresql_packages: [OS-specific]
+
+TODO.
+
 ## Dependencies
 
 None.
