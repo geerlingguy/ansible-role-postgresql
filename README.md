@@ -35,6 +35,10 @@ TODO.
         lc_collate: 'en_US.UTF-8' # optional
         lc_ctype: 'en_US.UTF-8' # optional
         encoding: 'UTF-8' # optional
+        login_host: example.com # optional, defaults to 'localhost'
+        login_password: supersecure # optional
+        login_user: admin # optional, defaults to 'postgres'
+        port: 5432 # optional
 
 TODO.
 

@@ -1,5 +1,5 @@
 ---
-__postgresql_version: "9.5"
+__postgresql_version: "9.3"
 __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
 __postgresql_daemon: postgresql
 __postgresql_packages:
