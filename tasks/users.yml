@@ -5,7 +5,7 @@
     password: "{{ item.password | default(omit) }}"
     login_host: "{{ item.login_host | default('localhost') }}"
     login_password: "{{ item.login_password | default(omit) }}"
-    login_user: "{{ item.login_user | default(postgres) }}"
+    login_user: "{{ item.login_user | default('postgres') }}"
     port: "{{ item.port | default('5432') }}"
     priv: "{{ item.priv | default(omit) }}"
     role_attr_flags: "{{ item.role_attr_flags | default(omit) }}"
