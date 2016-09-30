@@ -12,5 +12,7 @@
   file:
     path: "{{ item }}"
     state: directory
-    mode: 0777
+    owner: "{{ postgresql_user }}"
+    group: "{{ postgresql_group }}"
+    mode: 02775
   with_items: "{{ postgresql_unix_socket_directories }}"
