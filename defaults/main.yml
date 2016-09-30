@@ -5,11 +5,13 @@ postgresql_enablerepo: ""
 postgresql_user: postgres
 postgresql_group: postgres
 
-postgresql_unix_socket_dir: /var/run/postgresql
+postgresql_unix_socket_directories:
+  - /var/run/postgresql
 
+# Global configuration options that will be set in postgresql.conf.
 postgresql_global_config_options:
-  - option: unix_socket_directory
-    value: '{{ postgresql_unix_socket_dir }}'
+  - option: unix_socket_directories
+    value: '{{ postgresql_unix_socket_directories | join(",") }}'
 
 # Debian only. Used to generate the locales used by PostgreSQL databases.
 postgresql_locales:
