@@ -6,12 +6,12 @@ env:
     init: /usr/lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
     postgresql_bin_dir: /usr/bin
-    postgres_data_path: /var/lib/pgsql/data
+    postgresql_data_dir: /var/lib/pgsql/data
   - distro: centos6
     init: /sbin/init
     run_opts: ""
     postgresql_bin_dir: /usr/bin
-    postgres_data_path: /var/lib/pgsql/data
+    postgresql_data_dir: /var/lib/pgsql/data
   - distro: ubuntu1604
     init: /lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
@@ -56,7 +56,7 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Check PostgreSQL status.
-  - 'docker exec -u postgres "$(cat ${container_id})" ${postgresql_bin_dir}/pg_ctl -D ${postgres_data_dir} status'
+  - 'docker exec -u postgres "$(cat ${container_id})" ${postgresql_bin_dir}/pg_ctl -D ${postgresql_data_dir} status'
 
 after_failure:
   # Check what happened on systemd systems.
