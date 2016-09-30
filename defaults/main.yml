@@ -19,24 +19,27 @@ postgresql_locales:
 
 # Databases to ensure exist.
 postgresql_databases: []
-  # - name: example
-  #   lc_collate: 'en_US.UTF-8' # optional
-  #   lc_ctype: 'en_US.UTF-8' # optional
-  #   encoding: 'UTF-8' # optional
-  #   login_host: example.com # optional, defaults to 'localhost'
-  #   login_password: supersecure # optional
-  #   login_user: admin # optional, defaults to "{{ postgresql_user }}"
-  #   port: 5432 # optional
-  #   state: present # optional, defaults to 'present'
+  # - name: exampledb # required; the rest are optional
+  #   lc_collate: # defaults to 'en_US.UTF-8'
+  #   lc_ctype: # defaults to 'en_US.UTF-8'
+  #   encoding: # defaults to 'UTF-8'
+  #   template: # defaults to 'template0'
+  #   login_host: # defaults to 'localhost'
+  #   login_password: # defaults to not set
+  #   login_user: # defaults to '{{ postgresql_user }}'
+  #   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+  #   port: # defaults to not set
+  #   state: # defaults to 'present'
 
 # Users to ensure exist.
 postgresql_users: []
-  # - name: jdoe
-  #   password: supersecure # optional
-  #   login_host: example.com # optional, defaults to 'localhost'
-  #   login_password: supersecure # optional
-  #   login_user: admin # optional, defaults to "{{ postgresql_user }}"
-  #   port: 1234 # optional, defaults to 5432
-  #   priv: table:priv1,priv2 # optional
-  #   role_attr_flags: CREATEDB,NOSUPERUSER # optional
-  #   state: present # optional
+  # - name: jdoe #required; the rest are optional
+  #   password: # defaults to not set
+  #   priv: # defaults to not set
+  #   role_attr_flags: # defaults to not set
+  #   login_host: # defaults to 'localhost'
+  #   login_password: # defaults to not set
+  #   login_user: # defaults to '{{ postgresql_user }}'
+  #   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+  #   port: # defaults to not set
+  #   state: # defaults to 'present'

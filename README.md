@@ -19,44 +19,66 @@ Available variables are listed below, along with default values (see `defaults/m
 
     postgresql_enablerepo: ""
 
-TODO.
+(RHEL/CentOS only) You can set a repo to use for the PostgreSQL installation by passing it in here.
 
     postgresql_user: postgres
     postgresql_group: postgres
 
-TODO.
+The user and group under which PostgreSQL will run.
+
+    postgresql_unix_socket_directories:
+      - /var/run/postgresql
+
+The directories (usually one, but can be multiple) where PostgreSQL's socket will be created.
+
+    postgresql_global_config_options:
+      - option: unix_socket_directories
+        value: '{{ postgresql_unix_socket_directories | join(",") }}'
+
+Global configuration options that will be set in `postgresql.conf`. Note that for RHEL/CentOS 6 (or very old versions of PostgreSQL), you need to at least override this variable and set the `option` to `unix_socket_directory`.
+
+    postgresql_locales:
+      - 'en_US.UTF-8'
+
+(Debian/Ubuntu only) Used to generate the locales used by PostgreSQL databases.
 
     postgresql_databases:
-      - name: example
-        lc_collate: 'en_US.UTF-8' # optional
-        lc_ctype: 'en_US.UTF-8' # optional
-        encoding: 'UTF-8' # optional
-        login_host: example.com # optional, defaults to 'localhost'
-        login_password: supersecure # optional
-        login_user: admin # optional, defaults to "{{ postgresql_user }}"
-        port: 5432 # optional
+      - name: exampledb # required; the rest are optional
+        lc_collate: # defaults to 'en_US.UTF-8'
+        lc_ctype: # defaults to 'en_US.UTF-8'
+        encoding: # defaults to 'UTF-8'
+        template: # defaults to 'template0'
+        login_host: # defaults to 'localhost'
+        login_password: # defaults to not set
+        login_user: # defaults to 'postgresql_user'
+        login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+        port: # defaults to not set
+        state: # defaults to 'present'
 
-TODO.
+A list of databases to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
     postgresql_users:
-      - name: jdoe
-        password: supersecure # optional
-        login_host: example.com # optional, defaults to 'localhost'
-        login_password: supersecure # optional
-        login_user: admin # optional, defaults to "{{ postgresql_user }}"
-        port: 1234 # optional, defaults to 5432
-        priv: table:priv1,priv2 # optional
-        role_attr_flags: CREATEDB,NOSUPERUSER # optional
-        state: present # optional
+      - name: jdoe #required; the rest are optional
+        password: # defaults to not set
+        priv: # defaults to not set
+        role_attr_flags: # defaults to not set
+        login_host: # defaults to 'localhost'
+        login_password: # defaults to not set
+        login_user: # defaults to '{{ postgresql_user }}'
+        login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+        port: # defaults to not set
+        state: # defaults to 'present'
 
-TODO.
+A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
     postgresql_version: [OS-specific]
+    postgresql_data_dir: [OS-specific]
     postgresql_bin_path: [OS-specific]
+    postgresql_config_path: [OS-specific]
     postgresql_daemon: [OS-specific]
     postgresql_packages: [OS-specific]
 
-TODO.
+OS-specific variables that are set by include files in this role's `vars` directory. These shouldn't be overridden unless you're using a verison of PostgreSQL that wasn't installed using system packages.
 
 ## Dependencies
 
@@ -77,7 +99,7 @@ None.
       - name: example_db
     postgresql_users:
       - name: example_user
-        password: similarly-secure-password
+        password: supersecure
 
 ## License
 
