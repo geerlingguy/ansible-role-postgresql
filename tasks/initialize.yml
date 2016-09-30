@@ -6,6 +6,21 @@
     mode: 0644
   notify: restart postgresql
 
+- name: Configure global settings.
+  lineinfile:
+    dest: "{{ postgresql_config_path }}/postgresql.conf"
+    regexp: "^#?{{ item.option }}.+$"
+    line: "{{ item.option }} = '{{ item.value }}'"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ postgresql_global_config_options }}"
+  notify: restart postgresql
+
+- name: Ensure PostgreSQL unix socket dir exists.
+  file:
+    path: "{{ postgresql_unix_socket_dir }}"
+    state: directory
+    mode: 0777
+
 - name: Ensure PostgreSQL data directory exists.
   file:
     path: "{{ postgresql_data_dir }}"
