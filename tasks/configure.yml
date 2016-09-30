@@ -10,6 +10,7 @@
 
 - name: Ensure PostgreSQL unix socket dirs exist.
   file:
-    path: "{{ postgresql_unix_socket_directories }}"
+    path: "{{ item }}"
     state: directory
     mode: 0777
+  with_items: "{{ postgresql_unix_socket_directories }}"
