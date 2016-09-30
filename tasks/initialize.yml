@@ -4,6 +4,7 @@
     src: postgres.sh.j2
     dest: /etc/profile.d/postgres.sh
     mode: 0644
+  notify: restart postgresql
 
 - name: Ensure PostgreSQL data directory exists.
   file:
@@ -23,3 +24,6 @@
   when: not pgdata_dir_version.stat.exists
   become: yes
   become_user: "{{ postgresql_user }}"
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true

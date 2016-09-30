@@ -23,6 +23,11 @@
     postgresql_version: "{{ __postgresql_version }}"
   when: postgresql_version is not defined
 
+- name: Define postgresql_data_dir.
+  set_fact:
+    postgresql_data_dir: "{{ __postgresql_data_dir }}"
+  when: postgresql_data_dir is not defined
+
 - name: Define postgresql_bin_path.
   set_fact:
     postgresql_bin_path: "{{ __postgresql_bin_path }}"

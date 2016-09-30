@@ -21,10 +21,6 @@ Available variables are listed below, along with default values (see `defaults/m
 
 TODO.
 
-    postgresql_data_dir: /var/lib/pgsql/data
-
-TODO.
-
     postgresql_user: postgres
     postgresql_group: postgres
 
@@ -37,7 +33,7 @@ TODO.
         encoding: 'UTF-8' # optional
         login_host: example.com # optional, defaults to 'localhost'
         login_password: supersecure # optional
-        login_user: admin # optional, defaults to 'postgres'
+        login_user: admin # optional, defaults to "{{ postgresql_user }}"
         port: 5432 # optional
 
 TODO.
@@ -47,7 +43,7 @@ TODO.
         password: supersecure # optional
         login_host: example.com # optional, defaults to 'localhost'
         login_password: supersecure # optional
-        login_user: admin # optional, defaults to 'postgres'
+        login_user: admin # optional, defaults to "{{ postgresql_user }}"
         port: 1234 # optional, defaults to 5432
         priv: table:priv1,priv2 # optional
         role_attr_flags: CREATEDB,NOSUPERUSER # optional
