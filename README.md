@@ -72,6 +72,23 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
+    postgresql_privileges:
+      - db: exampledb # required
+        roles: jdoe # required
+        type: # defaults to 'table'
+        grant_option: # defaults to not set
+        login_host: # defaults to 'localhost'
+        login_password: # defaults to not set
+        login_user: # defaults to '{{ postgresql_user }}'
+        login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+        objs: # defaults to not set
+        port: # defaults to not set
+        privs: # defaults to not set
+        schema: # defaults to not set
+        state: # defaults to 'present'
+
+A list of access privileges to ensure exist on the server. Only `db` and `roles` are required; all other properties are optional.
+
     postgresql_version: [OS-specific]
     postgresql_data_dir: [OS-specific]
     postgresql_bin_path: [OS-specific]

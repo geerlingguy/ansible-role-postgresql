@@ -1,0 +1,22 @@
+---
+- name: Ensure PostgreSQL privileges are present.
+  postgresql_privs:
+    db: "{{ item.db }}"
+    grant_option: "{{ item.grant_option | default(omit) }}"
+    login_host: "{{ item.login_host | default('localhost') }}"
+    login_password: "{{ item.login_password | default(omit) }}"
+    login_user: "{{ item.login_user | default(postgresql_user) }}"
+    login_unix_socket: "{{ item.login_unix_socket | default(postgresql_unix_socket_directories[0]) }}"
+    objs: "{{ item.objs | default(omit) }}"
+    port: "{{ item.port | default(omit) }}"
+    privs: "{{ item.privs | default(omit) }}"
+    roles: "{{ item.roles | default(omit) }}"
+    schema: "{{ item.schema | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+    type: "{{ item.type | default('table') }}"
+  with_items: "{{ postgresql_privileges }}"
+  become: yes
+  become_user: "{{ postgresql_user }}"
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true

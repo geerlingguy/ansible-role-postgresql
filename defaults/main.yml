@@ -44,3 +44,20 @@ postgresql_users: []
   #   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
   #   port: # defaults to not set
   #   state: # defaults to 'present'
+
+# Privileges to ensure exist.
+postgresql_privileges: []
+  #  - db: exampledb # required
+  #    roles: jdoe # required
+  #    type: # defaults to 'table'
+  #    grant_option: # defaults to not set
+  #    login_host: # defaults to 'localhost'
+  #    login_password: # defaults to not set
+  #    login_user: # defaults to '{{ postgresql_user }}'
+  #    login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+  #    objs: # defaults to not set
+  #    port: # defaults to not set
+  #    privs: # defaults to not set
+  #    schema: # defaults to not set
+  #    state: # defaults to 'present'
+

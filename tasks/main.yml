@@ -21,3 +21,4 @@
 # Configure PostgreSQL.
 - include: databases.yml
 - include: users.yml
+- include: privileges.yml
