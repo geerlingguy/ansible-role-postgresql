@@ -1,6 +1,17 @@
 ---
-# RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
+# RHEL/CentOS and Debian/Ubuntu only. Set a repository to use for PostgreSQL installation.
+# https://yum.postgresql.org/repopackages.php
+# https://wiki.postgresql.org/wiki/Apt
 postgresql_enablerepo: ""
+#postgresql_enablerepo: "http://apt.postgresql.org/pub/repos/apt/"
+## only required on debian/ubuntu
+#postgresql_enablerepo_key: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+## RedHat/CentOS
+#postgresql_repo: "https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-redhat95-9.5-3.noarch.rpm"
+
+postgresql_pkgnames: [ 'postgresql' ]
+## if different pkg name (different repository)
+#postgresql_pkgnames: [ 'postgresql-9.5' ]
 
 postgresql_user: postgres
 postgresql_group: postgres

@@ -1,10 +1,27 @@
 ---
+
+- block:
+    - name: add repository to sources.list
+      lineinfile: dest=/etc/apt/sources.list.d/pgdg.list line="deb {{ postgresql_enablerepo }} {{ ansible_distribution_release | lower }}-pgdg main" create=yes
+    - name: add repository key
+      apt_key: url={{ postgresql_enablerepo_key }} state=present
+    - name: Update apt cache
+      apt: update_cache=yes
+    - name: Ensure PostgreSQL packages are installed.
+      apt: "name={{ item }} state=installed"
+      with_items: "{{ postgresql_pkgnames }}"
+    - name: ensure variables are defined
+      set_fact:
+        postgresql_daemon: postgresql
+  when: postgresql_enablerepo is defined and postgresql_enablerepo != ''
+
 - name: Ensure PostgreSQL Python libraries are installed.
   apt: "name=python-psycopg2 state=installed"
 
 - name: Ensure PostgreSQL packages are installed.
   apt: "name={{ item }} state=installed"
   with_items: "{{ postgresql_packages }}"
+  when: not (postgresql_enablerepo is defined and postgresql_enablerepo != '')
 
 - name: Ensure all configured locales are present.
   locale_gen: "name={{ item }} state=present"
