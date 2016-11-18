@@ -1,0 +1,8 @@
+---
+
+- hosts: all
+#  vars:
+#    - a:
+  roles:
+    - geerlingguy.postgresql
+

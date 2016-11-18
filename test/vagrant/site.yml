@@ -1,0 +1,6 @@
+---
+
+- hosts: all
+  roles:
+    - juju4.myrole
+

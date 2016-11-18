@@ -9,18 +9,28 @@
       apt: update_cache=yes
     - name: Ensure PostgreSQL packages are installed.
       apt: "name={{ item }} state=installed"
-      with_items: "{{ postgresql_pkgnames }}"
+      with_items: "{{ postgresql_pkgnames | default([]) }}"
     - name: ensure variables are defined
       set_fact:
         postgresql_daemon: postgresql
+    - name: configure pinning
+      blockinfile:
+        dest: /etc/apt/preferences.d/pgdg.pref
+        block: |
+          Package: *
+          Pin: release o=apt.postgresql.org
+          Pin-Priority: {{ postgresql_repo_pinning }}
+        marker: "# {mark} ANSIBLE MANAGED BLOCK: repo pinning"
+      when: postgresql_repo_pinning is defined and postgresql_repo_pinning != ''
   when: postgresql_enablerepo is defined and postgresql_enablerepo != ''
 
 - name: Ensure PostgreSQL Python libraries are installed.
   apt: "name=python-psycopg2 state=installed"
 
+## FIXME! travis/trusty: already have pgdg. postgresql calls postgresql-9.6
 - name: Ensure PostgreSQL packages are installed.
   apt: "name={{ item }} state=installed"
-  with_items: "{{ postgresql_packages }}"
+  with_items: "{{ postgresql_packages | default([]) }}"
   when: not (postgresql_enablerepo is defined and postgresql_enablerepo != '')
 
 - name: Ensure all configured locales are present.
