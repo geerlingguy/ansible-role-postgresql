@@ -3,10 +3,12 @@
 - block:
     - name: add repository to sources.list
       lineinfile: dest=/etc/apt/sources.list.d/pgdg.list line="deb {{ postgresql_enablerepo }} {{ ansible_distribution_release | lower }}-pgdg main" create=yes
+      register: newrepo
     - name: add repository key
       apt_key: url={{ postgresql_enablerepo_key }} state=present
     - name: Update apt cache
       apt: update_cache=yes
+      when: newrepo.changed
     - name: Ensure PostgreSQL packages are installed.
       apt: "name={{ item }} state=installed"
       with_items: "{{ postgresql_pkgnames | default([]) }}"

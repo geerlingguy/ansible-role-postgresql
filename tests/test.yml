@@ -8,9 +8,9 @@
       - name: jdoe
 
   pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=yes
-      when: ansible_os_family == 'Debian'
+#    - name: Update apt cache.
+#      apt: update_cache=yes
+#      when: ansible_os_family == 'Debian'
 
     - name: Set custom variable name for old CentOS 6 PostgreSQL install.
       set_fact:
