@@ -27,7 +27,7 @@
   when: postgresql_enablerepo is defined and postgresql_enablerepo != ''
 
 - name: Debian | Ensure PostgreSQL Python libraries are installed.
-  apt: "name=python-psycopg2 state=installed"
+  apt: "name=python-psycopg2 state=installed update_cache=yes"
 
 ## FIXME! travis/trusty: already have pgdg. postgresql calls postgresql-9.6
 - name: Debian | Ensure PostgreSQL packages are installed.
