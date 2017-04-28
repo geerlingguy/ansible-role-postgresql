@@ -1,13 +1,13 @@
 ---
 
-- name: Install new repository
+- name: RedHat | Install new repository
   yum: name="{{ postgresql_repo }}" state=present
   when: postgresql_repo is defined and postgresql_repo != ''
 
-- name: Ensure PostgreSQL packages are installed.
+- name: RedHat | Ensure PostgreSQL packages are installed.
 #  package: "name={{ item }} state=installed enablerepo={{ postgresql_enablerepo }} update_cache=yes"
   package: "name={{ item }} state=installed update_cache=yes"
   with_items: "{{ postgresql_pkgnames | default( postgresql_packages ) }}"
 
-- name: Ensure PostgreSQL Python libraries are installed.
+- name: RedHat | Ensure PostgreSQL Python libraries are installed.
   package: "name=python-psycopg2 state=installed enablerepo={{ postgresql_enablerepo }}"

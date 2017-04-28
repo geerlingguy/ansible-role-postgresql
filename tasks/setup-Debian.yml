@@ -1,21 +1,21 @@
 ---
 
 - block:
-    - name: add repository to sources.list
+    - name: Debian | add repository to sources.list
       lineinfile: dest=/etc/apt/sources.list.d/pgdg.list line="deb {{ postgresql_enablerepo }} {{ ansible_distribution_release | lower }}-pgdg main" create=yes
       register: newrepo
-    - name: add repository key
+    - name: Debian | add repository key
       apt_key: url={{ postgresql_enablerepo_key }} state=present
-    - name: Update apt cache
+    - name: Debian | Update apt cache
       apt: update_cache=yes
       when: newrepo.changed
-    - name: Ensure PostgreSQL packages are installed.
-      apt: "name={{ item }} state=installed"
-      with_items: "{{ postgresql_pkgnames | default([]) }}"
-    - name: ensure variables are defined
+#    - name: Debian | Ensure PostgreSQL packages are installed.
+#      apt: "name={{ item }} state=installed"
+#      with_items: "{{ postgresql_pkgnames | default([]) }}"
+    - name: Debian | ensure variables are defined
       set_fact:
         postgresql_daemon: postgresql
-    - name: configure pinning
+    - name: Debian | configure pinning
       blockinfile:
         dest: /etc/apt/preferences.d/pgdg.pref
         block: |
@@ -26,21 +26,20 @@
       when: postgresql_repo_pinning is defined and postgresql_repo_pinning != ''
   when: postgresql_enablerepo is defined and postgresql_enablerepo != ''
 
-- name: Ensure PostgreSQL Python libraries are installed.
+- name: Debian | Ensure PostgreSQL Python libraries are installed.
   apt: "name=python-psycopg2 state=installed"
 
 ## FIXME! travis/trusty: already have pgdg. postgresql calls postgresql-9.6
-- name: Ensure PostgreSQL packages are installed.
+- name: Debian | Ensure PostgreSQL packages are installed.
   apt: "name={{ item }} state=installed"
-  with_items: "{{ postgresql_packages | default([]) }}"
-  when: not (postgresql_enablerepo is defined and postgresql_enablerepo != '')
+  with_items: "{{ postgresql_pkgnames | default( postgresql_packages ) }}"
 
-- name: Ensure all configured locales are present.
+- name: Debian | Ensure all configured locales are present.
   locale_gen: "name={{ item }} state=present"
   with_items: "{{ postgresql_locales }}"
   register: locale_gen_result
 
-- name: Force-restart PostgreSQL after new locales are generated.
+- name: Debian | Force-restart PostgreSQL after new locales are generated.
   service:
     name: "{{ postgresql_daemon }}"
     state: restarted
