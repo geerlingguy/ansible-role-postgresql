@@ -43,7 +43,8 @@ services:
   - docker
 
 before_install:
-  - ln -s role_under_test geerlingguy.postgresql
+  - ln -s ansible-role-postgresql ../role_under_test
+  - ln -s ansible-role-postgresql ../geerlingguy.postgresql
   # Pull container
   - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
 
