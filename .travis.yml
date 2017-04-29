@@ -73,6 +73,8 @@ script:
 
 after_failure:
   # Check what happened on systemd systems.
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /etc/passwd'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm cat /etc/group'
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm systemctl -l status postgresql.service'
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm journalctl -xe --no-pager'
 
