@@ -13,7 +13,7 @@ env:
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
     postgresql_bin_dir: /usr/pgsql-9.5/bin
     postgresql_data_dir: /var/lib/pgsql/9.5/data
-    test_yml: 'test/integration/default-pgdg/default.yml'
+    test_yml: 'role_under_test/test/integration/default-pgdg/default.yml'
   - distro: centos6
     init: /sbin/init
     run_opts: ""
