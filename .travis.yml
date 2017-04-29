@@ -7,26 +7,37 @@ env:
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
     postgresql_bin_dir: /usr/bin
     postgresql_data_dir: /var/lib/pgsql/data
+    test_yml: 'role_under_test/tests/test.yml'
+  - distro: centos7
+    init: /usr/lib/systemd/systemd
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    postgresql_bin_dir: /usr/pgsql-9.5/bin
+    postgresql_data_dir: /var/lib/pgsql/9.5/data
+    test_yml: 'test/integration/default-pgdg/default.yml'
   - distro: centos6
     init: /sbin/init
     run_opts: ""
     postgresql_bin_dir: /usr/bin
     postgresql_data_dir: /var/lib/pgsql/data
+    test_yml: 'role_under_test/tests/test.yml'
   - distro: ubuntu1604
     init: /lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
     postgresql_bin_dir: /usr/lib/postgresql/9.5/bin
     postgresql_data_dir: /var/lib/postgresql/9.5/main
+    test_yml: 'role_under_test/tests/test.yml'
   - distro: ubuntu1404
     init: /sbin/init
     run_opts: ""
     postgresql_bin_dir: /usr/lib/postgresql/9.3/bin
     postgresql_data_dir: /var/lib/postgresql/9.3/main
+    test_yml: 'role_under_test/tests/test.yml'
   - distro: debian8
     init: /lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
     postgresql_bin_dir: /usr/lib/postgresql/9.4/bin
     postgresql_data_dir: /var/lib/postgresql/9.4/main
+    test_yml: 'role_under_test/tests/test.yml'
 
 services:
   - docker
@@ -41,14 +52,14 @@ script:
   - 'docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} geerlingguy/docker-${distro}-ansible:latest "${init}" > "${container_id}"'
 
   # Ansible syntax check.
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml --syntax-check'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/${test_yml} --syntax-check'
 
   # Test role.
-  - 'docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml -vvvv'
+  - 'docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/${test_yml} -vvvv'
 
   # Test role idempotence.
   - idempotence=$(mktemp)
-  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml | tee -a ${idempotence}
+  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/${test_yml} | tee -a ${idempotence}
   - >
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
