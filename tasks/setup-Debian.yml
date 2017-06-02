@@ -1,4 +1,7 @@
 ---
+- name: Ensure Sudo package is installed.
+  apt: "name=sudo state=installed"
+
 - name: Ensure PostgreSQL Python libraries are installed.
   apt: "name=python-psycopg2 state=installed"
 
