@@ -1,17 +1,45 @@
 ---
-- name: Ensure PostgreSQL Python libraries are installed.
-  apt: "name=python-psycopg2 state=installed"
 
-- name: Ensure PostgreSQL packages are installed.
+- block:
+    - name: Debian | add repository to sources.list
+      lineinfile: dest=/etc/apt/sources.list.d/pgdg.list line="deb {{ postgresql_enablerepo }} {{ ansible_distribution_release | lower }}-pgdg main" create=yes
+      register: newrepo
+    - name: Debian | add repository key
+      apt_key: url={{ postgresql_enablerepo_key }} state=present
+    - name: Debian | Update apt cache
+      apt: update_cache=yes
+      when: newrepo.changed
+#    - name: Debian | Ensure PostgreSQL packages are installed.
+#      apt: "name={{ item }} state=installed"
+#      with_items: "{{ postgresql_pkgnames | default([]) }}"
+    - name: Debian | ensure variables are defined
+      set_fact:
+        postgresql_daemon: postgresql
+    - name: Debian | configure pinning
+      blockinfile:
+        dest: /etc/apt/preferences.d/pgdg.pref
+        block: |
+          Package: *
+          Pin: release o=apt.postgresql.org
+          Pin-Priority: {{ postgresql_repo_pinning }}
+        marker: "# {mark} ANSIBLE MANAGED BLOCK: repo pinning"
+      when: postgresql_repo_pinning is defined and postgresql_repo_pinning != ''
+  when: postgresql_enablerepo is defined and postgresql_enablerepo != ''
+
+- name: Debian | Ensure PostgreSQL Python libraries are installed.
+  apt: "name=python-psycopg2 state=installed update_cache=yes"
+
+## FIXME! travis/trusty: already have pgdg. postgresql calls postgresql-9.6
+- name: Debian | Ensure PostgreSQL packages are installed.
   apt: "name={{ item }} state=installed"
-  with_items: "{{ postgresql_packages }}"
+  with_items: "{{ postgresql_pkgnames | default( postgresql_packages ) }}"
 
-- name: Ensure all configured locales are present.
+- name: Debian | Ensure all configured locales are present.
   locale_gen: "name={{ item }} state=present"
   with_items: "{{ postgresql_locales }}"
   register: locale_gen_result
 
-- name: Force-restart PostgreSQL after new locales are generated.
+- name: Debian | Force-restart PostgreSQL after new locales are generated.
   service:
     name: "{{ postgresql_daemon }}"
     state: restarted

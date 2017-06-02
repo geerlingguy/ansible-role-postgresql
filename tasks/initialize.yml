@@ -1,4 +1,5 @@
 ---
+
 - name: Set PostgreSQL environment variables.
   template:
     src: postgres.sh.j2

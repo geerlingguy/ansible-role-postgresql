@@ -1,0 +1,43 @@
+---
+
+- hosts: all
+#  vars:
+#    - a:
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Set postgresql upstream repo for Ubuntu
+      set_fact:
+        postgresql_enablerepo: "http://apt.postgresql.org/pub/repos/apt/"
+        postgresql_enablerepo_key: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+#        postgresql_enablerepo_version: '9.5'
+        postgresql_pkgnames:
+#          - postgresql         ## postgresql matchs latest release
+          - postgresql-9.5
+        __postgresql_version: "9.5"
+      when: ansible_distribution == 'Ubuntu'
+    - set_fact:
+        postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
+        postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
+        postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
+        postgresql_daemon: postgresql
+      when: ansible_distribution == 'Ubuntu'
+
+    - set_fact:
+        postgresql_repo: "https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-7-x86_64/pgdg-redhat95-9.5-3.noarch.rpm"
+#        postgresql_enablerepo: "pgdg-95"
+        postgresql_packages:
+          - postgresql95
+      when: ansible_os_family == 'RedHat' and ansible_distribution_version.split('.')[0] == '7'
+    - set_fact:
+        postgresql_repo: "https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-6-x86_64/pgdg-redhat95-9.5-3.noarch.rpm"
+#        postgresql_enablerepo: "pgdg-95"
+        postgresql_packages:
+          - postgresql95
+      when: ansible_os_family == 'RedHat' and ansible_distribution_version.split('.')[0] == '6'
+
+  roles:
+    - geerlingguy.postgresql
+

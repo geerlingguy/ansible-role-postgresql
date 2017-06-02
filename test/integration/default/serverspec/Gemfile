@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+gem 'serverspec'
+gem 'rake'
+## for junit output and jenkins support
+## FIXME! travis: 'Could not find gem 'yarjuf' in any of the gem sources listed in your Gemfile or available on this machine.'
+#gem 'yarjuf'
+
