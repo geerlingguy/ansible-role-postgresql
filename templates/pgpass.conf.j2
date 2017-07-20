@@ -1,0 +1,3 @@
+{% for item in postgresql_pgpass_entries %}
+{{ item.host | default('*') }}:{{ item.port | default('*') }}:{{ item.database | default('*') }}:{{ item.user | default('*') }}:{{ item.password | default('*') }}
+{% endfor %}

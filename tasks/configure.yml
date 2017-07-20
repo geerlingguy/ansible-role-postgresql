@@ -18,6 +18,15 @@
   notify: restart postgresql
   when: postgresql_hba_entries
 
+- name: Configure pgpass-based access.
+  template:
+    src: "templates/pgpass.conf.j2"
+    dest: ~postgres/.pgpass
+    owner: "{{ postgresql_user }}"
+    group: "{{ postgresql_group }}"
+    mode: 0600
+  when: postgresql_pgpass_entries
+
 - name: Ensure PostgreSQL unix socket dirs exist.
   file:
     path: "{{ item }}"
