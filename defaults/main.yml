@@ -4,6 +4,8 @@ postgresql_enablerepo: ""
 
 postgresql_python_library: python-psycopg2
 postgresql_user: postgres
+postgresql_pass: null
+postgresql_port: 5432
 postgresql_group: postgres
 
 postgresql_unix_socket_directories:
@@ -21,6 +23,12 @@ postgresql_hba_entries:
   - { type: local, database: all, user: all, auth_method: peer }
   - { type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5 }
   - { type: host, database: all, user: all, address: '::1/128', auth_method: md5 }
+
+# PG-pass based access
+# https://www.postgresql.org/docs/current/static/libpq-pgpass.html
+postgresql_pgpass_entries:
+  - { host: 'localhost', port: "{{ postgresql_port }}", database: 'postgres', user: "{{ postgresql_user }}", password: "{{ postgresql_pass }}" }
+  - { host: '127.0.0.1', port: "{{ postgresql_port }}", database: 'postgres', user: "{{ postgresql_user }}", password: "{{ postgresql_pass }}" }
 
 # Debian only. Used to generate the locales used by PostgreSQL databases.
 postgresql_locales:
