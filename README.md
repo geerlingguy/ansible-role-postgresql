@@ -21,6 +21,10 @@ Available variables are listed below, along with default values (see `defaults/m
 
 (RHEL/CentOS only) You can set a repo to use for the PostgreSQL installation by passing it in here.
 
+    postgresql_restarted_state: "restarted"
+
+Set the state of the service when configuration changes are made. Recommended values are `restarted` or `reloaded`.
+
     postgresql_python_library: python-psycopg2
 
 Library used by Ansible to communicate with PostgreSQL. If you are using Python 3 (e.g. set via `ansible_python_interpreter`), you should change this to `python3-psycopg2`.
