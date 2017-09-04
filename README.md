@@ -76,6 +76,7 @@ If overriding, make sure you copy all of the existing entries from `defaults/mai
         login_user: # defaults to 'postgresql_user'
         login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
         port: # defaults to not set
+        owner: # defaults to 'postgresql_user'
         state: # defaults to 'present'
 
 A list of databases to ensure exist on the server. Only the `name` is required; all other properties are optional.
