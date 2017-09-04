@@ -1,0 +1,12 @@
+---
+__postgresql_version: "9.2"
+# PGDATA directory is set in /etc/sysconfig/pgsql/postgresql
+__postgresql_data_dir: "/var/lib/pgsql9/data"
+__postgresql_bin_path: "/usr/bin"
+__postgresql_config_path: "/var/lib/pgsql9/data"
+__postgresql_daemon: postgresql
+__postgresql_packages:
+  - postgresql
+  - postgresql-server
+  - postgresql-contrib
+  - postgresql-libs
