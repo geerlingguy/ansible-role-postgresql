@@ -8,7 +8,7 @@
   apt_key:
     url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
     state: present
-  when: postgres_use_official_repo
+  when: postgresql_use_official_repo
 
 - name: Ensure official PostgresSQL Repo is configured.
   apt_repository:
