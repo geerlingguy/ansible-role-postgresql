@@ -2,6 +2,9 @@
 # RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
 postgresql_enablerepo: ""
 
+# Uubntu only. Use the official PostgresSQL Repository
+postgresql_use_official_repo: False
+
 postgresql_python_library: python-psycopg2
 postgresql_user: postgres
 postgresql_group: postgres

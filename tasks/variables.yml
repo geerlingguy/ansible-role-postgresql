@@ -8,6 +8,11 @@
   include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
   when: ansible_os_family == 'RedHat'
 
+- name: Define postgresql_use_official_repo
+  set_fact:
+    postgresql_use_official_repo: "{{ __postgresql_use_official_repo}}"
+  when: postgresql_use_official_repo is not defined
+
 - name: Define postgresql_packages.
   set_fact:
     postgresql_packages: "{{ __postgresql_packages | list }}"

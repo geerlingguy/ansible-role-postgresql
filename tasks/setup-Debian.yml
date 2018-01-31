@@ -4,6 +4,17 @@
     name: "{{ postgresql_python_library }}"
     state: installed
 
+- name: Ensure official PostgresSQL Apt Key is installed
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+  when: postgres_use_official_repo
+
+- name: Ensure official PostgresSQL Repo is configured.
+  apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main
+  when: postgresql_use_official_repo
+
 - name: Ensure PostgreSQL packages are installed.
   apt:
     name: "{{ item }}"

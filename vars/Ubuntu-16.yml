@@ -1,4 +1,5 @@
 ---
+__postgresql_use_official_repo: False
 __postgresql_version: "9.5"
 __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
 __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
