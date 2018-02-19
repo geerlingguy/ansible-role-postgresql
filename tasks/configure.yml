@@ -15,7 +15,7 @@
     owner: "{{ postgresql_user }}"
     group: "{{ postgresql_group }}"
     mode: 0600
-  notify: restart postgresql
+  notify: refresh pg_hba
   when: postgresql_hba_entries
 
 - name: Ensure PostgreSQL unix socket dirs exist.

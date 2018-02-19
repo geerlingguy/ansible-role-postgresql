@@ -1,3 +1,8 @@
 ---
 - name: restart postgresql
   service: "name={{ postgresql_daemon }} state=restarted sleep=5"
+
+- name: refresh pg_hba
+  become: yes
+  become_user: postgres
+  command: psql -c "SELECT pg_reload_conf();"
