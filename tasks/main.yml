@@ -1,4 +1,7 @@
 ---
+- name: Print ansible_os_family
+  debug: var=ansible_os_family
+
 # Variable configuration.
 - include: variables.yml
   static: no
@@ -10,6 +13,10 @@
 
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
+  static: no
+  
+- include: setup-Suse.yml
+  when: ansible_os_family == 'Suse'
   static: no
 
 - include: initialize.yml

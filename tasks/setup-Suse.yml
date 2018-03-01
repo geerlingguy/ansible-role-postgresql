@@ -1,0 +1,6 @@
+---
+- name: Ensure PostgreSQL packages are installed.
+  zypper:
+    name: "{{ item }}"
+    state: installed
+  with_items: "{{ postgresql_packages }}"

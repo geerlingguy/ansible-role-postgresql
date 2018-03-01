@@ -18,6 +18,10 @@ galaxy_info:
     - name: Debian
       versions:
       - all
+    - name: opensuse
+      versions:
+      - 12
+      - 13
   galaxy_tags:
     - database
     - postgresql
