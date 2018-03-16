@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-postgresql.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-postgresql)
 
-Installs and configures PostgreSQL server on RHEL/CentOS, RHEL or Debian/Ubuntu servers.
+Installs and configures PostgreSQL server on RHEL/CentOS, SLES or Debian/Ubuntu servers.
 
 ## Requirements
 
