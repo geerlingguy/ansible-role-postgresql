@@ -20,8 +20,8 @@ galaxy_info:
       - all
     - name: opensuse
       versions:
-      - 12
-      - 13
+      - 12.3
+      - 13.1
   galaxy_tags:
     - database
     - postgresql
