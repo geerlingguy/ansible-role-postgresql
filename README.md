@@ -102,7 +102,7 @@ A list of users to ensure exist on the server. Only the `name` is required; all 
     postgresql_daemon: [OS-specific]
     postgresql_packages: [OS-specific]
 
-OS-specific variables that are set by include files in this role's `vars` directory. These shouldn't be overridden unless you're using a verison of PostgreSQL that wasn't installed using system packages.
+OS-specific variables that are set by include files in this role's `vars` directory. These shouldn't be overridden unless you're using a version of PostgreSQL that wasn't installed using system packages.
 
 ## Dependencies
 
