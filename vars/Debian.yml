@@ -1,0 +1,91 @@
+---
+__postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
+__postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
+__postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
+__postgresql_daemon: postgresql
+__postgresql_packages:
+  - postgresql
+  - postgresql-contrib
+  - libpq-dev
+
+__default_os_vars:
+  debian:
+    7:
+      __postgresql_version: "9.1"
+    8:
+      __postgresql_version: "9.4"
+    9:
+      __postgresql_version: "9.6"
+  ubuntu:
+    14:
+      __postgresql_version: "9.3"
+    16:
+      __postgresql_version: "9.5"
+    18:
+      __postgresql_version: "10"
+
+# Legacy support variables
+__tmp_ansible_distribution_version_short: "{{ ansible_distribution_version.split('.')[0] }}"
+__postgresql_version: "{{ __default_os_vars[ansible_os_family][__tmp_ansible_distribution_version_short].__postgresql_version }}"
+
+__default_postgres_vars:
+  8.4:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+  9.0:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+  9.1:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+  9.2:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+  9.3:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+  9.4:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+  9.5:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+  9.6:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+  10:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+  11:
+    __postgresql_daemon: postgresql
+    __postgresql_packages:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev

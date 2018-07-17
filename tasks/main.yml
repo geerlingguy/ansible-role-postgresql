@@ -2,12 +2,12 @@
 # Variable configuration.
 - include_tasks: variables.yml
 
-# Setup/install tasks.
-- include_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+- include_tasks: install_official_repo.yml
+  when: install_official_repo is defined
 
-- include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+# Setup/install tasks.
+- include_tasks: setup-{{ ansible_os_family }}.yml
+  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
 
 - include_tasks: initialize.yml
 - include_tasks: configure.yml
@@ -19,5 +19,5 @@
     enabled: yes
 
 # Configure PostgreSQL.
-- import_tasks: databases.yml
-- import_tasks: users.yml
+- include_tasks: databases.yml
+- include_tasks: users.yml

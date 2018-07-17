@@ -2,6 +2,14 @@
 # RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
 postgresql_enablerepo: ""
 
+# Postgresql.org repo path. Set a repository to use for PostgreSQL installation.
+postgresql_url_repo_path: "https://download.postgresql.org/pub/repos"
+postgresql_url_repo_state: present
+postgresql_url_repo_key: "ACCC4CF8"
+
+# issue https://github.com/geerlingguy/ansible-role-postgresql/issues/29
+__ansible_ssh_pipelining: true # false
+
 # Set postgresql state when configuration changes are made. Recommended values:
 # `restarted` or `reloaded`
 postgresql_restarted_state: "restarted"

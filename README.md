@@ -21,6 +21,16 @@ Available variables are listed below, along with default values (see `defaults/m
 
 (RHEL/CentOS only) You can set a repo to use for the PostgreSQL installation by passing it in here.
 
+    postgresql_url_repo_path: "https://download.postgresql.org/pub/repos"
+    postgresql_url_repo_state: present
+    postgresql_url_repo_key: "SOME_KEY_ID"
+
+You can set a repo to use for PostgreSQL installation from postgresql.org.
+
+    __ansible_ssh_pipelining: true
+
+Workaround for issue https://github.com/geerlingguy/ansible-role-postgresql/issues/29
+
     postgresql_restarted_state: "restarted"
 
 Set the state of the service when configuration changes are made. Recommended values are `restarted` or `reloaded`.
@@ -116,20 +126,32 @@ None.
 
 ## Example Playbook
 
-    - hosts: database
+    - hosts: all
       become: yes
-      vars_files:
-        - vars/main.yml
+      vars:
+        postgresql_databases:
+          - name: example_db
+        postgresql_users:
+          - name: example_user
+            password: supersecure
       roles:
-        - geerlingguy.postgresql
+        - role: geerlingguy.postgresql
 
-*Inside `vars/main.yml`*:
 
-    postgresql_databases:
-      - name: example_db
-    postgresql_users:
-      - name: example_user
-        password: supersecure
+## Example Playbook for install from postgresql.org
+
+    - hosts: all
+      become: yes
+      vars:
+        postgresql_version: 11
+        install_official_repo: true
+        postgresql_databases:
+          - name: example_db
+        postgresql_users:
+          - name: example_user
+            password: supersecure
+      roles:
+        - role: geerlingguy.postgresql
 
 ## License
 
