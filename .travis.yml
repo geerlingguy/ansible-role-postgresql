@@ -17,7 +17,10 @@ env:
   - distro: ubuntu1404
     postgresql_bin_dir: /usr/lib/postgresql/9.3/bin
     postgresql_data_dir: /var/lib/postgresql/9.3/main
-  - distro: debian8
+  - distro: debian7
+    postgresql_bin_dir: /usr/lib/postgresql/9.1/bin
+    postgresql_data_dir: /var/lib/postgresql/9.1/main
+    - distro: debian8
     postgresql_bin_dir: /usr/lib/postgresql/9.4/bin
     postgresql_data_dir: /var/lib/postgresql/9.4/main
   - distro: debian9
