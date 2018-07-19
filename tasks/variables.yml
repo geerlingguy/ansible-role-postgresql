@@ -7,7 +7,7 @@
 
 - name: Define postgresql_version.
   set_fact:
-    postgresql_config_path: "{{ __postgresql_version }}"
+    postgresql_version: "{{ __postgresql_version }}"
   when: postgresql_version is not defined
 
 - name: Define postgres version specific variables for official repo.
