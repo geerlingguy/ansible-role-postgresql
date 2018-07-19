@@ -1,7 +1,19 @@
 ---
+__default_os_family_vars:
+  redhat_6:
+    __postgresql_version: "8.4"
+  redhat_7:
+    __postgresql_version: "9.2"
+
+# Legacy support variables
+__tmp_ansible_distribution_version: "{{ ansible_os_family.lower() }}_{{ ansible_distribution_version.split('.')[0] }}"
+__postgresql_version: "{{ postgresql_version|default(__default_os_family_vars[__tmp_ansible_distribution_version].__postgresql_version) }}"
+#postgresql_version: "{{ __postgresql_version }}"
+__local_postgresql_version_str: "{{ __postgresql_version|string }}"
+
 __postgresql_data_dir: "/var/lib/pgsql/data"
 __postgresql_bin_path: "/usr/bin"
-__postgresql_config_path: "/var/lib/pgsql/data"
+__postgresql_config_path: "{{ __postgresql_data_dir }}"
 __postgresql_daemon: postgresql
 __postgresql_packages:
   - postgresql
@@ -9,85 +21,94 @@ __postgresql_packages:
   - postgresql-contrib
   - postgresql-libs
 
-__default_os_vars:
-  RedHat:
-    6:
-      __postgresql_version: "8.4"
-    7:
-      __postgresql_version: "9.2"
-
-# Legacy support variables
-__tmp_ansible_distribution_version_short: "{{ ansible_distribution_version.split('.')[0] }}"
-__postgresql_version: "{{ __default_os_vars[ansible_os_family[__tmp_ansible_distribution_version_short]].__postgresql_version }}"
-
 __default_postgres_vars:
-  8.4:
-    __postgresql_daemon: postgresql
+  __8.4:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
     __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
-  9.0:
-    __postgresql_daemon: postgresql
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
+  __9.0:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
     __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
-  9.1:
-    __postgresql_daemon: postgresql
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
+  __9.1:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
     __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
-  9.2:
-    __postgresql_daemon: postgresql
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
+  __9.2:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
     __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
-  9.3:
-    __postgresql_daemon: postgresql
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
+  __9.3:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
     __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
-  9.4:
-    __postgresql_daemon: postgresql
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
+  __9.4:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
     __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
-  9.5:
-    __postgresql_daemon: postgresql
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
+  __9.5:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
     __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
-  9.6:
-    __postgresql_daemon: postgresql
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
+  __9.6:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
     __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
-  10:
-    __postgresql_daemon: postgresql
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
+  __10:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
     __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
-  11:
-    __postgresql_daemon: postgresql
-    __postgresql_packages:
-      - postgresql
-      - postgresql-server
-      - postgresql-contrib
-      - postgresql-libs
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"

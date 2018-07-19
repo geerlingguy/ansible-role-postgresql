@@ -153,6 +153,23 @@ None.
       roles:
         - role: geerlingguy.postgresql
 
+## For work with unsupported Ubuntu versions
+
+Next versions unsupported and not tested:
+
+- ubuntu 15.04
+- ubuntu 15.10
+- ubuntu 17.04
+- ubuntu 17.10
+
+You must add in your playbook next variables:
+
+    __default_os_family_vars:
+      ubuntu_15:
+        __postgresql_version: ""
+      ubuntu_17:
+        __postgresql_version: ""
+
 ## License
 
 MIT / BSD

@@ -1,49 +1,69 @@
 ---
 # Variable configuration.
+
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
   when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'
 
-- name: Define postgres version specific variables.
+- name: Define postgresql_version.
+  set_fact:
+    postgresql_config_path: "{{ __postgresql_version }}"
+  when: postgresql_version is not defined
+
+- name: Define postgres version specific variables for official repo.
   block:
   - name: Define postgresql_packages.
     set_fact:
-      postgresql_packages: "{{ __default_postgres_vars[postgresql_version].__postgresql_packages | list }}"
+      postgresql_packages: "{{ __default_postgres_vars['__' + postgresql_version].__postgresql_packages | list }}"
     when: postgresql_packages is not defined
 
   - name: Define postgresql_daemon.
     set_fact:
-      postgresql_daemon: "{{ __default_postgres_vars[postgresql_version].__postgresql_daemon }}"
+      postgresql_daemon: "{{ __default_postgres_vars['__' + postgresql_version].__postgresql_daemon }}"
     when: postgresql_daemon is not defined
 
-  when: install_official_repo is defined and postgresql_version is defined
+  - name: Define postgresql_data_dir.
+    set_fact:
+      postgresql_data_dir: "{{ __default_postgres_vars['__' + postgresql_version].__postgresql_data_dir }}"
+    when: postgresql_data_dir is not defined
 
-- name: Define postgresql_packages.
-  set_fact:
-    postgresql_packages: "{{ __postgresql_packages | list }}"
-  when: postgresql_packages is not defined
+  - name: Define postgresql_bin_path.
+    set_fact:
+      postgresql_bin_path: "{{ __default_postgres_vars['__' + postgresql_version].__postgresql_bin_path }}"
+    when: postgresql_bin_path is not defined
 
-- name: Define postgresql_daemon.
-  set_fact:
-    postgresql_daemon: "{{ __postgresql_daemon }}"
-  when: postgresql_daemon is not defined
+  - name: Define postgresql_config_path.
+    set_fact:
+      postgresql_config_path: "{{ __default_postgres_vars['__' + postgresql_version].__postgresql_config_path }}"
+    when: postgresql_config_path is not defined
 
-- name: Define postgresql_version.
-  set_fact:
-    postgresql_version: "{{ __postgresql_version }}"
-  when: postgresql_version is not defined
+  when: install_official_repo is defined
 
-- name: Define postgresql_data_dir.
-  set_fact:
-    postgresql_data_dir: "{{ __postgresql_data_dir }}"
-  when: postgresql_data_dir is not defined
+- name: Define postgres variables for OS or custom repositories.
+  block:
+  - name: Define postgresql_packages.
+    set_fact:
+      postgresql_packages: "{{ __postgresql_packages | list }}"
+    when: postgresql_packages is not defined
 
-- name: Define postgresql_bin_path.
-  set_fact:
-    postgresql_bin_path: "{{ __postgresql_bin_path }}"
-  when: postgresql_bin_path is not defined
+  - name: Define postgresql_daemon.
+    set_fact:
+      postgresql_daemon: "{{ __postgresql_daemon }}"
+    when: postgresql_daemon is not defined
 
-- name: Define postgresql_config_path.
-  set_fact:
-    postgresql_config_path: "{{ __postgresql_config_path }}"
-  when: postgresql_config_path is not defined
+  - name: Define postgresql_data_dir.
+    set_fact:
+      postgresql_data_dir: "{{ __postgresql_data_dir }}"
+    when: postgresql_data_dir is not defined
+
+  - name: Define postgresql_bin_path.
+    set_fact:
+      postgresql_bin_path: "{{ __postgresql_bin_path }}"
+    when: postgresql_bin_path is not defined
+
+  - name: Define postgresql_config_path.
+    set_fact:
+      postgresql_config_path: "{{ __postgresql_config_path }}"
+    when: postgresql_config_path is not defined
+
+  when: install_official_repo is not defined

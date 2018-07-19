@@ -1,7 +1,7 @@
 ---
 - name: Get list package
   uri:
-    url: "{{ postgresql_url_repo_path }}/yum/{{ postgresql_version }}/{{ ansible_distribution.lower() }}/{% if ansible_distribution == 'Fedora' %}{{ ansible_distribution.lower() }}{% else %}rhel{% endif %}-{{ ansible_distribution_version.split('.')[0] }}-{{ ansible_architecture }}"
+    url: "{{ postgresql_url_repo_path }}/yum/{{ postgresql_version }}/{{ ansible_os_family.lower() }}/{% if ansible_distribution == 'Fedora' %}{{ ansible_distribution.lower() }}{% else %}rhel{% endif %}-{{ ansible_distribution_version.split('.')[0] }}-{{ ansible_architecture }}"
     return_content: yes
   register: webpage
   run_once: true
@@ -9,7 +9,7 @@
 
 - name: Package name
   set_fact:
-    package_name: "pgdg-{{ ansible_distribution.lower() }}{{ postgresql_version.split('.')|join('') }}-{{ postgresql_version }}"
+    package_name: "pgdg-{{ ansible_distribution.lower() }}{{ __local_postgresql_version_str.split('.')|join('') }}-{{ postgresql_version }}-\\d+\\.noarch\\.rpm"
   run_once: true
   when: ansible_os_family == 'RedHat'
 
@@ -19,15 +19,17 @@
   run_once: true
   when: ansible_os_family == 'RedHat'
 
-- name: Debug variables
-  debug: msg="{{ package_file_name }} {{ package_name }}"
-  when: ansible_os_family == 'RedHat'
-
 - name: Manage repo package
   package:
-    name: "{{ postgresql_url_repo_path }}/yum/{{ postgresql_version }}/{{ ansible_distribution.lower() }}/{% if ansible_distribution == 'Fedora' %}{{ ansible_distribution.lower() }}{% else %}rhel{% endif %}-{{ ansible_distribution_version.split('.')[0] }}-{{ ansible_architecture }}/{{ package_file_name }}"
+    name: "{{ postgresql_url_repo_path }}/yum/{{ postgresql_version }}/{{ ansible_os_family.lower() }}/{% if ansible_distribution == 'Fedora' %}{{ ansible_distribution.lower() }}{% else %}rhel{% endif %}-{{ ansible_distribution_version.split('.')[0] }}-{{ ansible_architecture }}/{{ package_file_name }}"
     state: "{{ postgresql_url_repo_state }}"
   when: ansible_os_family == 'RedHat'
+
+- name: Install https transport for apt
+  package:
+    name: apt-transport-https
+    state: present
+  when: ansible_os_family == 'Debian'
 
 - name: Add an Apt signing key
   apt_key:
@@ -42,12 +44,12 @@
     state: "{{ postgresql_url_repo_state }}"
   when: ansible_os_family == 'Debian'
 
-# Extend availables version postgresql from official repos:
-# RHEL/CentOS/SL/OL 7 9.2+
-# RHEL/CentOS/SL/OL 6 8.4+
-# Debian 7 9.1+
-# Debian 8 8.4+
-# Debian 9 9.2+
-# Ubuntu 14 8.4+
-# Ubuntu 16 9.1+
-# Ubuntu 18 9.3+
+# Extension available versions postgresql from official repos (some versions may be unsupported, but available for installation and use):
+# RHEL/SL/OL/CentOS7 9.2+
+# RHEL/SL/OL/CentOS6 8.4+
+# Debian7 8.4+
+# Debian8 8.4+
+# Debian9 9.2+
+# Ubuntu1404 8.4+
+# Ubuntu1604 9.1+
+# Ubuntu1804 9.3+

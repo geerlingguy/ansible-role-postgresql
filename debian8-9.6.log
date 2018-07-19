@@ -1,0 +1,25 @@
+[0;32mStarting Docker container: geerlingguy/docker-debian8-ansible.[0m
+Trying to pull repository docker.io/geerlingguy/docker-debian8-ansible ... 
+sha256:b2716cb9c70e5c6e88efdd7751c635eb0afb8095b1de8788422c9a91a93d8fc2: Pulling from docker.io/geerlingguy/docker-debian8-ansible
+Digest: sha256:b2716cb9c70e5c6e88efdd7751c635eb0afb8095b1de8788422c9a91a93d8fc2
+Status: Image is up to date for docker.io/geerlingguy/docker-debian8-ansible:latest
+a16058418c87cc4400d5b77aad738e147bf53e33c6d4f8116d68526794ee966c
+
+
+[0;32mChecking Ansible playbook syntax.[0m
+[0;34mNo config file found; using defaults[0m
+
+playbook: /etc/ansible/roles/role_under_test/tests/test.yml
+
+[0;32mRunning command: docker exec 1532012187 env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml -e postgresql_version=9.6 -e install_official_repo=true -v[0m
+[0;34mNo config file found; using defaults[0m
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [localhost][0m
+
+TASK [Remount selinux fs (fix for run docker on fedora host)] ******************
+[0;33mchanged: [localhost] => {"changed": true, "cmd": "mount -o remount,ro,bind /sys/fs/selinux", "delta": "0:00:00.269397", "end": "2018-07-19 14:56:37.889311", "rc": 0, "start": "2018-07-19 14:56:37.619914", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}[0m
+
+TASK [Update apt cache.] *******************************************************

@@ -1,16 +1,22 @@
 ---
 # Variable configuration.
-- include_tasks: variables.yml
+- name: Tasks for define and set variables.
+  include_tasks: variables.yml
 
-- include_tasks: install_official_repo.yml
+- name: Tasks for manage postgresql.org repositories.
+  include_tasks: install_official_repo.yml
   when: install_official_repo is defined
 
 # Setup/install tasks.
-- include_tasks: setup-{{ ansible_os_family }}.yml
+- name: OS setup/install tasks.
+  include_tasks: setup-{{ ansible_os_family }}.yml
   when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
 
-- include_tasks: initialize.yml
-- include_tasks: configure.yml
+- name: Tasks for initilisation database.
+  include_tasks: initialize.yml
+
+- name: Tasks for manage postgresql configuration.
+  include_tasks: configure.yml
 
 - name: Ensure PostgreSQL is started and enabled on boot.
   service:
@@ -19,5 +25,7 @@
     enabled: yes
 
 # Configure PostgreSQL.
-- include_tasks: databases.yml
-- include_tasks: users.yml
+- name: Tasks for manage databases.
+  include_tasks: databases.yml
+- name: Tasks for manage postgresql users.
+  include_tasks: users.yml
