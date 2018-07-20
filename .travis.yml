@@ -171,7 +171,7 @@ script:
   # Configure test script so we can run extra tests after playbook is run.
   - export container_id="$(date +%s)"
   - export cleanup=false
-  - test -n ${postgresql_version} && export extra_vars="-e postgresql_version=${postgresql_version} -e install_official_repo=true"; fi
+  - test -n ${postgresql_version} && export extra_vars="-e postgresql_version=${postgresql_version} -e install_official_repo=true"
   - if [[ ${distro} =~ centos? ]]; then true; else test -z ${postgresql_data_dir} && export postgresql_data_dir="/var/lib/postgresql/${postgresql_version}/main"; fi
   - if [[ ${distro} =~ centos? ]]; then true; else test -z ${postgresql_bin_path} && export postgresql_bin_path="/usr/lib/postgresql/${postgresql_version}/bin"; fi
   - if [[ ${distro} =~ centos? ]]; then true; else test -z ${postgresql_daemon} && export postgresql_daemon="postgresql@${postgresql_version}-main"; fi
