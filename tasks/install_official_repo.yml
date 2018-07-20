@@ -9,7 +9,7 @@
 
 - name: Package name
   set_fact:
-    package_name: "pgdg-{{ ansible_distribution.lower() }}{{ __local_postgresql_version_str.split('.')|join('') }}-{{ postgresql_version }}-\\d+\\.noarch\\.rpm"
+    package_name: "pgdg-{{ ansible_distribution.lower() }}-({{ __local_postgresql_version_str.split('.')|join('') }}-)?{{ postgresql_version }}-\\d+\\.noarch\\.rpm"
   run_once: true
   when: ansible_os_family == 'RedHat'
 
