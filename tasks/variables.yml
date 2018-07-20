@@ -74,4 +74,4 @@
     postgresql_global_config_options:
       - option: unix_socket_directory
         value: '{{ postgresql_unix_socket_directories[0] }}'
-  when: ((((postgresql_version|float)*10)|int <= 92 ) and (((postgresql_version|float)*10)|int >= 10)) or (ansible_distribution.lower != 'centos' and ansible_distribution_version.split('.')[0] != '7')
+  when: ((((postgresql_version|float)*10)|int <= 92 ) and (ansible_distribution.lower != 'centos' and ansible_distribution_version.split('.')[0] != '7')
