@@ -16,13 +16,13 @@ __default_os_family_vars:
 # Legacy support variables
 __tmp_ansible_distribution_version: "{{ ansible_distribution.lower() }}_{{ ansible_distribution_version.split('.')[0] }}"
 __postgresql_version: "{{ postgresql_version|default(__default_os_family_vars[__tmp_ansible_distribution_version].__postgresql_version) }}"
-#postgresql_version: "{{ __postgresql_version }}"
+postgresql_version: "{{ postgresql_version|default(__default_os_family_vars[__tmp_ansible_distribution_version].__postgresql_version)  }}"
 __local_postgresql_version_str: "{{ __postgresql_version|string }}"
 
 __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
 __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
 __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-__postgresql_daemon: postgresql
+__postgresql_daemon: "postgresql"
 __postgresql_packages:
   - postgresql
   - postgresql-contrib
@@ -33,89 +33,89 @@ __default_postgres_vars:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev
   __9.0:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev
   __9.1:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev
   __9.2:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev
   __9.3:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev
   __9.4:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev
   __9.5:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev
   __9.6:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev
   __10:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev
   __11:
     __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
     __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
     __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
-    __postgresql_daemon: postgresql
+    __postgresql_daemon: "postgresql@{{ __postgresql_version }}-main"
     __postgresql_packages:
-      - postgresql
-      - postgresql-contrib
+      - postgresql-{{ __postgresql_version }}
+      - postgresql-contrib-{{ __postgresql_version }}
       - libpq-dev

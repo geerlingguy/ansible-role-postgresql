@@ -5,32 +5,182 @@ env:
   - distro: centos7
     postgresql_bin_dir: /usr/bin
     postgresql_data_dir: /var/lib/pgsql/data
+    postgresql_daemon: postgresql
   - distro: centos6
     postgresql_bin_dir: /usr/bin
     postgresql_data_dir: /var/lib/pgsql/data
+    postgresql_daemon: postgresql
   - distro: ubuntu1804
     postgresql_bin_dir: /usr/lib/postgresql/10/bin
     postgresql_data_dir: /var/lib/postgresql/10/main
+    postgresql_daemon: postgresql
   - distro: ubuntu1604
     postgresql_bin_dir: /usr/lib/postgresql/9.5/bin
     postgresql_data_dir: /var/lib/postgresql/9.5/main
+    postgresql_daemon: postgresql
   - distro: ubuntu1404
     postgresql_bin_dir: /usr/lib/postgresql/9.3/bin
     postgresql_data_dir: /var/lib/postgresql/9.3/main
+    postgresql_daemon: postgresql
+  - distro: debian7
+    postgresql_bin_dir: /usr/lib/postgresql/9.1/bin
+    postgresql_data_dir: /var/lib/postgresql/9.1/main
+    postgresql_daemon: postgresql
   - distro: debian8
     postgresql_bin_dir: /usr/lib/postgresql/9.4/bin
     postgresql_data_dir: /var/lib/postgresql/9.4/main
+    postgresql_daemon: postgresql
   - distro: debian9
     postgresql_bin_dir: /usr/lib/postgresql/9.6/bin
     postgresql_data_dir: /var/lib/postgresql/9.6/main
+    postgresql_daemon: postgresql
+  - distro: debian7
+    postgresql_version: 8.4
+  - distro: debian7
+    postgresql_version: 9.0
+  - distro: debian7
+    postgresql_version: 9.1
+  - distro: debian7
+    postgresql_version: 9.2
+  - distro: debian7
+    postgresql_version: 9.3
+  - distro: debian7
+    postgresql_version: 9.4
+  - distro: debian7
+    postgresql_version: 9.5
+  - distro: debian7
+    postgresql_version: 9.6
+  - distro: debian7
+    postgresql_version: 10
+  - distro: debian7
+    postgresql_version: 11
+  - distro: debian8
+    postgresql_version: 8.4
+  - distro: debian8
+    postgresql_version: 9.0
+  - distro: debian8
+    postgresql_version: 9.1
+  - distro: debian8
+    postgresql_version: 9.2
+  - distro: debian8
+    postgresql_version: 9.3
+  - distro: debian8
+    postgresql_version: 9.4
+  - distro: debian8
+    postgresql_version: 9.5
+  - distro: debian8
+    postgresql_version: 9.6
+  - distro: debian8
+    postgresql_version: 10
+  - distro: debian8
+    postgresql_version: 11
+  - distro: debian9
+    postgresql_version: 9.2
+  - distro: debian9
+    postgresql_version: 9.3
+  - distro: debian9
+    postgresql_version: 9.4
+  - distro: debian9
+    postgresql_version: 9.5
+  - distro: debian9
+    postgresql_version: 9.6
+  - distro: debian9
+    postgresql_version: 10
+  - distro: debian9
+    postgresql_version: 11
+  - distro: ubuntu1404
+    postgresql_version: 8.4
+  - distro: ubuntu1404
+    postgresql_version: 9.0
+  - distro: ubuntu1404
+    postgresql_version: 9.1
+  - distro: ubuntu1404
+    postgresql_version: 9.2
+  - distro: ubuntu1404
+    postgresql_version: 9.3
+  - distro: ubuntu1404
+    postgresql_version: 9.4
+  - distro: ubuntu1404
+    postgresql_version: 9.5
+  - distro: ubuntu1404
+    postgresql_version: 9.6
+  - distro: ubuntu1404
+    postgresql_version: 10
+  - distro: ubuntu1404
+    postgresql_version: 11
+  - distro: ubuntu1604
+    postgresql_version: 9.1
+  - distro: ubuntu1604
+    postgresql_version: 9.2
+  - distro: ubuntu1604
+    postgresql_version: 9.3
+  - distro: ubuntu1604
+    postgresql_version: 9.4
+  - distro: ubuntu1604
+    postgresql_version: 9.5
+  - distro: ubuntu1604
+    postgresql_version: 9.6
+  - distro: ubuntu1604
+    postgresql_version: 10
+  - distro: ubuntu1604
+    postgresql_version: 11
+  - distro: ubuntu1804
+    postgresql_version: 9.3
+  - distro: ubuntu1804
+    postgresql_version: 9.4
+  - distro: ubuntu1804
+    postgresql_version: 9.5
+  - distro: ubuntu1804
+    postgresql_version: 9.6
+  - distro: ubuntu1804
+    postgresql_version: 10
+  - distro: ubuntu1804
+    postgresql_version: 11
+  - distro: centos6
+    postgresql_version: 8.4
+  - distro: centos6
+    postgresql_version: 9.0
+  - distro: centos6
+    postgresql_version: 9.1
+  - distro: centos6
+    postgresql_version: 9.2
+  - distro: centos6
+    postgresql_version: 9.3
+  - distro: centos6
+    postgresql_version: 9.4
+  - distro: centos6
+    postgresql_version: 9.5
+  - distro: centos6
+    postgresql_version: 9.6
+  - distro: centos6
+    postgresql_version: 10
+  - distro: centos7
+    postgresql_version: 9.2
+  - distro: centos7
+    postgresql_version: 9.3
+  - distro: centos7
+    postgresql_version: 9.4
+  - distro: centos7
+    postgresql_version: 9.5
+  - distro: centos7
+    postgresql_version: 9.6
+  - distro: centos7
+    postgresql_version: 10
 
 script:
   # Configure test script so we can run extra tests after playbook is run.
-  - export container_id=$(date +%s)
+  - export container_id="$(date +%s)"
   - export cleanup=false
+  - 'test -n ${postgresql_version} && export extra_vars="-e postgresql_version=${postgresql_version} -e install_official_repo=true"'
+  - 'test ${distro} != centos? && test -z ${postgresql_data_dir} && export postgresql_data_dir="/var/lib/postgresql/${postgresql_version}/main"'
+  - 'test ${distro} != centos? && test -z ${postgresql_bin_path} && export postgresql_bin_path="/usr/lib/postgresql/${postgresql_version}/bin"'
+  - 'test ${distro} != centos? && test -z ${postgresql_daemon} && export postgresql_daemon="postgresql@${postgresql_version}-main"'  
+  - 'test ${distro} == centos? && test -z ${postgresql_data_dir} && export postgresql_data_dir="/var/lib/pgsql/${postgresql_version}/data"'
+  - 'test ${distro} == centos? && test -z ${postgresql_bin_path} && export postgresql_bin_path="/usr/pgsql-${postgresql_version}/bin"'
+  - 'test ${distro} == centos? && test -z ${postgresql_daemon} && export postgresql_daemon="postgresql-{{ postgresql_version }}"'
 
   # Download test shim.
-  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/
+  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/AlexGluck/67d7335621310548d1d5633b237799e6/raw/
   - chmod +x ${PWD}/tests/test.sh
 
   # Run tests.
@@ -41,8 +191,8 @@ script:
 
 after_failure:
   # Check what happened on systemd systems.
-  - 'docker exec --tty ${container_id} env TERM=xterm systemctl -l status postgresql.service'
+  - 'docker exec --tty ${container_id} env TERM=xterm systemctl -l status ${postgresql_daemon}'
   - 'docker exec --tty ${container_id} env TERM=xterm journalctl -xe --no-pager'
 
-notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+# notifications:
+#   webhooks: https://galaxy.ansible.com/api/v1/notifications/
