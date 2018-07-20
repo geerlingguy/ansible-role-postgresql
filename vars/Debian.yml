@@ -16,7 +16,7 @@ __default_os_family_vars:
 # Legacy support variables
 __tmp_ansible_distribution_version: "{{ ansible_distribution.lower() }}_{{ ansible_distribution_version.split('.')[0] }}"
 __postgresql_version: "{{ postgresql_version|default(__default_os_family_vars[__tmp_ansible_distribution_version].__postgresql_version) }}"
-postgresql_version: "{{ postgresql_version|default(__default_os_family_vars[__tmp_ansible_distribution_version].__postgresql_version)  }}"
+#postgresql_version: "{{ postgresql_version|default(__default_os_family_vars[__tmp_ansible_distribution_version].__postgresql_version)  }}"
 __local_postgresql_version_str: "{{ __postgresql_version|string }}"
 
 __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
