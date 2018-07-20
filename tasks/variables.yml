@@ -74,4 +74,4 @@
     postgresql_global_config_options:
       - option: unix_socket_directory
         value: '{{ postgresql_unix_socket_directories[0] }}'
-  when: postgresql_version is version('9.3', '<')
+  when: __local_postgresql_version_str.split('.')|join('')|int <= 92 and __local_postgresql_version_str.split('.')|join('')|int >= 10

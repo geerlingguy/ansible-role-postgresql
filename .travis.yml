@@ -165,6 +165,7 @@ script:
   - if [[ ${distro} =~ centos? ]]; then test -z ${postgresql_data_dir:+x} && export postgresql_data_dir="/var/lib/pgsql/${postgresql_version}/data" || true; fi; true
   - if [[ ${distro} =~ centos? ]]; then test -z ${postgresql_bin_dir:+x} && export postgresql_bin_dir="/usr/pgsql-${postgresql_version}/bin" || true; fi; true
   - if [[ ${distro} =~ centos? ]]; then test -z ${postgresql_daemon:+x} && export postgresql_daemon="postgresql-${postgresql_version}" || true; fi; true
+  - if [[ ${distro} == debian7 ]]; then export test_idempotence=false fi; true
 
   # Download test shim.
   - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/AlexGluck/67d7335621310548d1d5633b237799e6/raw/

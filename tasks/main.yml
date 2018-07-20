@@ -23,6 +23,13 @@
     name: "{{ postgresql_daemon }}"
     state: started
     enabled: yes
+    sleep: 5
+
+- name: Ensure PostgreSQL is running for Debian 7.
+  shell: service {{ postgresql_daemon }} start
+  args:
+    warn: no
+  when: ansible_distribution == 'Debian' and ansible_distribution_version.split('.')[0] == '7'
 
 # Configure PostgreSQL.
 - name: Tasks for manage databases.
