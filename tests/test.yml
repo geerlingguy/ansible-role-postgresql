@@ -10,16 +10,9 @@
     #   shell: mount -o remount,ro,bind /sys/fs/selinux
     #   args:
     #     warn: no
-    #   when: ansible_distribution == 'Ubuntu' or (ansible_os_family == 'Debian' and ansible_distribution_version.split('.')[0] == '8')
+    #   when: ansible_os_family == 'Debian'
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'
-    - name: Set custom variables for old CentOS 6 PostgreSQL install.
-      set_fact:
-        postgresql_hba_entries: []
-        postgresql_global_config_options:
-          - option: unix_socket_directory
-            value: '{{ postgresql_unix_socket_directories[0] }}'
-      when: ansible_os_family == 'RedHat' and ansible_distribution_version.split('.')[0] == '6' and install_official_repo is not defined
   roles:
     - role_under_test

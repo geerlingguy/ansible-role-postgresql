@@ -67,3 +67,11 @@
     when: postgresql_config_path is not defined
 
   when: install_official_repo is not defined
+
+- name: Set custom variables for PostgreSQL version lower than 9.3.
+  set_fact:
+    postgresql_hba_entries: []
+    postgresql_global_config_options:
+      - option: unix_socket_directory
+        value: '{{ postgresql_unix_socket_directories[0] }}'
+  when: postgresql_version is version('9.3', '<')

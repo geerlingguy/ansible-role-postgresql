@@ -52,8 +52,6 @@ env:
     postgresql_version: 9.6
   - distro: debian7
     postgresql_version: 10
-  - distro: debian7
-    postgresql_version: 11
   - distro: debian8
     postgresql_version: 8.4
   - distro: debian8
@@ -72,8 +70,6 @@ env:
     postgresql_version: 9.6
   - distro: debian8
     postgresql_version: 10
-  - distro: debian8
-    postgresql_version: 11
   - distro: debian9
     postgresql_version: 9.2
   - distro: debian9
@@ -86,8 +82,6 @@ env:
     postgresql_version: 9.6
   - distro: debian9
     postgresql_version: 10
-  - distro: debian9
-    postgresql_version: 11
   - distro: ubuntu1404
     postgresql_version: 8.4
   - distro: ubuntu1404
@@ -106,8 +100,6 @@ env:
     postgresql_version: 9.6
   - distro: ubuntu1404
     postgresql_version: 10
-  - distro: ubuntu1404
-    postgresql_version: 11
   - distro: ubuntu1604
     postgresql_version: 9.1
   - distro: ubuntu1604
@@ -122,8 +114,6 @@ env:
     postgresql_version: 9.6
   - distro: ubuntu1604
     postgresql_version: 10
-  - distro: ubuntu1604
-    postgresql_version: 11
   - distro: ubuntu1804
     postgresql_version: 9.3
   - distro: ubuntu1804
@@ -134,8 +124,6 @@ env:
     postgresql_version: 9.6
   - distro: ubuntu1804
     postgresql_version: 10
-  - distro: ubuntu1804
-    postgresql_version: 11
   - distro: centos6
     postgresql_version: 8.4
   - distro: centos6
