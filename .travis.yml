@@ -169,7 +169,6 @@ env:
 
 script:
   # Configure test script so we can run extra tests after playbook is run.
-  - export container_id="$(date +%s)"
   - export cleanup=false
   - test -n ${postgresql_version} && export extra_vars="-e postgresql_version=${postgresql_version} -e install_official_repo=true"
   - if [[ ${distro} =~ centos? ]]; then true; else test -z ${postgresql_data_dir} && export postgresql_data_dir="/var/lib/postgresql/${postgresql_version}/main"; fi
@@ -182,8 +181,8 @@ script:
   # Download test shim.
   - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/AlexGluck/67d7335621310548d1d5633b237799e6/raw/
   - chmod +x ${PWD}/tests/test.sh
-
   # Run tests.
+  - export container_id="$(date +%s)"
   - ${PWD}/tests/test.sh
 
   # Check PostgreSQL status.
