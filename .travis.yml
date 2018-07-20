@@ -21,19 +21,12 @@ env:
   - distro: ubuntu1404
     postgresql_bin_dir: /usr/lib/postgresql/9.3/bin
     postgresql_data_dir: /var/lib/postgresql/9.3/main
-<<<<<<< HEAD
     postgresql_daemon: postgresql
   - distro: debian7
     postgresql_bin_dir: /usr/lib/postgresql/9.1/bin
     postgresql_data_dir: /var/lib/postgresql/9.1/main
     postgresql_daemon: postgresql
   - distro: debian8
-=======
-  - distro: debian7
-    postgresql_bin_dir: /usr/lib/postgresql/9.1/bin
-    postgresql_data_dir: /var/lib/postgresql/9.1/main
-    - distro: debian8
->>>>>>> 73c952d33bbd610364668a968149e304c0ad433d
     postgresql_bin_dir: /usr/lib/postgresql/9.4/bin
     postgresql_data_dir: /var/lib/postgresql/9.4/main
     postgresql_daemon: postgresql
@@ -178,13 +171,13 @@ script:
   # Configure test script so we can run extra tests after playbook is run.
   - export container_id="$(date +%s)"
   - export cleanup=false
-  - 'test -n ${postgresql_version} && export extra_vars="-e postgresql_version=${postgresql_version} -e install_official_repo=true"'
-  - 'test ${distro} != centos? && test -z ${postgresql_data_dir} && export postgresql_data_dir="/var/lib/postgresql/${postgresql_version}/main"'
-  - 'test ${distro} != centos? && test -z ${postgresql_bin_path} && export postgresql_bin_path="/usr/lib/postgresql/${postgresql_version}/bin"'
-  - 'test ${distro} != centos? && test -z ${postgresql_daemon} && export postgresql_daemon="postgresql@${postgresql_version}-main"'  
-  - 'test ${distro} == centos? && test -z ${postgresql_data_dir} && export postgresql_data_dir="/var/lib/pgsql/${postgresql_version}/data"'
-  - 'test ${distro} == centos? && test -z ${postgresql_bin_path} && export postgresql_bin_path="/usr/pgsql-${postgresql_version}/bin"'
-  - 'test ${distro} == centos? && test -z ${postgresql_daemon} && export postgresql_daemon="postgresql-{{ postgresql_version }}"'
+  - test -n ${postgresql_version} && export extra_vars="-e postgresql_version=${postgresql_version} -e install_official_repo=true"
+  - test ${distro} != centos? && test -z ${postgresql_data_dir} && export postgresql_data_dir="/var/lib/postgresql/${postgresql_version}/main"
+  - test ${distro} != centos? && test -z ${postgresql_bin_path} && export postgresql_bin_path="/usr/lib/postgresql/${postgresql_version}/bin"
+  - test ${distro} != centos? && test -z ${postgresql_daemon} && export postgresql_daemon="postgresql@${postgresql_version}-main"
+  - test ${distro} == centos? && test -z ${postgresql_data_dir} && export postgresql_data_dir="/var/lib/pgsql/${postgresql_version}/data"
+  - test ${distro} == centos? && test -z ${postgresql_bin_path} && export postgresql_bin_path="/usr/pgsql-${postgresql_version}/bin"
+  - test ${distro} == centos? && test -z ${postgresql_daemon} && export postgresql_daemon="postgresql-{{ postgresql_version }}"
 
   # Download test shim.
   - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/AlexGluck/67d7335621310548d1d5633b237799e6/raw/
