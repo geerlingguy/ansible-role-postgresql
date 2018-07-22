@@ -23,7 +23,7 @@
     name: "{{ postgresql_daemon }}"
     state: started
     enabled: yes
-  when: ( ansible_distribution.lower() + ansible_distribution_version.split('.')[0] != 'debian7' ) or ( ansible_distribution.lower() == 'ubuntu' and ansible_distribution_version.split('.')[0] > 1504 )
+  when: ( ansible_distribution.lower() + ansible_distribution_version.split('.')[0] != 'debian7' ) or ( ansible_distribution.lower() == 'ubuntu' and (((ansible_distribution_version.split('.')[0] + ansible_distribution_version.split('.')[1])|float)*100)|int > 1504 )
 
 - name: Ensure PostgreSQL is started and enabled on boot ( for debian 7 and ubuntu lower 15.10 version ).
   service:
@@ -32,7 +32,7 @@
     enabled: yes
     sleep: 5
     args: "{{ postgresql_version }}"
-  when: ( ansible_distribution.lower() + ansible_distribution_version.split('.')[0] == 'debian7' ) or ( ansible_distribution.lower() == 'ubuntu' and ansible_distribution_version.split('.')[0] < 1510 ) and install_official_repo is defined
+  when: ( ansible_distribution.lower() + ansible_distribution_version.split('.')[0] == 'debian7' ) or ( ansible_distribution.lower() == 'ubuntu' and (((ansible_distribution_version.split('.')[0] + ansible_distribution_version.split('.')[1])|float)*100)|int < 151000 ) and install_official_repo is defined
 
 - name: Ensure PostgreSQL is running for Debian 7 (not postgresql.org repo).
   shell: service {{ postgresql_daemon }} start

@@ -25,7 +25,10 @@
   - name: Define postgresql_daemon ( for debian 7 and ubuntu lower 15.10 version).
     set_fact:
       postgresql_daemon: "{{ __postgresql_daemon }}"
-    when: ( ansible_distribution.lower() + ansible_distribution_version.split('.')[0] == 'debian7' ) or ( ansible_distribution.lower() == 'ubuntu' and ansible_distribution_version.split('.')[0] < 1510 )
+    when: ( ansible_distribution.lower() + ansible_distribution_version.split('.')[0] == 'debian7' ) or ( ansible_distribution.lower() == 'ubuntu' and (((ansible_distribution_version.split('.')[0] + ansible_distribution_version.split('.')[1])|float)*100)|int < 151000 )
+
+  - name: Debug vars
+    debug: msg="{{ (((ansible_distribution_version.split('.')[0] + ansible_distribution_version.split('.')[1])|float)*100)|int }} < 1510"
 
   - name: Define postgresql_data_dir.
     set_fact:
