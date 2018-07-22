@@ -80,3 +80,11 @@
       - option: unix_socket_directory
         value: '{{ postgresql_unix_socket_directories[0] }}'
   when: (((postgresql_version|float)*10)|int <= 92 ) and (ansible_os_family.lower() + ansible_distribution_version.split('.')[0] != 'redhat7')
+
+- name: Set custom variables for PostgreSQL version 9.2 from postgres.org at RedHat 7 family.
+  set_fact:
+    postgresql_hba_entries: []
+    postgresql_global_config_options:
+      - option: unix_socket_directory
+        value: '{{ postgresql_unix_socket_directories[0] }}'
+  when: (((postgresql_version|float)*10)|int <= 92 ) and (ansible_os_family.lower() + ansible_distribution_version.split('.')[0] == 'redhat7') and install_official_repo is defined
