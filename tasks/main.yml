@@ -12,7 +12,7 @@
   include_tasks: setup-{{ ansible_os_family }}.yml
   when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
 
-- name: Tasks for initilisation database.
+- name: Tasks for initilization database.
   include_tasks: initialize.yml
 
 - name: Tasks for manage postgresql configuration.
@@ -23,13 +23,22 @@
     name: "{{ postgresql_daemon }}"
     state: started
     enabled: yes
-    sleep: 5
+  when: ( ansible_distribution.lower() + ansible_distribution_version.split('.')[0] != 'debian7' ) or ( ansible_distribution.lower() == 'ubuntu' and ansible_distribution_version.split('.')[0] > 1504 )
 
-- name: Ensure PostgreSQL is running for Debian 7.
+- name: Ensure PostgreSQL is started and enabled on boot ( for debian 7 and ubuntu lower 15.10 version ).
+  service:
+    name: "{{ postgresql_daemon }}"
+    state: started
+    enabled: yes
+    sleep: 5
+    args: "{{ postgresql_version }}"
+  when: ( ansible_distribution.lower() + ansible_distribution_version.split('.')[0] == 'debian7' ) or ( ansible_distribution.lower() == 'ubuntu' and ansible_distribution_version.split('.')[0] < 1510 ) and install_official_repo is defined
+
+- name: Ensure PostgreSQL is running for Debian 7 (not postgresql.org repo).
   shell: service {{ postgresql_daemon }} start
   args:
     warn: no
-  when: ansible_distribution == 'Debian' and ansible_distribution_version.split('.')[0] == '7'
+  when: ansible_distribution.lower() + ansible_distribution_version.split('.')[0] == 'debian7' and install_official_repo is not defined
 
 # Configure PostgreSQL.
 - name: Tasks for manage databases.
