@@ -2,6 +2,8 @@
 # Variable configuration.
 - name: Tasks for define and set variables.
   include_tasks: variables.yml
+  tags:
+    - config
 
 - name: Tasks for manage postgresql.org repositories.
   include_tasks: install_official_repo.yml
@@ -17,6 +19,8 @@
 
 - name: Tasks for manage postgresql configuration.
   include_tasks: configure.yml
+  tags:
+    - config
 
 - name: Ensure PostgreSQL is started and enabled on boot.
   service:
@@ -43,5 +47,10 @@
 # Configure PostgreSQL.
 - name: Tasks for manage databases.
   include_tasks: databases.yml
+  tags:
+    - config
+
 - name: Tasks for manage postgresql users.
   include_tasks: users.yml
+  tags:
+    - config
