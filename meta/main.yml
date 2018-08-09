@@ -2,10 +2,11 @@
 dependencies: []
 
 galaxy_info:
+  role_name: postgresql
   author: geerlingguy
   description: "PostgreSQL server for Linux. Install, configure, remove, databases and users."
   company: "Midwestern Mac, LLC"
-  license: "license (BSD, MIT)"
+  license: license (BSD, MIT)
   min_ansible_version: 2.4
   platforms:
     - name: EL
