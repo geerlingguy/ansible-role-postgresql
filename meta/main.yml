@@ -18,9 +18,6 @@ galaxy_info:
     - name: Debian
       versions:
       - all
-  categories:
-    - database
-    - sql
   galaxy_tags:
     - database
     - postgresql
