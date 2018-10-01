@@ -31,3 +31,5 @@
     - name: Verify postgres is running.
       command: "{{ postgresql_bin_path }}/pg_ctl -D {{ postgresql_data_dir }} status"
       changed_when: false
+      become: true
+      become_user: postgres
