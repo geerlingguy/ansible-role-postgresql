@@ -115,7 +115,7 @@ A list of users to ensure exist on the server. Only the `name` is required; all 
       port: # defaults to not set
       state: # defaults to 'present
 
-A list of PostgreSQL extensions to be enabled on a given database under the server. Both `name` and `database` are required. The other properties are optional.
+A list of PostgreSQL extensions to be enabled on a given database under the server. Both `name` and `db` are required. The other properties are optional.
 
     postgresql_version: [OS-specific]
     postgresql_data_dir: [OS-specific]
