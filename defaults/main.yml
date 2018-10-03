@@ -72,4 +72,3 @@ postgresql_extensions: []
 #   login_password: # defaults to not set
 #   port: # defaults to not set
 #   state: # defaults to 'present
-
