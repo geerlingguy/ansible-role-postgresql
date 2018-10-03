@@ -62,3 +62,15 @@ postgresql_users: []
 #   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
 #   port: # defaults to not set
 #   state: # defaults to 'present'
+
+
+# Extensions to ensure exist.
+postgresql_extensions: []
+# - name: postgis # required
+#   db: example_db # required
+#   login_host: # defaults to 'localhost'
+#   login_user: # defaults to 'postgresql_user'
+#   login_password: # defaults to not set
+#   port: # defaults to not set
+#   state: # defaults to 'present
+

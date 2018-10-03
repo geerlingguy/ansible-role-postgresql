@@ -23,4 +23,4 @@
 - import_tasks: users.yml
 # Install extensions (if any are defined).
 - import_tasks: extensions.yml
-  when: postgresql_extensions is defined postgresql_extensions is not none
+  when: postgresql_extensions is defined postgresql_extensions != []
