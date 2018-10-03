@@ -8,6 +8,9 @@
       - name: example
     postgresql_users:
       - name: jdoe
+    postgresql_extensions:
+      - name: postgis
+        db: example
 
   pre_tasks:
     - name: Update apt cache.
