@@ -1,0 +1,16 @@
+---
+- name: Ensure PostgreSQL extensions are present.
+  postgresql_ext:
+    name: "{{ item.name }}"
+    db: "{{ item.db }}"
+    login_host: "{{ item.login_host | default('localhost') }}"
+    login_user: "{{ item.login_user | default(postgresql_user) }}"
+    login_password: "{{ item.login_password | default(omit) }}"
+    port: "{{ item.port | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ postgresql_extensions }}"
+  become: true
+  become_user: "{{ postgresql_user }}"
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true
