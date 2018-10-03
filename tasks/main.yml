@@ -21,6 +21,6 @@
 # Configure PostgreSQL.
 - import_tasks: databases.yml
 - import_tasks: users.yml
-  # Install extensions (if any are defined).
+# Install extensions (if any are defined).
 - import_tasks: extensions.yml
   when: postgresql_extensions is defined postgresql_extensions is not none
