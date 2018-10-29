@@ -3,7 +3,7 @@
   postgresql_ext:
     name: "{{ item.name }}"
     db: "{{ item.db }}"
-    login_host: "{{ item.login_host | default('localhost') }}"
+    login_host: "{{ item.login_host | default('127.0.0.1') }}"
     login_user: "{{ item.login_user | default(postgresql_user) }}"
     login_password: "{{ item.login_password | default(omit) }}"
     port: "{{ item.port | default(omit) }}"

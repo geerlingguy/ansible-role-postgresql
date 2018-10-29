@@ -11,9 +11,14 @@
     postgresql_hba_entries:
       - { type: local, database: all, user: postgres, auth_method: trust }
       - { type: local, database: all, user: all, auth_method: peer }
+      - { type: host, database: all, user: postgres, address: '127.0.0.1/32', auth_method: trust }
       - { type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5 }
       - { type: host, database: all, user: all, address: '::1/128', auth_method: md5 }
   pre_tasks:
+    - name: Install postgis package
+      package:
+          state: present 
+          name: postgis
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'
