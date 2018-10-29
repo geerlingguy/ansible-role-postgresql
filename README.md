@@ -111,6 +111,19 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
+
+    postgresql_extensions:
+    - name: postgis # required
+      db: example_db # required
+      login_host: # defaults to 'localhost'
+      login_user: # defaults to 'postgresql_user'
+      login_password: # defaults to not set
+      port: # defaults to not set
+      state: # defaults to 'present
+
+A list of PostgreSQL extensions to be enabled on a given database under the server. Both `name` and `db` are required. The other properties are optional.
+
+
     postgresql_version: [OS-specific]
     postgresql_data_dir: [OS-specific]
     postgresql_bin_path: [OS-specific]
@@ -134,6 +147,9 @@ None.
         postgresql_users:
           - name: example_user
             password: supersecure
+        postgresql_extensions:
+          - name: postgis
+            db: example_db
       roles:
         - role: geerlingguy.postgresql
 
@@ -150,6 +166,9 @@ None.
         postgresql_users:
           - name: example_user
             password: supersecure
+        postgresql_extensions:
+          - name: postgis
+            db: example_db
       roles:
         - role: geerlingguy.postgresql
 
@@ -159,6 +178,7 @@ Next versions unsupported and not tested:
 
 - ubuntu 15.04
 - ubuntu 15.10
+- ubuntu 16.10
 - ubuntu 17.04
 - ubuntu 17.10
 

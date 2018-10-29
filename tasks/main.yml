@@ -38,12 +38,6 @@
     args: "{{ postgresql_version }}"
   when: ( ansible_distribution.lower() + ansible_distribution_version.split('.')[0] == 'debian7' ) or ( ansible_distribution.lower() == 'ubuntu' and (((ansible_distribution_version.split('.')[0] + ansible_distribution_version.split('.')[1])|float)*100)|int < 151000 ) and install_official_repo is defined
 
-- name: Ensure PostgreSQL is running for Debian 7 (not postgresql.org repo).
-  shell: service {{ postgresql_daemon }} start
-  args:
-    warn: no
-  when: ansible_distribution.lower() + ansible_distribution_version.split('.')[0] == 'debian7' and install_official_repo is not defined
-
 # Configure PostgreSQL.
 - name: Tasks for manage databases.
   include_tasks: databases.yml
@@ -52,5 +46,11 @@
 
 - name: Tasks for manage postgresql users.
   include_tasks: users.yml
+  tags:
+    - config
+
+- name: "Install extensions (if any are defined)."
+  include_tasks: extensions.yml
+  when: postgresql_extensions is defined and postgresql_extensions != []
   tags:
     - config

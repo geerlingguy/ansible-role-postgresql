@@ -5,12 +5,10 @@
       - name: example
     postgresql_users:
       - name: jdoe
+    postgresql_extensions:
+      - name: postgis
+        db: example
   pre_tasks:
-#    - name: Remount selinux fs (fix for run docker on fedora host)
-#      shell: mount -o remount,ro,bind /sys/fs/selinux
-#      args:
-#        warn: no
-#      when: ansible_os_family == 'Debian'
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'

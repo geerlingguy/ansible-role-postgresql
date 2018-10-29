@@ -3,5 +3,5 @@
   package:
     name: "{{ item }}"
     state: present
-    enablerepo: "{{ postgresql_enablerepo }}"
+    enablerepo: "{{ postgresql_enablerepo | default(omit, true) }}"
   with_items: "{{ postgresql_packages }} + [ '{{ postgresql_python_library }}' ]"
