@@ -22,10 +22,6 @@ env:
     postgresql_bin_dir: /usr/lib/postgresql/9.3/bin
     postgresql_data_dir: /var/lib/postgresql/9.3/main
     postgresql_daemon: postgresql
-  - distro: debian7
-    postgresql_bin_dir: /usr/lib/postgresql/9.1/bin
-    postgresql_data_dir: /var/lib/postgresql/9.1/main
-    postgresql_daemon: postgresql
   - distro: debian8
     postgresql_bin_dir: /usr/lib/postgresql/9.4/bin
     postgresql_data_dir: /var/lib/postgresql/9.4/main
@@ -34,24 +30,6 @@ env:
     postgresql_bin_dir: /usr/lib/postgresql/9.6/bin
     postgresql_data_dir: /var/lib/postgresql/9.6/main
     postgresql_daemon: postgresql
-  - distro: debian7
-    postgresql_version: 8.4
-  - distro: debian7
-    postgresql_version: 9.0
-  - distro: debian7
-    postgresql_version: 9.1
-  - distro: debian7
-    postgresql_version: 9.2
-  - distro: debian7
-    postgresql_version: 9.3
-  - distro: debian7
-    postgresql_version: 9.4
-  - distro: debian7
-    postgresql_version: 9.5
-  - distro: debian7
-    postgresql_version: 9.6
-  - distro: debian7
-    postgresql_version: 10
   - distro: debian8
     postgresql_version: 8.4
   - distro: debian8
@@ -70,6 +48,8 @@ env:
     postgresql_version: 9.6
   - distro: debian8
     postgresql_version: 10
+  - distro: debian8
+    postgresql_version: 11
   - distro: debian9
     postgresql_version: 9.2
   - distro: debian9
@@ -82,6 +62,8 @@ env:
     postgresql_version: 9.6
   - distro: debian9
     postgresql_version: 10
+  - distro: debian9
+    postgresql_version: 11
   - distro: ubuntu1404
     postgresql_version: 8.4
   - distro: ubuntu1404
@@ -100,6 +82,8 @@ env:
     postgresql_version: 9.6
   - distro: ubuntu1404
     postgresql_version: 10
+  - distro: ubuntu1404
+    postgresql_version: 11
   - distro: ubuntu1604
     postgresql_version: 9.1
   - distro: ubuntu1604
@@ -114,6 +98,8 @@ env:
     postgresql_version: 9.6
   - distro: ubuntu1604
     postgresql_version: 10
+  - distro: ubuntu1604
+    postgresql_version: 11
   - distro: ubuntu1804
     postgresql_version: 9.3
   - distro: ubuntu1804
@@ -124,6 +110,8 @@ env:
     postgresql_version: 9.6
   - distro: ubuntu1804
     postgresql_version: 10
+  - distro: ubuntu1804
+    postgresql_version: 11
   - distro: centos6
     postgresql_version: 8.4
   - distro: centos6
@@ -142,6 +130,8 @@ env:
     postgresql_version: 9.6
   - distro: centos6
     postgresql_version: 10
+  - distro: centos6
+    postgresql_version: 11
   - distro: centos7
     postgresql_version: 9.2
   - distro: centos7
@@ -154,7 +144,9 @@ env:
     postgresql_version: 9.6
   - distro: centos7
     postgresql_version: 10
-
+  - distro: centos7
+    postgresql_version: 11
+    
 script:
   # Configure test script so we can run extra tests after playbook is run.
   - export cleanup=false

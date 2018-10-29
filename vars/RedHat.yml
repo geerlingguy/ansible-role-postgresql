@@ -111,3 +111,13 @@ __default_postgres_vars:
       - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
       - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
       - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
+  __11:
+    __postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"
+    __postgresql_config_path: "/var/lib/pgsql/{{ postgresql_version }}/data"
+    __postgresql_daemon: "postgresql-{{ postgresql_version }}"
+    __postgresql_packages:
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-server"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-contrib"
+      - "postgresql{{ __local_postgresql_version_str.split('.')|join('') }}-libs"
