@@ -8,6 +8,11 @@
     postgresql_extensions:
       - name: postgis
         db: example
+    postgresql_hba_entries:
+      - { type: local, database: all, user: postgres, auth_method: trust }
+      - { type: local, database: all, user: all, auth_method: peer }
+      - { type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5 }
+      - { type: host, database: all, user: all, address: '::1/128', auth_method: md5 }
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
