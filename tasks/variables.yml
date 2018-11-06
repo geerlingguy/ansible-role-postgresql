@@ -9,6 +9,14 @@
   when:
   - ansible_os_family == 'RedHat'
   - ansible_distribution != 'Fedora'
+  - not postgresql_use_scl
+
+- name: Include OS-specific variables (RedHat SCL).
+  include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}-SCL-{{ postgresql_scl_version }}.yml"
+  when:
+  - ansible_os_family == 'RedHat'
+  - ansible_distribution != 'Fedora'
+  - postgresql_use_scl
 
 - name: Include OS-specific variables (Fedora).
   include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
