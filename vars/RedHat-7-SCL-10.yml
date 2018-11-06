@@ -1,0 +1,11 @@
+---
+__postgresql_version: "10.5"
+__postgresql_data_dir: "/var/opt/rh/rh-postgresql10/lib/pgsql/data"
+__postgresql_bin_path: "/usr/bin"
+__postgresql_config_path: "/var/opt/rh/rh-postgresql10/lib/pgsql/data"
+__postgresql_daemon: postgresql
+__postgresql_packages:
+  - rh-postgresql10-postgresql-syspaths
+  - rh-postgresql10-postgresql-server-syspaths
+  - rh-postgresql10-postgresql-contrib-syspaths
+  - rh-postgresql10-postgresql-libs

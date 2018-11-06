@@ -2,6 +2,12 @@
 # RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
 postgresql_enablerepo: ""
 
+# RHEL/CentOS only. Use postgres from an Software Collection (SCL).
+postgresql_use_scl: False
+
+# RHEL/CentOS only. The SCL version to use.
+postgresql_scl_version: 96
+
 # Set postgresql state when configuration changes are made. Recommended values:
 # `restarted` or `reloaded`
 postgresql_restarted_state: "restarted"

@@ -1,0 +1,11 @@
+---
+__postgresql_version: "9.6"
+__postgresql_data_dir: "/var/opt/rh/rh-postgresql96/lib/pgsql/data"
+__postgresql_bin_path: "/usr/bin"
+__postgresql_config_path: "/var/opt/rh/rh-postgresql96/lib/pgsql/data"
+__postgresql_daemon: postgresql
+__postgresql_packages:
+  - rh-postgresql96-postgresql-syspaths
+  - rh-postgresql96-postgresql-server-syspaths
+  - rh-postgresql96-postgresql-contrib-syspaths
+  - rh-postgresql96-postgresql-libs
