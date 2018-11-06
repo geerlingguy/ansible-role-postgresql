@@ -11,6 +11,7 @@ env:
     - MOLECULE_DISTRO: ubuntu1604
     - MOLECULE_DISTRO: debian9
     - MOLECULE_DISTRO: debian8
+    - MOLECULE_DISTRO: fedora29
 
 install:
   # Install test dependencies.
