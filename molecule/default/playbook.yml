@@ -6,6 +6,8 @@
   vars:
     postgresql_databases:
       - name: example
+      - name: populated_example
+        run_sql_script: populate_example.sql.j2
     postgresql_users:
       - name: jdoe
 

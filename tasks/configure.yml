@@ -26,3 +26,6 @@
     group: "{{ postgresql_group }}"
     mode: 02775
   with_items: "{{ postgresql_unix_socket_directories }}"
+
+- name: Ensure authentication policy is applied
+  meta: flush_handlers

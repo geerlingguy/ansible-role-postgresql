@@ -87,6 +87,7 @@ If overriding, make sure you copy all of the existing entries from `defaults/mai
         port: # defaults to not set
         owner: # defaults to postgresql_user
         state: # defaults to 'present'
+        run_sql_script: # the location to an SQL script in templates/postgresql_population_scripts/ to run on this database when first created
 
 A list of databases to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
