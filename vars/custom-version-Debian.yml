@@ -1,0 +1,12 @@
+---
+__postgresql_repo_key: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+__postgresql_repo_reference: "deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main"
+__postgresql_version: "{{ postgresql_custom_version }}"
+__postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/main"
+__postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
+__postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
+__postgresql_daemon: postgresql
+__postgresql_packages:
+  - "postgresql-{{ __postgresql_version }}"
+  - "postgresql-contrib-{{ __postgresql_version }}"
+  - "libpq-dev"
