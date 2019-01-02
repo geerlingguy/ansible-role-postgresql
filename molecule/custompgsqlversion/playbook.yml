@@ -9,7 +9,7 @@
     postgresql_users:
       - name: jdoe
     postgresql_custom_version: '10'
-    postgresql_enablerepo: 'YES'
+    postgresql_apt_enablerepo: true
 
   pre_tasks:
     - name: Update apt cache.

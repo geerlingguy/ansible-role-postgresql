@@ -19,7 +19,7 @@
     postgresql_repo_reference: "{{ __postgresql_repo_reference }}"
   when:
     - ansible_os_family == 'Debian'
-    - postgresql_enablerepo == 'YES'
+    - postgresql_apt_enablerepo == true
     - postgresql_repo_reference is not defined
 
 - name: Define postgresql_repo_key.
@@ -27,7 +27,7 @@
     postgresql_repo_key: "{{ __postgresql_repo_key }}"
   when:
     - ansible_os_family == 'Debian'
-    - postgresql_enablerepo == 'YES'
+    - postgresql_apt_enablerepo == true
     - postgresql_repo_key is not defined
 
 - name: Define postgresql_packages.

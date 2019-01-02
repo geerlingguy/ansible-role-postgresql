@@ -3,15 +3,13 @@
   apt_key:
     url: "{{ postgresql_repo_key }}"
     state: present
-  when:
-    - postgresql_enablerepo == 'YES'
+  when: postgresql_apt_enablerepo
 
 - name: Enable external APT repository reference
   apt_repository:
     repo: "{{ postgresql_repo_reference }}"
     state: present
-  when:
-    - postgresql_enablerepo == 'YES'
+  when: postgresql_apt_enablerepo
 
 - name: Ensure PostgreSQL Python libraries are installed.
   apt:
