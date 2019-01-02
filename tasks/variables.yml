@@ -8,6 +8,28 @@
   include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
   when: ansible_os_family == 'RedHat'
 
+- name: Include Custom Version OS-specific variables (Debian)
+  include_vars: custom-version-Debian.yml
+  when:
+    - ansible_os_family == 'Debian'
+    - postgresql_custom_version is defined
+
+- name: Define postgresql_repo_reference.
+  set_fact:
+    postgresql_repo_reference: "{{ __postgresql_repo_reference }}"
+  when:
+    - ansible_os_family == 'Debian'
+    - postgresql_enablerepo == 'YES'
+    - postgresql_repo_reference is not defined
+
+- name: Define postgresql_repo_key.
+  set_fact:
+    postgresql_repo_key: "{{ __postgresql_repo_key }}"
+  when:
+    - ansible_os_family == 'Debian'
+    - postgresql_enablerepo == 'YES'
+    - postgresql_repo_key is not defined
+
 - name: Define postgresql_packages.
   set_fact:
     postgresql_packages: "{{ __postgresql_packages | list }}"
