@@ -26,3 +26,6 @@
     group: "{{ postgresql_group }}"
     mode: 02775
   with_items: "{{ postgresql_unix_socket_directories }}"
+
+- name: force all notified handlers to run at this point, not waiting for normal sync points 
+  meta: flush_handlers
