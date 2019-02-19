@@ -21,4 +21,3 @@
 # Configure PostgreSQL.
 - import_tasks: users.yml
 - import_tasks: databases.yml
-
