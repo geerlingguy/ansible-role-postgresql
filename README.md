@@ -21,6 +21,14 @@ Available variables are listed below, along with default values (see `defaults/m
 
 (RHEL/CentOS only) You can set a repo to use for the PostgreSQL installation by passing it in here.
 
+    postgresql_custom_version: '10'
+
+Override default postgresql version
+
+    postgresql_apt_enablerepo: true
+
+Required var when overriding default postgresql version on Ubuntu
+
     postgresql_restarted_state: "restarted"
 
 Set the state of the service when configuration changes are made. Recommended values are `restarted` or `reloaded`.
