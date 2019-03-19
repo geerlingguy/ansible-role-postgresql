@@ -18,15 +18,50 @@
     postgresql_version: "{{ __postgresql_version }}"
   when: postgresql_version is not defined
 
+# Daemon name
 - name: Define postgresql_daemon.
   set_fact:
     postgresql_daemon: "{{ __postgresql_daemon }}"
-  when: postgresql_daemon is not defined
+  when: ansible_os_family == 'Debian'
 
+- name: Define postgresql_daemon.
+  set_fact:
+    postgresql_daemon: "{{ __postgresql_daemon_main }}"
+  when:
+    - postgresql_cluster_name == 'main'
+    - ansible_os_family == 'RedHat'
+
+- name: Define postgresql_daemon.
+  set_fact:
+    postgresql_daemon: "{{ __postgresql_daemon }}"
+  when:
+    - postgresql_cluster_name != 'main'
+    - ansible_os_family == 'RedHat'
+
+# Data dir
 - name: Define postgresql_data_dir.
   set_fact:
     postgresql_data_dir: "{{ __postgresql_data_dir }}"
   when: postgresql_data_dir is not defined
+
+- name: Define PGDATA dir for main cluster (RedHat).
+  set_fact:
+    postgresql_pgdata: "{{ postgresql_data_dir }}/data"
+  when:
+    - postgresql_cluster_name == 'main'
+    - ansible_os_family == 'RedHat'
+
+- name: Define PGDATA dir for non-main cluster (RedHat).
+  set_fact:
+    postgresql_pgdata: "{{ postgresql_data_dir }}/{{ postgresql_version }}/{{ postgresql_cluster_name }}"
+  when:
+    - postgresql_cluster_name != 'main'
+    - ansible_os_family == 'RedHat'
+
+- name: Define PGDATA dir (Debian).
+  set_fact:
+    postgresql_pgdata: "{{ postgresql_data_dir }}/{{ postgresql_version }}/{{ postgresql_cluster_name }}"
+  when: ansible_os_family == 'Debian'
 
 - name: Define postgresql_bin_path.
   set_fact:

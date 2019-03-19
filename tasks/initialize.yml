@@ -8,22 +8,34 @@
 
 - name: Ensure PostgreSQL data directory exists.
   file:
-    path: "{{ postgresql_data_dir }}"
+    path: "{{ postgresql_pgdata }}"
     owner: "{{ postgresql_user }}"
     group: "{{ postgresql_group }}"
     state: directory
     mode: 0700
 
+### TODO
 - name: Check if PostgreSQL database is initialized.
   stat:
-    path: "{{ postgresql_data_dir }}/PG_VERSION"
+    path: "{{ postgresql_pgdata }}/PG_VERSION"
   register: pgdata_dir_version
 
 - name: Ensure PostgreSQL database is initialized.
-  command: "{{ postgresql_bin_path }}/initdb -D {{ postgresql_data_dir }}"
-  when: not pgdata_dir_version.stat.exists
+  command: "pg_createcluster -d {{ postgresql_pgdata }} \
+            {{ postgresql_version }} {{ postgresql_cluster_name }}"
+  become: true
+  become_user: "{{ postgresql_user }}"
+  when:
+    - not pgdata_dir_version.stat.exists
+    - ansible_os_family == 'Debian'
+
+- name: Ensure PostgreSQL database is initialized.
+  command: "{{ postgresql_bin_path }}/initdb -D {{ postgresql_pgdata }}"
   become: true
   become_user: "{{ postgresql_user }}"
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
   vars:
     ansible_ssh_pipelining: true
+  when:
+    - not pgdata_dir_version.stat.exists
+    - ansible_os_family == 'RedHat'
