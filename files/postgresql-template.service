@@ -1,0 +1,6 @@
+.include /lib/systemd/system/postgresql.service
+[Unit]
+Description=PostgreSQL Cluster %i
+
+[Service]
+Environment=PGDATA=/var/lib/pgsql/data/%I

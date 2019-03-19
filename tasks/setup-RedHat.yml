@@ -10,3 +10,22 @@
     name: "{{ postgresql_python_library }}"
     state: present
     enablerepo: "{{ postgresql_enablerepo | default(omit, true) }}"
+
+- name: Ensure template systemd unit file is installed.
+  copy:
+    src: postgresql-template.service
+    dest: /etc/systemd/system/postgresql@.service
+  when: ansible_distribution_major_version|int >= 7
+
+- name: Ensure init.d file is installed
+  file:
+    src: postgresql
+    path: "/etc/init.d/{{ postgresql_daemon }}"
+    state: link
+  when: ansible_distribution_major_version|int < 7
+
+- name: Ensure sysconfig is installed.
+  template:
+    src: sysconfig.j2
+    dest: "{{ __postgresql_sysconfig_path }}/{{ postgresql_daemon }}"
+  when: ansible_distribution_major_version|int < 7
