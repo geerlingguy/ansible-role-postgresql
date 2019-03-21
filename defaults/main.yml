@@ -2,6 +2,7 @@
 # RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
 postgresql_enablerepo: ""
 postgresql_cluster_name: main
+postgresql_port: 5432
 
 # Set postgresql state when configuration changes are made. Recommended values:
 # `restarted` or `reloaded`

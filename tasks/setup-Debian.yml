@@ -31,8 +31,11 @@
     - postgresql_cluster_name != 'main'
     - package_installed.changed
 
-# - name: Force-restart PostgreSQL after new locales are generated.
-#   service:
-#     name: "{{ postgresql_daemon }}"
-#     state: restarted
-#   when: locale_gen_result.changed
+- name: Configure non standard PostgreSQL port.
+  lineinfile:
+    dest: "{{ postgresql_config_path }}/{{ postgresql_cluster_name }}/postgresql.conf"
+    regexp: "^#?port.+$"
+    line: "port = {{ postgresql_port }}"
+    state: present
+  when: postgresql_port != 5432
+  notify: restart postgresql

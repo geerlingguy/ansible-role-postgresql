@@ -17,6 +17,22 @@
     dest: /etc/systemd/system/postgresql@.service
   when: ansible_distribution_major_version|int >= 7
 
+- name: Ensure systemd variable directory exists.
+  file:
+    path: "/etc/systemd/system/{{ postgresql_daemon }}.d"
+    state: directory
+  when:
+    - ansible_distribution_major_version|int >= 7
+    - postgresql_port != 5432
+
+- name: Ensure template systemd unit file is installed.
+  template:
+    src: systemd.service.d.j2
+    dest: "/etc/systemd/system/{{ postgresql_daemon }}.service.d/override.conf"
+  when:
+    - ansible_distribution_major_version|int >= 7
+    - postgresql_port != 5432
+
 - name: Ensure init.d file is installed
   file:
     src: postgresql
