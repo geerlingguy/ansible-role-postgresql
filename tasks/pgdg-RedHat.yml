@@ -6,13 +6,11 @@
     -{{ ansible_distribution_version.split('.')[0] }}-{{ ansible_architecture }}"
     return_content: true
   register: webpage
-  run_once: true
 
 - name: Package name
   set_fact:
     package_name: "pgdg-{{ ansible_distribution.lower() }}({{ (postgresql_version|string).split('.')|join('') }})?\
     -{{ postgresql_version }}-\\d+\\.noarch\\.rpm"
-  run_once: true
 
 - name: Search package
   set_fact:

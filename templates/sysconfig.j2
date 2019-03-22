@@ -1,3 +1,5 @@
 PGDATA={{ postgresql_data_dir }}/{{ postgresql_cluster_name }}
-PGPORT={{ postgresql_cluster_port }}
+PGPORT={{ postgresql_port }}
+PGENGINE={{ postgresql_bin_path }}
+PGMAJORVERSION={{ postgresql_version }}
 PG_OOM_ADJ=0
