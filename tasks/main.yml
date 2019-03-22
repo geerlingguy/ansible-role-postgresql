@@ -2,12 +2,18 @@
 # Variable configuration.
 - include_tasks: variables.yml
 
-# Setup/install tasks.
-- include_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+# Install official repository
+- name: Install PGDG repository.
+  include_tasks: pgdg-{{ ansible_os_family }}.yml
+  when:
+    - ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
+    - postgresql_pgdg is defined
+    - postgresql_pgdg
 
-- include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+# Setup/install tasks.
+- name: OS setup/install tasks.
+  include_tasks: setup-{{ ansible_os_family }}.yml
+  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
 
 - include_tasks: initialize.yml
 - include_tasks: configure.yml

@@ -1,0 +1,37 @@
+---
+- name: Get list package
+  uri:
+    url: "{{ postgresql_url_repo_path }}/yum/{{ postgresql_version }}/{{ ansible_os_family.lower() }}\
+    /{% if ansible_distribution == 'Fedora' %}{{ ansible_distribution.lower() }}{% else %}rhel{% endif %}\
+    -{{ ansible_distribution_version.split('.')[0] }}-{{ ansible_architecture }}"
+    return_content: true
+  register: webpage
+  run_once: true
+
+- name: Package name
+  set_fact:
+    package_name: "pgdg-{{ ansible_distribution.lower() }}({{ (postgresql_version|string).split('.')|join('') }})?\
+    -{{ postgresql_version }}-\\d+\\.noarch\\.rpm"
+  run_once: true
+
+- name: Search package
+  set_fact:
+    package_file_name: "{{ webpage.content|regex_search(package_name) }}"
+  run_once: true
+
+- name: Manage repo package
+  package:
+    name: "{{ postgresql_url_repo_path }}/yum/{{ postgresql_version }}/{{ ansible_os_family.lower() }}/\
+    {% if ansible_distribution == 'Fedora' %}{{ ansible_distribution.lower() }}{% else %}rhel{% endif %}-\
+    {{ ansible_distribution_version.split('.')[0] }}-{{ ansible_architecture }}/{{ package_file_name }}"
+    state: present
+
+- name: Override default varibles.
+  set_fact:
+    postgresql_packages: !!null
+    postgresql_bin_path: !!null
+
+- name: Override default varibles.
+  set_fact:
+    postgresql_packages: "{{ postgresql_oficial_packages|list }}"
+    postgresql_bin_path: "/usr/pgsql-{{ postgresql_version }}/bin"

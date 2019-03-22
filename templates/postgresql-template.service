@@ -1,0 +1,19 @@
+[Unit]
+Description=PostgreSQL Cluster %i
+After=network.target
+
+
+[Service]
+Type=forking
+
+User=postgres
+Group=postgres
+OOMScoreAdjust=-1000
+TimeoutSec=300
+
+# Environment variables
+Environment=PGDATA=/var/lib/pgsql/data/%I
+
+
+[Install]
+WantedBy=multi-user.target

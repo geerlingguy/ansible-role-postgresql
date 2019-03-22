@@ -13,6 +13,23 @@
     postgresql_packages: "{{ __postgresql_packages | list }}"
   when: postgresql_packages is not defined
 
+- name: Define installation source.
+  set_fact:
+    postgresql_pgdg: true
+  when:
+    - postgresql_pgdg is not defined
+    - postgresql_version is defined
+    - postgresql_version|float != __postgresql_version|float
+
+- name: Assert version is supported by source.
+  assert:
+    that:
+      postgresql_version == __postgresql_version
+    fail_msg: "This version of PostgreSQL is not supported by OS repository"
+  when:
+    - postgresql_pgdg is defined
+    - not postgresql_pgdg
+
 - name: Define postgresql_version.
   set_fact:
     postgresql_version: "{{ __postgresql_version }}"
