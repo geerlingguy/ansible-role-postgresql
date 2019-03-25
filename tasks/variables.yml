@@ -8,6 +8,11 @@
   include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
   when: ansible_os_family == 'RedHat'
 
+- name: Define postgresql_cluster_name.
+  set_fact:
+    postgresql_cluster_name: "{{ __postgresql_cluster_name }}"
+  when: postgresql_cluster_name is not defined
+
 - name: Define postgresql_packages.
   set_fact:
     postgresql_packages: "{{ __postgresql_packages | list }}"

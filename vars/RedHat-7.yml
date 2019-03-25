@@ -1,8 +1,9 @@
 ---
 __postgresql_version: "9.2"
-__postgresql_data_dir: "/var/lib/pgsql/data/{{ postgresql_version }}"
+__postgresql_cluster_name: main
+__postgresql_data_dir: "/var/lib/pgsql/data/"
 __postgresql_bin_path: "/usr/bin"
-__postgresql_config_path: "/var/lib/pgsql/data/{{ postgresql_version }}"
+__postgresql_config_path: "{{ postgresql_data_dir }}"
 __postgresql_daemon: "postgresql@{{ postgresql_version }}-{{ postgresql_cluster_name }}"
 __postgresql_packages:
   - postgresql
