@@ -6,23 +6,26 @@
     -{{ ansible_distribution_version.split('.')[0] }}-{{ ansible_architecture }}"
     return_content: true
   register: webpage
+  when: postgresql_oficial_repo_install
 
 - name: Package name
   set_fact:
     package_name: "pgdg-{{ ansible_distribution.lower() }}({{ (postgresql_version|string).split('.')|join('') }})?\
     -{{ postgresql_version }}-\\d+\\.noarch\\.rpm"
+  when: postgresql_oficial_repo_install
 
 - name: Search package
   set_fact:
     package_file_name: "{{ webpage.content|regex_search(package_name) }}"
-  run_once: true
+  when: postgresql_oficial_repo_install
 
-- name: Manage repo package
+- name: Install designated repository.
   package:
     name: "{{ postgresql_url_repo_path }}/yum/{{ postgresql_version }}/{{ ansible_os_family.lower() }}/\
     {% if ansible_distribution == 'Fedora' %}{{ ansible_distribution.lower() }}{% else %}rhel{% endif %}-\
     {{ ansible_distribution_version.split('.')[0] }}-{{ ansible_architecture }}/{{ package_file_name }}"
     state: present
+  when: postgresql_oficial_repo_install
 
 - name: Override default varibles.
   set_fact:

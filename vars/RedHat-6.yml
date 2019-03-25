@@ -4,7 +4,7 @@ __postgresql_data_dir: "/var/lib/pgsql/data/{{ postgresql_version }}"
 __postgresql_bin_path: "/usr/bin"
 __postgresql_config_path: "/var/lib/pgsql/data/{{ postgresql_version }}"
 __postgresql_sysconfig_path: /etc/sysconfig/pgsql
-__postgresql_daemon: "postgresql@{{ postgresql_version }}-{{ postgresql_cluster_name }}"
+__postgresql_daemon: "postgresql-{{ postgresql_version }}@{{ postgresql_cluster_name }}"
 __postgresql_packages:
   - postgresql
   - postgresql-server

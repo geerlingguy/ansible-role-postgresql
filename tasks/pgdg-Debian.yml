@@ -4,17 +4,20 @@
   package:
     name: apt-transport-https
     state: present
+  when: postgresql_oficial_repo_install
 
 - name: Add an Apt signing key
   apt_key:
     id: "{{ postgresql_url_repo_key }}"
     url: "{{ postgresql_url_repo_path }}/apt/{{ postgresql_url_repo_key }}.asc"
     state: present
+  when: postgresql_oficial_repo_install
 
 - name: Add an Apt repository
   apt_repository:
     repo: "deb {{ postgresql_url_repo_path }}/apt/ {{ ansible_distribution_release }}-pgdg main"
     state: present
+  when: postgresql_oficial_repo_install
 
 - name: Override default varibles.
   set_fact:

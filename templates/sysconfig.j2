@@ -1,5 +1,6 @@
 PGDATA={{ postgresql_data_dir }}/{{ postgresql_cluster_name }}
 PGPORT={{ postgresql_port }}
-PGENGINE={{ postgresql_bin_path }}
 PGMAJORVERSION={{ postgresql_version }}
 PG_OOM_ADJ=0
+PGLOG={{ postgresql_data_dir }}/{{ postgresql_cluster_name }}/pgstartup.log
+PGUPLOG={{ postgresql_data_dir }}/{{ postgresql_cluster_name }}/pgupgrade.log

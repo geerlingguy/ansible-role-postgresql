@@ -17,6 +17,7 @@ postgresql_oficial_packages:
     - postgresql-{{ postgresql_version }}
     - postgresql-contrib-{{ postgresql_version }}
     - libpq-dev
+postgresql_oficial_repo_install: true
 
 # Set postgresql state when configuration changes are made. Recommended values:
 # `restarted` or `reloaded`
