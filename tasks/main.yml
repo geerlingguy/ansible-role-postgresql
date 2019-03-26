@@ -1,6 +1,11 @@
 ---
 # Variable configuration.
 - include_tasks: variables.yml
+  tags: varrrs
+
+- debug:
+    var: postgresql_data_dir
+  tags: varrrs
 
 # Install official repository
 - name: Install PGDG repository.
