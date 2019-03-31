@@ -53,15 +53,25 @@
 
 - name: Define PGDATA dir for non-main cluster (RedHat).
   set_fact:
-    postgresql_pgdata: "{{ postgresql_data_dir }}/{{ postgresql_version }}/{{ postgresql_cluster_name }}"
+    postgresql_pgdata: "{{ postgresql_data_dir }}/{{ postgresql_cluster_name }}"
   when:
     - postgresql_cluster_name != 'main'
     - ansible_os_family == 'RedHat'
 
 - name: Define PGDATA dir (Debian).
   set_fact:
-    postgresql_pgdata: "{{ postgresql_data_dir }}/{{ postgresql_version }}/{{ postgresql_cluster_name }}"
+    postgresql_pgdata: "{{ postgresql_data_dir }}/{{ postgresql_cluster_name }}"
   when: ansible_os_family == 'Debian'
+
+# Asserts on pgdata path
+- name: Main cluster name can only be located in default path
+  assert:
+    that:
+      - postgresql_cluster_name != 'main'
+    fail_msg: Change postgresql_cluster_name or postgresql_data_dir
+  when:
+    - ansible_os_family == 'RedHat'
+    - __postgresql_data_dir != postgresql_data_dir
 
 - name: Define postgresql_bin_path.
   set_fact:

@@ -29,7 +29,7 @@
 
   post_tasks:
     - name: Verify postgres is running.
-      command: "{{ postgresql_bin_path }}/pg_ctl -D {{ postgresql_data_dir }}/main status"
+      command: "{{ postgresql_bin_path }}/pg_ctl -D {{ postgresql_pgdata }} status"
       changed_when: false
       become: true
       become_user: postgres

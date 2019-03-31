@@ -2,7 +2,7 @@
 __postgresql_version: "9.3"
 __postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}"
 __postgresql_bin_path: "/usr/lib/postgresql/{{ __postgresql_version }}/bin"
-__postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}"
+__postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/{{ postgresql_cluster_name }}"
 __postgresql_daemon: "postgresql@{{ postgresql_version }}-{{ postgresql_cluster_name }}"
 __postgresql_packages:
   - postgresql

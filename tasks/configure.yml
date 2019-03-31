@@ -1,7 +1,7 @@
 ---
 - name: Configure global settings.
   lineinfile:
-    dest: "{{ postgresql_config_path }}/{{ postgresql_cluster_name }}/postgresql.conf"
+    dest: "{{ postgresql_config_path }}/postgresql.conf"
     regexp: "^#?{{ item.option }}.+$"
     line: "{{ item.option }} = '{{ item.value }}'"
     state: "{{ item.state | default('present') }}"
@@ -11,7 +11,7 @@
 - name: Configure host based authentication (if entries are configured).
   template:
     src: "pg_hba.conf.j2"
-    dest: "{{ postgresql_config_path }}/{{ postgresql_cluster_name }}/pg_hba.conf"
+    dest: "{{ postgresql_config_path }}/pg_hba.conf"
     owner: "{{ postgresql_user }}"
     group: "{{ postgresql_group }}"
     mode: 0600
