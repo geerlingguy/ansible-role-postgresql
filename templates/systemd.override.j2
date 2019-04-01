@@ -1,0 +1,10 @@
+[Service]
+Environment=PGPORT={{ postgresql_port }}
+
+# Exec portion
+{% if not (postgresql_pgdg is defined and postgresql_pgdg) and ansible_os_family == 'RedHat' %}
+ExecStartPre=/usr/bin/postgresql-check-db-dir ${PGDATA}
+{% endif %}
+ExecStart={{ postgresql_bin_path }}/pg_ctl start -D ${PGDATA} -s -o "-p ${PGPORT}" -w -t 300
+ExecStop={{ postgresql_bin_path }}/pg_ctl stop -D ${PGDATA} -s -m fast
+ExecReload={{ postgresql_bin_path }}/pg_ctl reload -D ${PGDATA} -s

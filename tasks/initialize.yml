@@ -14,7 +14,6 @@
     state: directory
     mode: 0700
 
-### TODO
 - name: Check if PostgreSQL database is initialized.
   stat:
     path: "{{ postgresql_pgdata }}/PG_VERSION"

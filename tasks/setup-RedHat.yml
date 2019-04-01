@@ -11,18 +11,52 @@
     state: present
     enablerepo: "{{ postgresql_enablerepo | default(omit, true) }}"
 
+# RHEL 7+
 - name: Ensure template systemd unit file is installed.
   template:
     src: postgresql-template.service
     dest: /etc/systemd/system/postgresql@.service
+  register: systemd_unit
   when: ansible_distribution_major_version|int >= 7
 
-- name: Ensure init.d file is installed
+- name: Reload systemd subsystem.
+  systemd:
+    daemon_reload: true
+  when: systemd_unit.changed
+
+- name: Ensure systemd variable directory exists.
+  file:
+    path: "/etc/systemd/system/{{ postgresql_daemon }}.service.d"
+    state: directory
+  when:
+    - ansible_distribution_major_version|int >= 7
+
+- name: Ensure template systemd unit file is installed.
+  template:
+    src: systemd.override.j2
+    dest: "/etc/systemd/system/{{ postgresql_daemon }}.service.d/override.conf"
+  when:
+    - ansible_distribution_major_version|int >= 7
+
+# RHEL6
+- name: Ensure init.d file is installed (PostgreSQL from standard repository)
   file:
     src: postgresql
     path: "/etc/init.d/{{ postgresql_daemon }}"
     state: link
-  when: ansible_distribution_major_version|int < 7
+  when:
+    - ansible_distribution_major_version|int < 7
+    - postgresql_pgdg is not defined or (postgresql_pgdg is defined and not postgresql_pgdg)
+
+- name: Ensure init.d file is installed (PostgreSQL from PGDG)
+  file:
+    src: "postgresql-{{ postgresql_version }}"
+    path: "/etc/init.d/{{ postgresql_daemon }}"
+    state: link
+  when:
+    - ansible_distribution_major_version|int < 7
+    - postgresql_pgdg is defined
+    - postgresql_pgdg
 
 - name: Ensure sysconfig is installed.
   template:
