@@ -7,10 +7,20 @@ env:
     - ROLE_NAME: postgresql
   matrix:
     - MOLECULE_DISTRO: centos7
+    - MOLECULE_DISTRO: centos7
+      MOLECULE_PLAYBOOK: playbook-pgdg10.yml
     - MOLECULE_DISTRO: ubuntu1804
+    - MOLECULE_DISTRO: ubuntu1804
+      MOLECULE_PLAYBOOK: playbook-pgdg10.yml
     - MOLECULE_DISTRO: ubuntu1604
+    - MOLECULE_DISTRO: ubuntu1604
+      MOLECULE_PLAYBOOK: playbook-pgdg10.yml
     - MOLECULE_DISTRO: debian9
+    - MOLECULE_DISTRO: debian9
+      MOLECULE_PLAYBOOK: playbook-pgdg10.yml
     - MOLECULE_DISTRO: debian8
+    - MOLECULE_DISTRO: debian8
+      MOLECULE_PLAYBOOK: playbook-pgdg10.yml
 
 install:
   # Install test dependencies.
