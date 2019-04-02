@@ -1,0 +1,28 @@
+---
+- name: Install https transport for apt
+  package:
+    name: apt-transport-https
+    state: present
+  when: postgresql_oficial_repo_install
+
+- name: Add an Apt signing key
+  apt_key:
+    id: "{{ postgresql_url_repo_key }}"
+    url: "{{ postgresql_url_repo_path }}/apt/{{ postgresql_url_repo_key }}.asc"
+    state: present
+  when: postgresql_oficial_repo_install
+
+- name: Add an Apt repository
+  apt_repository:
+    repo: "deb {{ postgresql_url_repo_path }}/apt/ {{ ansible_distribution_release }}-pgdg main"
+    state: present
+  when: postgresql_oficial_repo_install
+
+# Override package names and paths
+- name: Override default varibles.
+  set_fact:
+    postgresql_packages: !!null
+
+- name: Override default varibles.
+  set_fact:
+    postgresql_packages: "{{ postgresql_oficial_packages.Debian|list }}"

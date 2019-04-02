@@ -20,7 +20,7 @@
   register: pgdata_dir_version
 
 - name: Ensure PostgreSQL database is initialized.
-  command: "pg_createcluster -d {{ postgresql_pgdata }} \
+  command: "pg_createcluster -d {{ postgresql_pgdata }} -p {{ postgresql_port }} \
             {{ postgresql_version }} {{ postgresql_cluster_name }}"
   become: true
   become_user: "{{ postgresql_user }}"
