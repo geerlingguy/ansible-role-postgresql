@@ -38,3 +38,14 @@
   when:
     - not pgdata_dir_version.stat.exists
     - ansible_os_family == 'RedHat'
+
+- name: Configure non standard PostgreSQL port.
+  lineinfile:
+    dest: "{{ postgresql_config_path }}/postgresql.conf"
+    regexp: "^#?port.+$"
+    line: "port = {{ postgresql_port }}"
+    state: present
+  notify: restart postgresql
+  when:
+    - postgresql_port != 5432
+    - ansible_os_family == 'Debian' or (ansible_os_family == 'RedHat' and postgresql_version|float > 9.4)
