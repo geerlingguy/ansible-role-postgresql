@@ -10,3 +10,10 @@
     name: "{{ postgresql_python_library }}"
     state: present
     enablerepo: "{{ postgresql_enablerepo | default(omit, true) }}"
+
+- name: Ensure PostgreSQL systemd have the rigth datadir
+  lineinfile:
+    path: "/usr/lib/systemd/system/postgresql.service"
+    regexp: "^Environment=PGDATA"
+    line: "Environment=PGDATA={{ postgresql_data_dir }}"
+  notify: reload daemon

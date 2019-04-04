@@ -4,3 +4,6 @@
     name: "{{ postgresql_daemon }}"
     state: "{{ postgresql_restarted_state }}"
     sleep: 5
+- name: reload daemon
+  systemd:
+    daemon_reload: yes
