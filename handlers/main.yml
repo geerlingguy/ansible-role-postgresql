@@ -6,4 +6,4 @@
     sleep: 5
 - name: reload daemon
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
