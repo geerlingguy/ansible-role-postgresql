@@ -22,7 +22,7 @@
   when:
     - postgresql_cluster_name != 'main'
     - package_installed.changed
-    
+
 - name: Ensure main cluster is not present (main is removed when PostgreSQL is just installed).
   file:
     path: "{{ item }}"

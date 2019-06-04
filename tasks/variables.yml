@@ -49,6 +49,7 @@
 - name: Define PGDATA.
   set_fact:
     postgresql_pgdata: "{{ postgresql_data_dir }}/{{ postgresql_version }}/{{ postgresql_cluster_name }}"
+  when: postgresql_pgdata is not defined
 
 # Asserts on pgdata path
 - name: Main cluster name can only be located in default path
