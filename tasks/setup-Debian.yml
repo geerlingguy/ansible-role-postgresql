@@ -19,14 +19,17 @@
   service:
     name: postgresql
     state: stopped
-
+  when:
+    - postgresql_cluster_name != 'main'
+    - package_installed.changed
+    
 - name: Ensure main cluster is not present (main is removed when PostgreSQL is just installed).
   file:
     path: "{{ item }}"
     state: absent
   loop:
-    - "{{ postgresql_data_dir }}/main"
-    - "{{ postgresql_config_path }}/main"
+    - "{{ __postgresql_data_dir }}/{{ postgresql_version }}/main"
+    - "{{ postgresql_config_path.split('/')[:-1]|join('/') }}/main"
   when:
     - postgresql_cluster_name != 'main'
     - package_installed.changed
