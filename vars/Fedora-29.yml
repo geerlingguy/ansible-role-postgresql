@@ -9,3 +9,4 @@ __postgresql_packages:
   - postgresql-server
   - postgresql-contrib
   - postgresql-libs
+postgresql_python_library: python2-psycopg2
