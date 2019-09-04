@@ -16,7 +16,7 @@
     group: "{{ postgresql_group }}"
     mode: 0600
   notify: restart postgresql
-  when: postgresql_hba_entries | bool
+  when: postgresql_hba_entries is defined
 
 - name: Ensure PostgreSQL unix socket dirs exist.
   file:
