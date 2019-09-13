@@ -8,6 +8,8 @@
       - name: example
     postgresql_users:
       - name: jdoe
+    postgresql_scl_version: "{{ lookup('env', 'RH_POSTGRESQL_SCL_VERSION') }}"
+    postgresql_use_scl: "{{ postgresql_scl_version | default('') | length > 0 }}"
 
   pre_tasks:
     # The Fedora 30+ container images have only C.UTF-8 installed
@@ -34,6 +36,12 @@
       when:
         - ansible_os_family == 'RedHat'
         - ansible_distribution_version.split('.')[0] == '6'
+
+    - name: Install Centos SCL package
+      package:
+        name: 'centos-release-scl'
+        state: present
+      when: ansible_distribution == 'CentOS' and postgresql_use_scl
 
   roles:
     - role: geerlingguy.postgresql
