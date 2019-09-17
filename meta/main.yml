@@ -18,10 +18,15 @@ galaxy_info:
         - 30
     - name: Ubuntu
       versions:
-        - all
+        - trusty
+        - xenial
+        - bionic
+        - cosmic
     - name: Debian
       versions:
-        - all
+        - wheezy
+        - jessie
+        - stretch
   galaxy_tags:
     - database
     - postgresql
