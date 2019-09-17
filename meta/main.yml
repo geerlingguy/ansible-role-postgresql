@@ -21,12 +21,12 @@ galaxy_info:
         - trusty
         - xenial
         - bionic
-        - cosmic
     - name: Debian
       versions:
         - wheezy
         - jessie
         - stretch
+        - buster
   galaxy_tags:
     - database
     - postgresql
