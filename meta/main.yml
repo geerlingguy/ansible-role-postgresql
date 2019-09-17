@@ -18,7 +18,6 @@ galaxy_info:
         - 30
     - name: Ubuntu
       versions:
-        - trusty
         - xenial
         - bionic
     - name: Debian
