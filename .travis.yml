@@ -12,6 +12,8 @@ env:
     - MOLECULE_DISTRO: ubuntu1604
     - MOLECULE_DISTRO: debian10
     - MOLECULE_DISTRO: debian9
+    - MOLECULE_DISTRO=centos7 RH_POSTGRESQL_SCL_VERSION=96
+    - MOLECULE_DISTRO=centos7 RH_POSTGRESQL_SCL_VERSION=10
 
 install:
   # Install test dependencies.
