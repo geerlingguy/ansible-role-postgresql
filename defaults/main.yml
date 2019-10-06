@@ -6,7 +6,13 @@ postgresql_enablerepo: ""
 # `restarted` or `reloaded`
 postgresql_restarted_state: "restarted"
 
-postgresql_python_library: python-psycopg2
+postgresql_python_library: |-
+  {% set _package_name = 'python-psycopg2' %}
+  {% if ansible_python_version is defined and
+        ansible_python_version.startswith('3.') %}
+  {%   set _package_name = 'python3-psycopg2' %}
+  {% endif %}
+  {{ _package_name }}
 postgresql_user: postgres
 postgresql_group: postgres
 
