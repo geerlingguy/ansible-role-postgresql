@@ -8,4 +8,3 @@ __postgresql_packages:
   - postgresql
   - postgresql-server
   - postgresql-contrib
-  - postgresql-libs
