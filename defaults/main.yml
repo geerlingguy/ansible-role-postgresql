@@ -62,3 +62,6 @@ postgresql_users: []
 #   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
 #   port: # defaults to not set
 #   state: # defaults to 'present'
+
+# Allows initdb options like "--data-checksums" to enable data checksumming
+postgresql_initdb_opts: ""

@@ -42,6 +42,10 @@ The directories (usually one, but can be multiple) where PostgreSQL's socket wil
     postgresql_service_state: started
     postgresql_service_enabled: true
 
+Sometimes you want to pass some arguments to the initdb command, for example to enable data checksums in a PostgreSQL cluster.
+
+    postgresql_initdb_opts: "--data-checksums"
+
 Control the state of the postgresql service and whether it should start at boot time.
 
     postgresql_global_config_options:

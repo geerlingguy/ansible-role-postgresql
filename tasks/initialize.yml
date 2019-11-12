@@ -20,7 +20,7 @@
   register: pgdata_dir_version
 
 - name: Ensure PostgreSQL database is initialized.
-  command: "{{ postgresql_bin_path }}/initdb -D {{ postgresql_data_dir }}"
+  command: "{{ postgresql_bin_path }}/initdb -D {{ postgresql_data_dir }} {{ postgresql_initdb_opts }}"
   when: not pgdata_dir_version.stat.exists
   become: true
   become_user: "{{ postgresql_user }}"
