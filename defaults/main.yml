@@ -21,6 +21,8 @@ postgresql_global_config_options:
   - option: unix_socket_directories
     value: '{{ postgresql_unix_socket_directories | join(",") }}'
 
+postgresql_global_config_options_dict: []
+
 # Host based authentication (hba) entries to be added to the pg_hba.conf. This
 # variable's defaults reflect the defaults that come with a fresh installation.
 postgresql_hba_entries:
