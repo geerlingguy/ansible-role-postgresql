@@ -2,10 +2,19 @@
 - name: Configure global settings.
   lineinfile:
     dest: "{{ postgresql_config_path }}/postgresql.conf"
+    regexp: "^#?{{ item.option }}.+$"
+    line: "{{ item.option }} = '{{ item.value }}'"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ postgresql_global_config_options }}"
+  notify: restart postgresql
+
+- name: Configure global settings dict-style
+  lineinfile:
+    dest: "{{ postgresql_config_path }}/postgresql.conf"
     regexp: "^#?{{ item.key }}.+$"
     line: "{{ item.key }} = '{{ item.value }}'"
     state: "{% if item.value == 'xyz-remove'%}absent{% else %}present{% endif %}"
-  with_dict: "{{ postgresql_global_config_options }}"
+  with_dict: "{{ postgresql_global_config_options_dict }}"
   notify: restart postgresql
 
 - name: Configure host based authentication (if entries are configured).
