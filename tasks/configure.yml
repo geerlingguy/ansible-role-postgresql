@@ -24,5 +24,7 @@
     state: directory
     owner: "{{ postgresql_user }}"
     group: "{{ postgresql_group }}"
-    mode: "{{ postgresql_unix_socket_directories_mode }}"
+    mode: "{{ postgresql_unix_socket_directories_mode
+        |default(__postgresql_unix_socket_directories_mode
+        |default('02775')) }}"
   with_items: "{{ postgresql_unix_socket_directories }}"
