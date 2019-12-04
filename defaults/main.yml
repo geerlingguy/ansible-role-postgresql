@@ -13,6 +13,8 @@ postgresql_group: postgres
 postgresql_unix_socket_directories:
   - /var/run/postgresql
 
+postgresql_unix_socket_directories_mode: '02755'
+
 postgresql_service_state: started
 postgresql_service_enabled: true
 
