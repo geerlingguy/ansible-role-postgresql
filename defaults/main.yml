@@ -1,6 +1,23 @@
 ---
 # RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
 postgresql_enablerepo: ""
+postgresql_cluster_name: main
+postgresql_port: 5432
+
+# Postgresql.org repo path. Set a repository to use for PostgreSQL installation.
+postgresql_url_repo_path: "https://download.postgresql.org/pub/repos"
+postgresql_url_repo_key: "ACCC4CF8"
+postgresql_official_packages:
+  RedHat:
+    - "postgresql{{ (postgresql_version|string).split('.')|join('') }}"
+    - "postgresql{{ (postgresql_version|string).split('.')|join('') }}-server"
+    - "postgresql{{ (postgresql_version|string).split('.')|join('') }}-contrib"
+    - "postgresql{{ (postgresql_version|string).split('.')|join('') }}-libs"
+  Debian:
+    - postgresql-{{ postgresql_version }}
+    - postgresql-contrib-{{ postgresql_version }}
+    - libpq-dev
+postgresql_official_repo_install: true
 
 # Set postgresql state when configuration changes are made. Recommended values:
 # `restarted` or `reloaded`

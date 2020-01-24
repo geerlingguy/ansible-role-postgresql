@@ -4,23 +4,13 @@
   become: true
 
   vars:
+    postgresql_version: 10
     postgresql_databases:
       - name: example
     postgresql_users:
       - name: jdoe
 
   pre_tasks:
-    # The Fedora 30+ container images have only C.UTF-8 installed
-    - name: Set database locale if using Fedora 30+
-      set_fact:
-        postgresql_databases:
-          - name: example
-            lc_collate: 'C.UTF-8'
-            lc_ctype: 'C.UTF-8'
-      when:
-        - ansible_distribution == 'Fedora'
-        - ansible_distribution_major_version >= '30'
-
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
@@ -29,7 +19,7 @@
       set_fact:
         postgresql_hba_entries: []
         postgresql_global_config_options:
-          - option: unix_socket_directory
+          - option: unix_socket_directories
             value: '{{ postgresql_unix_socket_directories[0] }}'
       when:
         - ansible_os_family == 'RedHat'

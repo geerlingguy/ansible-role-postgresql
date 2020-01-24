@@ -1,0 +1,4 @@
+PGDATA={{ postgresql_data_dir }}/{{ postgresql_version }}/{{ postgresql_cluster_name }}
+{% if postgresql_version < 9.4 %}
+PGPORT={{ postgresql_port }}
+{% endif %}

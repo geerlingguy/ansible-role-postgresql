@@ -1,0 +1,15 @@
+[Unit]
+Description=PostgreSQL Cluster %I
+After=network.target
+
+[Service]
+Type=forking
+User=postgres
+Group=postgres
+OOMScoreAdjust=-1000
+TimeoutSec=300
+Environment=PGDATA={{ postgresql_data_dir }}/%I
+
+
+[Install]
+WantedBy=multi-user.target

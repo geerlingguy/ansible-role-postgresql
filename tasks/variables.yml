@@ -29,10 +29,39 @@
     postgresql_daemon: "{{ __postgresql_daemon }}"
   when: postgresql_daemon is not defined
 
+- name: Define installation source.
+  set_fact:
+    postgresql_pgdg: true
+  when:
+    - postgresql_version|float != __postgresql_version|float
+
+- name: Assert version is supported by source.
+  assert:
+    that:
+      postgresql_version == __postgresql_version
+    fail_msg: "This version of PostgreSQL is not supported by OS repository"
+  when:
+    - postgresql_pgdg is defined
+    - not postgresql_pgdg
+
 - name: Define postgresql_data_dir.
   set_fact:
     postgresql_data_dir: "{{ __postgresql_data_dir }}"
   when: postgresql_data_dir is not defined
+
+- name: Define PGDATA.
+  set_fact:
+    postgresql_pgdata: "{{ postgresql_data_dir }}/{{ postgresql_version }}/{{ postgresql_cluster_name }}"
+  when: postgresql_pgdata is not defined
+
+- name: Main cluster name can only be located in default path
+  assert:
+    that:
+      - postgresql_cluster_name != 'main'
+    fail_msg: Change postgresql_cluster_name or postgresql_data_dir
+  when:
+    - ansible_os_family == 'RedHat'
+    - __postgresql_data_dir != postgresql_data_dir
 
 - name: Define postgresql_bin_path.
   set_fact:
