@@ -33,4 +33,3 @@
   when:
     - postgresql_cluster_name != 'main'
     - package_installed.changed
-
