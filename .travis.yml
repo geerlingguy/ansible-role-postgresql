@@ -9,9 +9,7 @@ env:
     - MOLECULE_DISTRO: centos7
     - MOLECULE_DISTRO: fedora31
     - MOLECULE_DISTRO: ubuntu1804
-    - MOLECULE_DISTRO: ubuntu1604
     - MOLECULE_DISTRO: debian10
-    - MOLECULE_DISTRO: debian9
 
 install:
   # Install test dependencies.
