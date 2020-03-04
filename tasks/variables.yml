@@ -47,5 +47,5 @@
 - name: Define postgresql_unix_socket_directories_mode.
   set_fact:
     postgresql_unix_socket_directories_mode: >-
-      {{ __postgresql_unix_socket_directories_mode | default('02775')) }}
+      {{ __postgresql_unix_socket_directories_mode | default('02775') }}
   when: postgresql_unix_socket_directories_mode is not defined
