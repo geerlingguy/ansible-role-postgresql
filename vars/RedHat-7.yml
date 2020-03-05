@@ -9,3 +9,4 @@ __postgresql_packages:
   - postgresql-server
   - postgresql-contrib
   - postgresql-libs
+__postgresql_unix_socket_directories_mode: '0755'
