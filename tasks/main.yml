@@ -1,13 +1,8 @@
 ---
-# Variable configuration.
-- include_tasks: variables.yml
+- fail: msg="Only Debian OS family supported"
+  when: ansible_os_family !== 'Debian'
 
-# Setup/install tasks.
-- include_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
-
-- include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+- include_tasks: setup.yml
 
 - include_tasks: initialize.yml
 - include_tasks: configure.yml

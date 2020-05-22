@@ -1,6 +1,17 @@
 ---
-# RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
-postgresql_enablerepo: ""
+postgresql_version: "12"
+
+postgresql_data_dir: "/var/lib/postgresql/{{ postgresql_version }}/main"
+postgresql_bin_path: "/usr/lib/postgresql/{{ postgresql_version }}/bin"
+postgresql_config_path: "/etc/postgresql/{{ postgresql_version }}/main"
+postgresql_daemon: postgresql
+
+postgresql_packages:
+  - postgresql
+  - postgresql-contrib
+  - libpq-dev
+
+postgresql_python_library: python3-psycopg2
 
 # Set postgresql state when configuration changes are made. Recommended values:
 # `restarted` or `reloaded`
