@@ -5,7 +5,7 @@
     regexp: "^#?{{ item.option }}.+$"
     line: "{{ item.option }} = '{{ item.value }}'"
     state: "{{ item.state | default('present') }}"
-  with_items: "{{ postgresql_global_config_options }}"
+  with_items: "{{ postgresql_global_config_options__ + postgresql_global_config_options }}"
   notify: restart postgresql
 
 - name: Configure host based authentication (if entries are configured).

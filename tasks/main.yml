@@ -1,16 +1,18 @@
 ---
-- fail: msg="Only Debian OS family supported"
-  when: ansible_os_family !== 'Debian'
+- fail: msg="Only Ubuntu 18.04 supported"
+  when: not (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04')
 
 - include_tasks: setup.yml
 
 - include_tasks: initialize.yml
 - include_tasks: configure.yml
 
+- meta: flush_handlers
+
 - name: Ensure PostgreSQL is started and enabled on boot.
   service:
     name: "{{ postgresql_daemon }}"
-    state: "{{ postgresql_service_state }}"
+    state: "started"
     enabled: "{{ postgresql_service_enabled }}"
 
 # Configure PostgreSQL.

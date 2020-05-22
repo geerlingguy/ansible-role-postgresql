@@ -4,6 +4,20 @@
     name: "{{ postgresql_python_library }}"
     state: present
 
+- name: Ensure gnupg is installed.
+  apt:
+    name: ['gnupg']
+
+- name: Add postgresql Apt signing key
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: Add postgresql Apt repo
+  apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt/ {{ansible_distribution_release}}-pgdg main
+    state: present
+
 - name: Ensure PostgreSQL packages are installed.
   apt:
     name: "{{ postgresql_packages }}"

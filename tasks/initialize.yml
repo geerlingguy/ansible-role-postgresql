@@ -21,9 +21,27 @@
 
 - name: Ensure PostgreSQL database is initialized.
   command: "{{ postgresql_bin_path }}/initdb -D {{ postgresql_data_dir }}"
-  when: not pgdata_dir_version.stat.exists
+  when: not postgresql_slave and not pgdata_dir_version.stat.exists
   become: true
   become_user: "{{ postgresql_user }}"
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
   vars:
     ansible_ssh_pipelining: true
+
+- name: Fetching base backup from primary (it may takes a long time).
+  command: |
+    {{ postgresql_bin_path }}/pg_basebackup \
+      -U {{ postgresql_primary_user }} \
+      -h {{ postgresql_primary_host }} \
+      -p {{ postgresql_primary_port }} \
+      -S {{ postgresql_primary_slot }} \
+      -D {{ postgresql_data_dir }}
+  when: postgresql_slave and not pgdata_dir_version.stat.exists
+  become: true
+  become_user: "{{ postgresql_user }}"
+
+- name: Ensure standby.signal file exists on slave and not exists on primary.
+  file:
+    path: "{{ postgresql_data_dir }}/standby.signal"
+    state: "{{ 'present' if postgresql_slave else 'absent' }}"
+  notify: restart postgresql
