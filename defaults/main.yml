@@ -85,3 +85,5 @@ postgresql_users: []
 
 # Whether to output user data when managing users.
 postgres_users_no_log: true
+
+postgresql_replication_slots: []
