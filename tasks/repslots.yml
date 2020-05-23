@@ -1,0 +1,14 @@
+---
+- name: Create replication slots configuration script
+  template:
+    src: scripts/repslots.sql
+    dest: "{{ postgresql_config_path }}/repslots.sql"
+
+- name: Configure database replication slots
+  command:
+    psql -U postgres -t -q -1f '{{ postgresql_config_path }}/repslots.sql'
+      --variable ON_ERROR_STOP=true
+  become: true
+  become_user: "{{ postgresql_user }}"
+  register: __postgresql_repslots
+  changed_when: (__postgresql_repslots.stdout | regex_search('(Droped|Added)'))

@@ -6,7 +6,9 @@ postgresql_bin_path: "/usr/lib/postgresql/{{ postgresql_version }}/bin"
 postgresql_config_path: "/etc/postgresql/{{ postgresql_version }}/main"
 postgresql_daemon: postgresql
 
-postgresql_packages:
+# Next two variable will be merged.
+postgresql_packages: []
+postgresql_packages__:
   - "postgresql-{{postgresql_version}}"
   - "postgresql-contrib"
   - "libpq-dev"
@@ -21,6 +23,13 @@ postgresql_unix_socket_directories_mode: "02775"
 
 postgresql_service_enabled: true
 
+postgresql_slave: false
+postgresql_primary_port: 5432
+postgresql_primary_sslmode: prefer
+postgresql_primary_user: postgres
+postgresql_primary_host: localhost
+postgresql_primary_slot: slave
+
 # Global configuration options that will be set in postgresql.conf.
 # Next two variable will be merged.
 postgresql_global_config_options: []
@@ -29,6 +38,8 @@ postgresql_global_config_options__:
     value: "{{postgresql_data_dir}}"
   - option: unix_socket_directories
     value: '{{ postgresql_unix_socket_directories | join(",") }}'
+  - option: primary_conninfo
+    value: 'host={{postgresql_primary_host}} port={{postgresql_primary_port}} user={{postgresql_primary_user}} sslmode={{postgresql_primary_sslmode}}'
 
 # Host based authentication (hba) entries to be added to the pg_hba.conf. This
 # variable's defaults reflect the defaults that come with a fresh installation.
@@ -74,9 +85,3 @@ postgresql_users: []
 
 # Whether to output user data when managing users.
 postgres_users_no_log: true
-
-postgresql_slave: false
-postgresql_primary_port: 5432
-# postgresql_primary_user:
-# postgresql_primary_host:
-# postgresql_primary_slot:

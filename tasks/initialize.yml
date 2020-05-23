@@ -27,21 +27,35 @@
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
   vars:
     ansible_ssh_pipelining: true
-
+  
 - name: Fetching base backup from primary (it may takes a long time).
-  command: |
+  shell: |
     {{ postgresql_bin_path }}/pg_basebackup \
       -U {{ postgresql_primary_user }} \
       -h {{ postgresql_primary_host }} \
       -p {{ postgresql_primary_port }} \
       -S {{ postgresql_primary_slot }} \
-      -D {{ postgresql_data_dir }}
+      -D {{ postgresql_data_dir }} \
+      -w
   when: postgresql_slave and not pgdata_dir_version.stat.exists
   become: true
   become_user: "{{ postgresql_user }}"
 
-- name: Ensure standby.signal file exists on slave and not exists on primary.
+- name: Ensure standby.signal file exists on slave.
+  copy:
+    content: ""
+    force: no
+    dest: "{{ postgresql_data_dir }}/standby.signal"
+  when: postgresql_slave
+  become: true
+  become_user: "{{ postgresql_user }}"
+  notify: restart postgresql
+
+- name: Ensure standby.signal file is not exists on primary.
   file:
     path: "{{ postgresql_data_dir }}/standby.signal"
-    state: "{{ 'present' if postgresql_slave else 'absent' }}"
+    state: absent
+  when: not postgresql_slave
+  become: true
+  become_user: "{{ postgresql_user }}"
   notify: restart postgresql

@@ -20,7 +20,7 @@
 
 - name: Ensure PostgreSQL packages are installed.
   apt:
-    name: "{{ postgresql_packages }}"
+    name: "{{ postgresql_packages__ + postgresql_packages }}"
     state: present
 
 - name: Ensure all configured locales are present.

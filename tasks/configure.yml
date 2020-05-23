@@ -26,3 +26,16 @@
     group: "{{ postgresql_group }}"
     mode: "{{ postgresql_unix_socket_directories_mode }}"
   with_items: "{{ postgresql_unix_socket_directories }}"
+
+- name: Add replication credentials to .pgpass file.
+  blockinfile:
+    path: ~/.pgpass
+    marker: "# {mark} ansible-role-postgresql: replication credentials"
+    block: |
+      {{ postgresql_primary_host }}:{{ postgresql_primary_port }}:*:{{ postgresql_primary_user }}:{{ postgresql_primary_password }}
+    create: yes
+    mode: 0600
+  when: postgresql_slave
+  become: true
+  become_user: "{{ postgresql_user }}"
+  notify: restart postgresql
