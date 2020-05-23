@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-postgresql.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-postgresql)
 
-Installs and configures PostgreSQL server on RHEL/CentOS or Debian/Ubuntu servers.
+Installs and configures PostgreSQL server on Ubuntu servers.
 
 ## Requirements
 
@@ -10,24 +10,10 @@ No special requirements; note that this role requires root access, so either run
 
     - hosts: database
       roles:
-        - role: geerlingguy.postgresql
+        - role: andrchalov.postgresql
           become: yes
 
 ## Role Variables
-
-Available variables are listed below, along with default values (see `defaults/main.yml`):
-
-    postgresql_enablerepo: ""
-
-(RHEL/CentOS only) You can set a repo to use for the PostgreSQL installation by passing it in here.
-
-    postgresql_restarted_state: "restarted"
-
-Set the state of the service when configuration changes are made. Recommended values are `restarted` or `reloaded`.
-
-    postgresql_python_library: python-psycopg2
-
-Library used by Ansible to communicate with PostgreSQL. If you are using Python 3 (e.g. set via `ansible_python_interpreter`), you should change this to `python3-psycopg2`.
 
     postgresql_user: postgres
     postgresql_group: postgres
@@ -130,7 +116,7 @@ None.
       vars_files:
         - vars/main.yml
       roles:
-        - geerlingguy.postgresql
+        - andrchalov.postgresql
 
 *Inside `vars/main.yml`*:
 
@@ -146,4 +132,6 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2016 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+This repository maintained by Andrey Chalov
+
+This repository was forked from [Ansible Role](https://github.com/geerlingguy/ansible-role-postgresql) made by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
