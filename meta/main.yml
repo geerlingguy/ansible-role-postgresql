@@ -2,6 +2,7 @@
 dependencies: []
 
 galaxy_info:
+  role_name: postgresql
   author: geerlingguy
   description: PostgreSQL server for Linux.
   company: "Midwestern Mac, LLC"
