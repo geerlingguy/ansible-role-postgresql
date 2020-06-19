@@ -63,5 +63,22 @@ postgresql_users: []
 #   port: # defaults to not set
 #   state: # defaults to 'present'
 
+# Extensions to ensure exist on certain databases
+postgresql_extensions: []
+# - name: dblink #required
+#   db: my_awesome_db #required; the rest are optional
+#   ca_cert: # defaults to not set (so uses system chain)
+#   cascade: # defaults to no since it's only supported on PG 9.6+
+#   login_host: # defaults to 'localhost'
+#   login_password: # defaults to not set
+#   login_user: # defaults to "{{ postgresql_user }}"
+#   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+#   port: # defaults to not set
+#   schema: # defaults to not set
+#   session_role: # defaults to not set
+#   ssl_mode: # defaults to 'prefer' (default value in the ansible resource)
+#   state: # defaults to 'present'
+#   version: # defaults to not set
+
 # Whether to output user data when managing users.
 postgres_users_no_log: true
