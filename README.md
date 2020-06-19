@@ -106,6 +106,25 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
+# Extensions to ensure exist on certain databases
+    postgresql_extensions:
+      - name: dblink #required
+        db: my_awesome_db #required; the rest are optional
+        ca_cert: # defaults to not set (so uses system chain)
+        cascade: # defaults to no since it's only supported on PG 9.6+
+        login_host: # defaults to 'localhost'
+        login_password: # defaults to not set
+        login_user: # defaults to "{{ postgresql_user }}"
+        login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+        port: # defaults to not set
+        schema: # defaults to not set
+        session_role: # defaults to not set
+        ssl_mode: # defaults to 'prefer' (default value in the ansible resource)
+        state: # defaults to 'present'
+        version: # defaults to not set
+
+A list of "contrib" database extensions to ensure exist on certain databases.  The `name` and `db` properties are required; all other properties are optional.
+
     postgres_users_no_log: true
 
 Whether to output user data (which may contain sensitive information, like passwords) when managing users.
