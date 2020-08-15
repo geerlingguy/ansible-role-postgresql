@@ -18,13 +18,13 @@
             lc_collate: 'C.UTF-8'
             lc_ctype: 'C.UTF-8'
       when:
-        - ( ansible_distribution == 'Fedora' and ansible_distribution_major_version >= '30') or
-          ( ansible_os_family == 'RedHat' and ansible_distribution_major_version == '8')
+        - ( ansible_facts.distribution == 'Fedora' and ansible_facts.distribution_major_version >= '30') or
+          ( ansible_facts.os_family == 'RedHat' and ansible_facts.distribution_major_version == '8')
 
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       changed_when: false
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts.os_family == 'Debian'
 
     - name: Set custom variables for old CentOS 6 PostgreSQL install.
       set_fact:
@@ -33,8 +33,8 @@
           - option: unix_socket_directory
             value: '{{ postgresql_unix_socket_directories[0] }}'
       when:
-        - ansible_os_family == 'RedHat'
-        - ansible_distribution_version.split('.')[0] == '6'
+        - ansible_facts.os_family == 'RedHat'
+        - ansible_facts.distribution_version.split('.')[0] == '6'
 
   roles:
     - role: geerlingguy.postgresql
