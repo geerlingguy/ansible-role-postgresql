@@ -1,20 +1,6 @@
 ---
 - name: Ensure PostgreSQL database extensions are present
-  postgresql_ext:
-    name: "{{ item.name }}"
-    ca_cert: "{{ item.ca_cert | default(omit) }}"
-    cascade: "{{ item.cascade | default('no') }}"
-    db: "{{ item.db }}"
-    login_host: "{{ item.login_host | default('localhost') }}"
-    login_password: "{{ item.login_password | default(omit) }}"
-    login_user: "{{ item.login_user | default(postgresql_user) }}"
-    login_unix_socket: "{{ item.login_unix_socket | default(postgresql_unix_socket_directories[0]) }}"
-    port: "{{ item.port | default(omit) }}"
-    schema: "{{ item.schema | default(omit) }}"
-    session_role: "{{ item.session_role | default(omit) }}"
-    ssl_mode: "{{ item.ssl_mode | default('prefer') }}"
-    state: "{{ item.state | default('present') }}"
-    version: "{{ item.version | default(omit) }}"
+  postgresql_ext: "{{ item }}"
   with_items: "{{ postgresql_extensions }}"
   become: true
   become_user: "{{ postgresql_user }}"
