@@ -1,4 +1,10 @@
 ---
+- name: Ensure security packages are installed.
+  apt:
+    name:
+      - gnupg
+    state: present
+
 - name: Install postgres gpg key
   apt_key:
     url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
