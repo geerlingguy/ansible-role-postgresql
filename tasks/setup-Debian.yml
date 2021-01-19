@@ -1,10 +1,12 @@
 ---
 - name: Install postgres gpg key
-  apt_key: url="https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+  apt_key:
+    url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
 
 - name: Enable postgres repo
-  apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main"
-  update_cache: yes
+  apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main"
+    update_cache: yes
 
 - name: Ensure PostgreSQL Python libraries are installed.
   apt:
