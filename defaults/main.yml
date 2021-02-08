@@ -7,7 +7,7 @@ postgresql_enablerepo: ""
 postgresql_restarted_state: "restarted"
 
 postgresql_python_library: python-psycopg2
-community.general.postgresql_user: postgres
+postgresql_user: postgres
 postgresql_group: postgres
 
 postgresql_unix_socket_directories:
