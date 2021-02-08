@@ -1,6 +1,6 @@
 ---
 - name: Ensure PostgreSQL users are present.
-  postgresql_user:
+  community.general.postgresql_user:
     name: "{{ item.name }}"
   with_items: "{{ postgresql_users }}"
   no_log: "{{ postgres_users_no_log }}"

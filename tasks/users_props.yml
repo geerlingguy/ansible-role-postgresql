@@ -1,6 +1,6 @@
 ---
 - name: Ensure PostgreSQL users are configured correctly.
-  postgresql_user:
+  community.general.postgresql_user:
     name: "{{ item.name }}"
     password: "{{ item.password | default(omit) }}"
     encrypted: "{{ item.encrypted | default(omit) }}"

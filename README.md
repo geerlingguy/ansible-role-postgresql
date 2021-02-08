@@ -29,7 +29,7 @@ Set the state of the service when configuration changes are made. Recommended va
 
 Library used by Ansible to communicate with PostgreSQL. If you are using Python 3 (e.g. set via `ansible_python_interpreter`), you should change this to `python3-psycopg2`.
 
-    postgresql_user: postgres
+    community.general.postgresql_user: postgres
     postgresql_group: postgres
 
 The user and group under which PostgreSQL will run.

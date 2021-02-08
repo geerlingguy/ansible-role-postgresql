@@ -1,6 +1,9 @@
 ---
 dependencies: []
 
+collections:
+  - community.general
+
 galaxy_info:
   role_name: postgresql
   author: geerlingguy
