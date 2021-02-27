@@ -12,6 +12,7 @@
     login_unix_socket: "{{ item.login_unix_socket | default(postgresql_unix_socket_directories[0]) }}"
     port: "{{ item.port | default(omit) }}"
     owner: "{{ item.owner | default(postgresql_user) }}"
+    conn_limit: "{{ item.conn_limit | default(omit) }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ postgresql_databases }}"
   become: true
