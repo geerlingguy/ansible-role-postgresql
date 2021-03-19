@@ -12,7 +12,8 @@
     owner: "{{ postgresql_user }}"
     group: "{{ postgresql_group }}"
     state: directory
-    mode: 0700
+    mode: u=rwX,g=,o=
+    recurse: yes
 
 - name: Check if PostgreSQL database is initialized.
   stat:
