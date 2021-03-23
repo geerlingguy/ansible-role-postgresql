@@ -6,6 +6,7 @@
     encrypted: "{{ item.encrypted | default(omit) }}"
     priv: "{{ item.priv | default(omit) }}"
     role_attr_flags: "{{ item.role_attr_flags | default(omit) }}"
+    conn_limit: "{{ item.conn_limit | default(omit) }}"
     db: "{{ item.db | default(omit) }}"
     login_host: "{{ item.login_host | default('localhost') }}"
     login_password: "{{ item.login_password | default(omit) }}"
