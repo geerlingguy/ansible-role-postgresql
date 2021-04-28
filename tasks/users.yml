@@ -1,9 +1,10 @@
 ---
 - name: Ensure PostgreSQL users are present.
   postgresql_user:
-    name: "{{ item.name }}"
-    password: "{{ item.password | default(omit) }}"
-  with_items: "{{ postgresql_users }}"
+    name: "{{ item.0.name }}"
+    password: "{{ item.0.password | default(omit) }}"
+    login_unix_socket: "{{ item.1 }}"
+  loop: "{{ postgresql_users|zip(postgresql_unix_socket_directories) | list }}"
   no_log: "{{ postgres_users_no_log }}"
   become: true
   become_user: "{{ postgresql_user }}"
