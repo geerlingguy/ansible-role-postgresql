@@ -1,0 +1,15 @@
+---
+- name: Ensure sudo is installed.
+  zypper:
+    name: sudo
+    state: present
+
+- name: Ensure PostgreSQL packages are installed.
+  zypper:
+    name: "{{ postgresql_packages }}"
+    state: present
+
+- name: Ensure PostgreSQL Python libraries are installed.
+  zypper:
+    name: "{{ postgresql_python_library }}"
+    state: present
