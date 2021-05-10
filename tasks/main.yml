@@ -15,6 +15,11 @@
 - include_tasks: initialize.yml
 - include_tasks: configure.yml
 
+# Otherwise users and db are created in default data dir location (Ubunut: /var/lib/postgresql/...)
+# instead of the custom `postgresql_data_dir`
+- name: Reset Ansible handlers to ensure users and db are created in data dir {{ postgresql_data_dir }}
+  meta: flush_handlers
+
 - name: Ensure PostgreSQL is started and enabled on boot.
   service:
     name: "{{ postgresql_daemon }}"
