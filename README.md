@@ -47,8 +47,10 @@ Control the state of the postgresql service and whether it should start at boot 
     postgresql_global_config_options:
       - option: unix_socket_directories
         value: '{{ postgresql_unix_socket_directories | join(",") }}'
+      - option: log_directory
+        value: 'log'
 
-Global configuration options that will be set in `postgresql.conf`. Note that for RHEL/CentOS 6 (or very old versions of PostgreSQL), you need to at least override this variable and set the `option` to `unix_socket_directory`.
+Global configuration options that will be set in `postgresql.conf`. Note that if you override 'log_directory' with another, absolute path, this role will create it for you. 
 
     postgresql_hba_entries:
       - { type: local, database: all, user: postgres, auth_method: peer }
