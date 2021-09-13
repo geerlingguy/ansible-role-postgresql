@@ -2,9 +2,8 @@
 - name: Check Logs for Servers
   hosts: all
   gather_facts: True
-  remote_user: ansible
   become_user: root
   become: yes
   roles:
-    - ansible-role-postgresql
+    - gitops-postgresql 
 
