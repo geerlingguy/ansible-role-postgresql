@@ -13,10 +13,7 @@
     port: "{{ item.port | default(omit) }}"
     owner: "{{ item.owner | default(postgresql_user) }}"
     state: "{{ item.state | default('present') }}"
-#  with_items: "{{ postgresql_databases }}"
-  with_items:
-     - miketest
-     - miketest1 
+  with_items: "{{ postgresql_databases }}"
   become: true
   become_user: "{{ postgresql_user }}"
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
