@@ -37,10 +37,7 @@ postgresql_locales:
   - 'en_US.UTF-8'
 
 # Databases to ensure exist.
-postgresql_databases: 
-  - miketest
-  - miketest2
-#postgresql_databases: []
+postgresql_databases: []
 # - name: exampledb # required; the rest are optional
 #   lc_collate: # defaults to 'en_US.UTF-8'
 #   lc_ctype: # defaults to 'en_US.UTF-8'
