@@ -6,7 +6,7 @@
   postgresql_db:
     name: miketest
     encoding: UTF-8
-    lc_collate: de_DE.UTF-8
-    lc_ctype: de_DE.UTF-8
+    lc_collate: en_NZ.UTF-8
+    lc_ctype: en_NZ.UTF-8
     state: present
     template: template0
