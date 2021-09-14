@@ -1,9 +1,9 @@
 ---
-- name: Check Logs for Servers
+- name: Postgres DB
   hosts: all
   gather_facts: True
   become_user: root
   become: yes
   roles:
     - gitops-postgresql 
-
+    - gitops-add-db
