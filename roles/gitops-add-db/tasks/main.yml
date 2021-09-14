@@ -1,8 +1,12 @@
 ---
 # tasks file for gitops-add-db
-- postgresql_db:
+- name: Create DB
+  become: true
+  become_user: postgres
+  postgresql_db:
     name: miketest
     encoding: UTF-8
     lc_collate: de_DE.UTF-8
     lc_ctype: de_DE.UTF-8
+    state: present
     template: template0
