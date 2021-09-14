@@ -10,3 +10,11 @@
     lc_ctype: en_NZ.UTF-8
     state: present
     template: template0
+- name: Add user
+  postgresql_user:
+      db: miketest
+      name: test_user
+      password: test_user
+      role_attr_flags: NOSUPERUSER,NOCREATEDB
+      state: present
+
