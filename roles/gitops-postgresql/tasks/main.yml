@@ -1,4 +1,4 @@
----
+--
 # Variable configuration.
 - include_tasks: variables.yml
 
@@ -11,6 +11,7 @@
 
 - include_tasks: initialize.yml
 - include_tasks: configure.yml
+- include_tasks: databases.yml
 
 - name: Ensure PostgreSQL is started and enabled on boot.
   service:
