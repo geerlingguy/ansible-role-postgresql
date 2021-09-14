@@ -1,4 +1,4 @@
---
+---
 # Variable configuration.
 - include_tasks: variables.yml
 
