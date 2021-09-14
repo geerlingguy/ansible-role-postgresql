@@ -10,7 +10,10 @@
     lc_ctype: en_NZ.UTF-8
     state: present
     template: template0
+
 - name: Add user
+  become: true
+  become_user: postgres
   postgresql_user:
       db: miketest
       name: test_user
