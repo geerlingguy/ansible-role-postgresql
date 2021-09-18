@@ -1,0 +1,27 @@
+---
+- name: Ensure Postgres Python libraries are installed.
+  community.general.pacman:
+    name: "{{ postgresql_python_library }}" 
+    state: present
+    update_cache: true
+
+- name: Install postgresql
+  community.general.pacman:
+    name: "{{ postgresql_packages }}"
+    state: present
+    update_cache: true
+  register: postgresql_install_packages
+
+- name: Ensure postgresql_data_dir exists
+  ansible.builtin.file:
+    state: directory
+    path: "{{ postgresql_data_dir }}"
+    owner: "{{ postgresql_user }}"
+  when: postgresql_install_packages.changed
+
+- name: Run postgres initialization if Postgres packages were changed
+  ansible.builtin.command: initdb -D {{ postgresql_data_dir }}
+  when: postgresql_install_packages.changed
+  tags: ['skip_ansible_lint']
+  become: true
+  become_user: "{{ postgresql_user }}"
