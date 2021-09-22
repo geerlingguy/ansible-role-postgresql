@@ -50,7 +50,7 @@ Control the state of the postgresql service and whether it should start at boot 
       - option: log_directory
         value: 'log'
 
-Global configuration options that will be set in `postgresql.conf`. Note that if you override 'log_directory' with another, absolute path, this role will create it for you. 
+Global configuration options that will be set in `postgresql.conf`. Note that if you override 'log_directory' with another path, this role will create it for you. 
 
     postgresql_hba_entries:
       - { type: local, database: all, user: postgres, auth_method: peer }
