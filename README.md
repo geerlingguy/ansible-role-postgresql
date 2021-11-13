@@ -29,6 +29,10 @@ Set the state of the service when configuration changes are made. Recommended va
 
 Library used by Ansible to communicate with PostgreSQL. If you are using Python 3 (e.g. set via `ansible_python_interpreter`), you should change this to `python3-psycopg2`.
 
+    postgresql_port: 5432
+
+Postgresql port used by Ansible to create databases and users.
+
     postgresql_user: postgres
     postgresql_group: postgres
 
@@ -88,7 +92,7 @@ If overriding, make sure you copy all of the existing entries from `defaults/mai
         login_password: # defaults to not set
         login_user: # defaults to 'postgresql_user'
         login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
-        port: # defaults to not set
+        port: # defaults to postgresql_port
         owner: # defaults to postgresql_user
         state: # defaults to 'present'
 
@@ -105,7 +109,7 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
         login_password: # defaults to not set
         login_user: # defaults to '{{ postgresql_user }}'
         login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
-        port: # defaults to not set
+        port: # defaults to postgresql_port
         state: # defaults to 'present'
 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
