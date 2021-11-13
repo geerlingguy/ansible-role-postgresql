@@ -104,6 +104,7 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
         encrypted: # defaults to not set
         priv: # defaults to not set
         role_attr_flags: # defaults to not set
+        groups: # defaults to not set
         db: # defaults to not set
         login_host: # defaults to 'localhost'
         login_password: # defaults to not set
