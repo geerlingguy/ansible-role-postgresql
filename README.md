@@ -34,6 +34,10 @@ Library used by Ansible to communicate with PostgreSQL. If you are using Python 
 
 The user and group under which PostgreSQL will run.
 
+    postgresql_locale: 'C.UTF-8'
+
+Default locale used by Ansible to create databases.
+
     postgresql_unix_socket_directories:
       - /var/run/postgresql
 
@@ -76,8 +80,8 @@ If overriding, make sure you copy all of the existing entries from `defaults/mai
 
     postgresql_databases:
       - name: exampledb # required; the rest are optional
-        lc_collate: # defaults to 'en_US.UTF-8'
-        lc_ctype: # defaults to 'en_US.UTF-8'
+        lc_collate: # defaults to 'postgresql_locale'
+        lc_ctype: # defaults to 'postgresql_locale'
         encoding: # defaults to 'UTF-8'
         template: # defaults to 'template0'
         login_host: # defaults to 'localhost'
