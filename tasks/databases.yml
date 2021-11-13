@@ -2,8 +2,8 @@
 - name: Ensure PostgreSQL databases are present.
   postgresql_db:
     name: "{{ item.name }}"
-    lc_collate: "{{ item.lc_collate | default('en_US.UTF-8') }}"
-    lc_ctype: "{{ item.lc_ctype | default('en_US.UTF-8') }}"
+    lc_collate: "{{ item.lc_collate | default(postgresql_locale) }}"
+    lc_ctype: "{{ item.lc_ctype | default(postgresql_locale) }}"
     encoding: "{{ item.encoding | default('UTF-8') }}"
     template: "{{ item.template | default('template0') }}"
     login_host: "{{ item.login_host | default('localhost') }}"

@@ -9,6 +9,7 @@ postgresql_restarted_state: "restarted"
 postgresql_python_library: python-psycopg2
 postgresql_user: postgres
 postgresql_group: postgres
+postgresql_locale: 'C.UTF-8'
 
 # `md5` or `scram-sha-256` (https://www.postgresql.org/docs/10/auth-methods.html)
 postgresql_auth_method: "{{ ansible_fips  | ternary('scram-sha-256', 'md5') }}"
@@ -39,8 +40,8 @@ postgresql_locales:
 # Databases to ensure exist.
 postgresql_databases: []
 # - name: exampledb # required; the rest are optional
-#   lc_collate: # defaults to 'en_US.UTF-8'
-#   lc_ctype: # defaults to 'en_US.UTF-8'
+#   lc_collate: # defaults to '{{ postgresql_locale }}'
+#   lc_ctype: # defaults to '{{ postgresql_locale }}'
 #   encoding: # defaults to 'UTF-8'
 #   template: # defaults to 'template0'
 #   login_host: # defaults to 'localhost'
