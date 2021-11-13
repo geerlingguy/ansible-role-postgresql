@@ -7,6 +7,7 @@ postgresql_enablerepo: ""
 postgresql_restarted_state: "restarted"
 
 postgresql_python_library: python-psycopg2
+postgresql_port: 5432
 postgresql_user: postgres
 postgresql_group: postgres
 postgresql_locale: 'C.UTF-8'
@@ -48,7 +49,7 @@ postgresql_databases: []
 #   login_password: # defaults to not set
 #   login_user: # defaults to '{{ postgresql_user }}'
 #   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
-#   port: # defaults to not set
+#   port: # defaults to postgresql_port
 #   owner: # defaults to postgresql_user
 #   state: # defaults to 'present'
 
@@ -64,7 +65,7 @@ postgresql_users: []
 #   login_password: # defaults to not set
 #   login_user: # defaults to '{{ postgresql_user }}'
 #   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
-#   port: # defaults to not set
+#   port: # defaults to postgresql_port
 #   state: # defaults to 'present'
 
 # Whether to output user data when managing users.
