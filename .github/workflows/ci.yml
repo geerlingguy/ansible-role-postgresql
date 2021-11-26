@@ -48,6 +48,7 @@ jobs:
           - ubuntu1804
           - debian10
           - debian11
+          - amazonlinux2
 
     steps:
       - name: Check out the codebase.

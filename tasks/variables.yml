@@ -9,6 +9,11 @@
   when:
   - ansible_os_family == 'RedHat'
   - ansible_distribution != 'Fedora'
+  - ansible_distribution != 'Amazon'
+
+- name: Include OS-specific variables (Amazon).
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_distribution == 'Amazon'
 
 - name: Include OS-specific variables (Fedora).
   include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
