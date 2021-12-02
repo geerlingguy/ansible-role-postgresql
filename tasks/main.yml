@@ -6,6 +6,11 @@
 - include_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
+- include_tasks: setup-RedHat.yml
+  when:
+    - ansible_version.string is version('2.11', '<')
+    - ansible_os_family in ['Rocky', 'AlmaLinux']
+
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 

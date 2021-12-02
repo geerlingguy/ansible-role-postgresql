@@ -11,6 +11,12 @@
   - ansible_distribution != 'Fedora'
   - ansible_distribution != 'Amazon'
 
+- name: Include OS-specific variables (Rocky Linux, AlmaLinux).
+  include_vars: "RedHat-{{ ansible_distribution_major_version }}.yml"
+  when:
+  - ansible_version.string is version('2.11', '<')
+  - ansible_os_family in ['AlmaLinux', 'Rocky']
+
 - name: Include OS-specific variables (Amazon).
   include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
   when: ansible_distribution == 'Amazon'
