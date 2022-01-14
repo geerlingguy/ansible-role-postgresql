@@ -36,3 +36,5 @@ galaxy_info:
     - postgresql
     - postgres
     - rdbms
+collections:
+  - community.general
