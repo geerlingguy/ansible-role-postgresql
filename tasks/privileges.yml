@@ -1,11 +1,12 @@
 ---
 - name: 
   postgresql_privs:
-    databases: "{{ item.name }}"
+    database: "{{ item.database }}"
     login_host: "{{ item.login_host | default('localhost') }}"
     login_password: "{{ item.login_password | default(omit) }}"
     login_user: "{{ item.login_user | default(postgresql_user) }}"
     login_unix_socket: "{{ item.login_unix_socket | default(postgresql_unix_socket_directories[0]) }}"
+    port: "{{ item.port | default(postgresql_port) }}"
     objs: "{{ item.objs | default('ALL_IN_SCHEMA') }}"
     state: "{{ item.state | default('present') }}"
     privs: "{{ item.privs | default('ALL') }}"

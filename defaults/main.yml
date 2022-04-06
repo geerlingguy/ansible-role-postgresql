@@ -53,6 +53,10 @@ postgresql_databases: []
 #   owner: # defaults to postgresql_user
 #   state: # defaults to 'present'
 
+# Privileges to ensure exist
+postgresql_privs: []
+
+
 # Users to ensure exist.
 postgresql_users: []
 # - name: jdoe #required; the rest are optional
