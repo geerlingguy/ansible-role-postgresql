@@ -114,8 +114,8 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
         state: # defaults to 'present'
 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
-  
-    postgresql_privs:
+
+    postgresql_privileges:
       - database: #required;
         roles: required; the rest are optiona
         login_host: # defaults to 'localhost'

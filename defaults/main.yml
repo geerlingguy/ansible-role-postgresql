@@ -70,7 +70,7 @@ postgresql_users: []
 #   state: # defaults to 'present'
 
 # Privileges to ensure exist
-postgresql_privs: []
+postgresql_privileges: []
 # - database: #required;
 #   roles: required; the rest are optiona
 #   login_host: # defaults to 'localhost'
