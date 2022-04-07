@@ -99,7 +99,7 @@ If overriding, make sure you copy all of the existing entries from `defaults/mai
 A list of databases to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
     postgresql_users:
-      - name: jdoe #required; the rest are optional
+      - name: jdoe # required; the rest are optional
         password: # defaults to not set
         encrypted: # defaults to not set
         priv: # defaults to not set
@@ -116,8 +116,8 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
     postgresql_privileges:
-      - database: #required;
-        roles: required; the rest are optiona
+      - database: # required;
+        roles: # required; the rest are optional
         login_host: # defaults to 'localhost'
         login_password: # defaults to not set
         login_user: # defaults to '{{ postgresql_user }}'
