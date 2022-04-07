@@ -148,7 +148,9 @@ None.
     postgresql_users:
       - name: example_user
         password: supersecure
-
+    postgresql_privileges:
+      - database: example_db
+      - roles: example_role
 ## License
 
 MIT / BSD
