@@ -53,21 +53,6 @@ postgresql_databases: []
 #   owner: # defaults to postgresql_user
 #   state: # defaults to 'present'
 
-# Privileges to ensure exist
-postgresql_privs: []
-#   database: #required;
-#   roles: required; the rest are optiona
-#   login_host: # defaults to 'localhost'
-#   login_password: # defaults to not set
-#   login_user: # defaults to '{{ postgresql_user }}'
-#   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
-#   port: # defaults to postgresql_port
-#   objs: # default to 'ALL_IN_SCHEMA'
-#   state: # defaults to 'present'
-#   privs: defaults to 'ALL'
-#   type: default to not set
-#   target_roles: default to not set
-
 # Users to ensure exist.
 postgresql_users: []
 # - name: jdoe #required; the rest are optional
@@ -83,6 +68,21 @@ postgresql_users: []
 #   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
 #   port: # defaults to postgresql_port
 #   state: # defaults to 'present'
+
+# Privileges to ensure exist
+postgresql_privs: []
+# - database: #required;
+#   roles: required; the rest are optiona
+#   login_host: # defaults to 'localhost'
+#   login_password: # defaults to not set
+#   login_user: # defaults to '{{ postgresql_user }}'
+#   login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+#   port: # defaults to postgresql_port
+#   objs: # default to 'ALL_IN_SCHEMA'
+#   state: # defaults to 'present'
+#   privs: defaults to 'ALL'
+#   type: default to not set
+#   target_roles: default to not set
 
 # Whether to output user data when managing users.
 postgres_users_no_log: true
