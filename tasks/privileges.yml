@@ -10,7 +10,7 @@
     objs: "{{ item.objs | default('ALL_IN_SCHEMA') }}"
     state: "{{ item.state | default('present') }}"
     privs: "{{ item.privs | default('ALL') }}"
-    type: "{{ item.type | default('database') }}"
+    type: "{{ item.type | default(omit) }}"
     roles: "{{ item.roles }}"
     target_roles: "{{ item.target_roles | default(omit) }}"
   with_items: "{{ postgresql_privileges  }}"
