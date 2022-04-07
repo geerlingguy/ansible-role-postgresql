@@ -71,7 +71,7 @@ postgresql_users: []
 
 # Privileges to ensure exist
 postgresql_privileges: []
-# - database: #required;
+# - database: # required;
 #   roles: # required; the rest are optional
 #   login_host: # defaults to 'localhost'
 #   login_password: # defaults to not set
