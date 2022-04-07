@@ -113,7 +113,7 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
         port: # defaults to postgresql_port
         state: # defaults to 'present'
 
-A list of privileges to ensure exist on the server. The `database` and `roles` is required; all other properties are optional.
+A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
   
     postgresql_privs:
       - database: #required;
@@ -128,6 +128,8 @@ A list of privileges to ensure exist on the server. The `database` and `roles` i
         privs: defaults to 'ALL'
         type: default to not set
         target_roles: default to not set
+
+A list of privileges to ensure exist on the server. The `database` and `roles` is required; all other properties are optional.
 
     postgres_users_no_log: true
 
