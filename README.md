@@ -151,6 +151,7 @@ None.
     postgresql_privileges:
       - database: example_db
       - roles: example_role
+      
 ## License
 
 MIT / BSD
