@@ -9,7 +9,7 @@
     port: "{{ item.port | default(postgresql_port) }}"
     state: "{{ item.state | default('present') }}"
     database: "{{ item.database | default('postgres') }}"
-    owner: "{{ item.owner | default(omit) }}"
+    owner: "{{ item.owner | default('postgres') }}"
     cascade_drop: "{{ item.cascade_drop | default(omit) }}"
   with_items: "{{ postgresql_schema }}"
   become: true
