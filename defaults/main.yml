@@ -69,8 +69,8 @@ postgresql_users: []
 #   port: # defaults to postgresql_port
 #   state: # defaults to 'present'
 
-# Schema to ensure exist.
-postgresql_schema: []
+# Schemas to ensure exist.
+postgresql_schemas: []
 # - name: myschema # required; the rest are optional
 #   login_host: # defaults to 'localhost'
 #   login_password: # defaults to not set

@@ -11,7 +11,7 @@
     database: "{{ item.database | default('postgres') }}"
     owner: "{{ item.owner | default('postgres') }}"
     cascade_drop: "{{ item.cascade_drop | default(omit) }}"
-  with_items: "{{ postgresql_schema }}"
+  with_items: "{{ postgresql_schemas }}"
   become: true
   become_user: "{{ postgresql_user }}"
   vars:

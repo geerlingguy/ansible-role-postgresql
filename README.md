@@ -115,7 +115,7 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
-    postgresql_schema:
+    postgresql_schemas:
       - name: myschema # required; the rest are optional
         login_host: # defaults to 'localhost'
         login_password: # defaults to not set
@@ -127,7 +127,7 @@ A list of users to ensure exist on the server. Only the `name` is required; all 
         owner: jdoe # default to not set
         cascade_drop: yes # default to not set
 
-A list of schema to ensure exist on the server. Only the `name` is required; all other properties are optional.
+A list of schemas to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
     postgresql_privileges:
       - database: # required;
