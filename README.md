@@ -115,6 +115,20 @@ A list of databases to ensure exist on the server. Only the `name` is required; 
 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
+    postgresql_schema:
+      - name: myschema # required; the rest are optional
+        login_host: # defaults to 'localhost'
+        login_password: # defaults to not set
+        login_user: # defaults to '{{ postgresql_user }}'
+        login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+        port: # defaults to postgresql_port
+        state: # defaults to 'present'
+        database: exampledb # default to postgres
+        owner: jdoe # default to not set
+        cascade_drop: yes # default to not set
+
+A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
+
     postgresql_privileges:
       - database: # required;
         roles: # required; the rest are optional
