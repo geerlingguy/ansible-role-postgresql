@@ -127,7 +127,7 @@ A list of users to ensure exist on the server. Only the `name` is required; all 
         owner: jdoe # default to not set
         cascade_drop: yes # default to not set
 
-A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
+A list of schema to ensure exist on the server. Only the `name` is required; all other properties are optional.
 
     postgresql_privileges:
       - database: # required;
