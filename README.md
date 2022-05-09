@@ -5,8 +5,11 @@
 Installs and configures PostgreSQL server on RHEL/CentOS or Debian/Ubuntu servers.
 
 ## Requirements
+This role depends on `community.postgresql` You might already have this collection installed if you are using the ansible package. It is not included in ansible-core. To check whether it is installed, run a`nsible-galaxy collection list`.
 
-No special requirements; note that this role requires root access, so either run it in a playbook with a global `become: yes`, or invoke the role in your playbook like:
+To install it, use: `ansible-galaxy collection install community.postgresql`.
+
+note that this role requires root access, so either run it in a playbook with a global `become: yes`, or invoke the role in your playbook like:
 
     - hosts: database
       roles:
