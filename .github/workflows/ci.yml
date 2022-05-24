@@ -39,11 +39,12 @@ jobs:
     name: Molecule
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: ${{ !contains(github.event_name, 'pull_request') }}
       matrix:
         distro:
           - rockylinux8
           - centos7
-          - fedora35
+          - fedora36
           - ubuntu2004
           - ubuntu1804
           - debian10
