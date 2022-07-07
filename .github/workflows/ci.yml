@@ -45,6 +45,7 @@ jobs:
           - rockylinux8
           - centos7
           - fedora36
+          - ubuntu2204
           - ubuntu2004
           - ubuntu1804
           - debian10
