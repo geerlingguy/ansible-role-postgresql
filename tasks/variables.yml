@@ -59,9 +59,9 @@
 - name: Define postgresql_effective_log_dir, if postgresql_log_dir is absolute
   set_fact:
     postgresql_effective_log_dir: '{{ postgresql_log_dir }}'
-  when: postgresql_log_dir is regex("^/.*")
+  when: postgresql_log_dir is match("/")
 
 - name: Define postgresql_effective_log_dir, if postgresql_log_dir is relative
   set_fact:
     postgresql_effective_log_dir: '{{ postgresql_data_dir }}/{{ postgresql_log_dir }}'
-  when: postgresql_log_dir is not regex("^/.*")
+  when: postgresql_log_dir is not match("/")
