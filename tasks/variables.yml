@@ -54,3 +54,19 @@
     postgresql_unix_socket_directories_mode: >-
       {{ __postgresql_unix_socket_directories_mode | default('02775') }}
   when: postgresql_unix_socket_directories_mode is not defined
+
+- name: Define postgresql_log_dir.
+  set_fact:
+    # postgresql_global_config_options is an array but its keys are unique, so it can be converted to dict,
+    # to easily get the value under the 'log_directory' key
+    postgresql_log_dir: "{{ (postgresql_global_config_options | items2dict(key_name='option', value_name='value')).log_directory }}"
+
+- name: Define postgresql_effective_log_dir, if postgresql_log_dir is absolute
+  set_fact:
+    postgresql_effective_log_dir: '{{ postgresql_log_dir }}'
+  when: postgresql_log_dir is match("/")
+
+- name: Define postgresql_effective_log_dir, if postgresql_log_dir is relative
+  set_fact:
+    postgresql_effective_log_dir: '{{ postgresql_data_dir }}/{{ postgresql_log_dir }}'
+  when: postgresql_log_dir is not match("/")
