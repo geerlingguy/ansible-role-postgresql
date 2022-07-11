@@ -14,14 +14,6 @@
     state: directory
     mode: 0700
 
-- name: Ensure PostgreSQL log directory exists.
-  file:
-    path: "{{ postgresql_effective_log_dir }}"
-    owner: "{{ postgresql_user }}"
-    group: "{{ postgresql_group }}"
-    state: directory
-    mode: 0700
-
 - name: Check if PostgreSQL database is initialized.
   stat:
     path: "{{ postgresql_data_dir }}/PG_VERSION"
@@ -35,3 +27,11 @@
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
   vars:
     ansible_ssh_pipelining: true
+
+- name: Ensure PostgreSQL log directory exists.
+  file:
+    path: "{{ postgresql_effective_log_dir }}"
+    owner: "{{ postgresql_user }}"
+    group: "{{ postgresql_group }}"
+    state: directory
+    mode: 0700
