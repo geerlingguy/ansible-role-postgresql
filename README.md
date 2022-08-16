@@ -70,8 +70,10 @@ Configure [host based authentication](https://www.postgresql.org/docs/current/st
   - `auth_method` (required)
   - `auth_options` (optional)
 
+```
     postgresql_ident_entries:
       - {name: rootpostgres, system_user: root, pg_user: postgres}
+```
 
 Configure [User Name Maps](https://www.postgresql.org/docs/current/auth-username-maps.html) entries to be added to the pg_ident.conf. Options for entries include:
 
