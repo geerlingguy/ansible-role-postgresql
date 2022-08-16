@@ -19,6 +19,16 @@
   notify: restart postgresql
   when: postgresql_hba_entries | length > 0
 
+- name: Configure user map entries (if entries are configured).
+  template:
+    src: "pg_ident.conf.j2"
+    dest: "{{ postgresql_config_path }}/pg_ident.conf"
+    owner: "{{ postgresql_user }}"
+    group: "{{ postgresql_group }}"
+    mode: 0600
+  notify: restart postgresql
+  when: postgresql_ident_entries | length > 0
+
 - name: Ensure PostgreSQL unix socket dirs exist.
   file:
     path: "{{ item }}"

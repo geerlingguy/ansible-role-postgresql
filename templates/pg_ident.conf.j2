@@ -1,0 +1,9 @@
+{{ ansible_managed | comment }}
+# PostgreSQL Identity Configuration File
+# ===================================================
+#
+# See: https://www.postgresql.org/docs/current/auth-username-maps.html
+
+{% for ident in postgresql_ident_entries %}
+{{ ident.name }} {{ ident.system_user }} {{ ident.pg_user }}
+{% endfor %}

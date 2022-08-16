@@ -34,6 +34,10 @@ postgresql_hba_entries:
   - {type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: "{{ postgresql_auth_method }}"}
   - {type: host, database: all, user: all, address: '::1/128', auth_method: "{{ postgresql_auth_method }}"}
 
+#User Name Maps entries to be added to the pg_ident.conf.
+postgresql_ident_entries: []
+#  - {name: rootpostgres, system_user: root, pg_user: postgres}
+
 # Debian only. Used to generate the locales used by PostgreSQL databases.
 postgresql_locales:
   - 'en_US.UTF-8'
