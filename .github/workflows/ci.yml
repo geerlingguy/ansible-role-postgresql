@@ -43,6 +43,7 @@ jobs:
       matrix:
         distro:
           - rockylinux8
+          - rockylinux9
           - centos7
           - fedora36
           - ubuntu2204
