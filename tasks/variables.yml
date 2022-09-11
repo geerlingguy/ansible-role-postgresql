@@ -18,6 +18,10 @@
 - name: Include OS-specific variables (Fedora).
   include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
   when: ansible_distribution == 'Fedora'
+  
+- name: Include OS-specific variables (Suse).
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_os_family == 'Suse'
 
 - name: Define postgresql_packages.
   set_fact:
