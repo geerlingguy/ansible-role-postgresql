@@ -1,13 +1,11 @@
 ---
-# Fedora 34 containers only have python3 by default
 postgresql_python_library: python{{ ansible_python_version is version('3.0.0', '<') | ternary('2', '3') }}-psycopg2
 
-# Geerlingguy.postgresql roles doesn't support F34
 __postgresql_version: "14"
 __postgresql_data_dir: "/var/lib/pgsql/data/"
 __postgresql_bin_path: "/usr/lib/postgresql{{ __postgresql_version }}/bin/"
 __postgresql_config_path: "/var/lib/pgsql/data/"
-__postgresql_daemon:  postgresql
+__postgresql_daemon: postgresql
 __postgresql_packages:
   - "postgresql{{ __postgresql_version | replace('.','') }}"
   - "postgresql{{ __postgresql_version | replace('.','') }}-server"
