@@ -4,7 +4,7 @@
     name: "{{ postgresql_python_library }}"
     state: present
     update_cache: yes
-    
+
 - name: Ensure PostgreSQL packages are installed.
   apt:
     name: "{{ postgresql_packages }}"
