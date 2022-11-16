@@ -9,6 +9,8 @@ postgresql_restarted_state: "restarted"
 postgresql_python_library: python-psycopg2
 postgresql_user: postgres
 postgresql_group: postgres
+postgresql_port: 5432
+postgresql_ident_file: "{{ __postgresql_config_path }}/pg_ident.conf"
 
 # `md5` or `scram-sha-256` (https://www.postgresql.org/docs/10/auth-methods.html)
 postgresql_auth_method: "{{ ansible_fips  | ternary('scram-sha-256', 'md5') }}"
@@ -33,6 +35,10 @@ postgresql_hba_entries:
   - {type: local, database: all, user: all, auth_method: peer}
   - {type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: "{{ postgresql_auth_method }}"}
   - {type: host, database: all, user: all, address: '::1/128', auth_method: "{{ postgresql_auth_method }}"}
+
+postgresql_pg_ident: []
+
+postgresql_database_extensions: []
 
 # Debian only. Used to generate the locales used by PostgreSQL databases.
 postgresql_locales:
