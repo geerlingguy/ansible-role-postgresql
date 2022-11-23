@@ -42,6 +42,7 @@ jobs:
       fail-fast: ${{ !contains(github.event_name, 'pull_request') }}
       matrix:
         distro:
+          - archlinux
           - rockylinux8
           - centos7
           - fedora36
