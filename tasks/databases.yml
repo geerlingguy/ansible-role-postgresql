@@ -14,6 +14,7 @@
     owner: "{{ item.owner | default(postgresql_user) }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ postgresql_databases }}"
+  no_log: "{{ postgres_dbs_no_log }}"
   become: true
   become_user: "{{ postgresql_user }}"
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
