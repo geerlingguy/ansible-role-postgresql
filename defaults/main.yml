@@ -53,6 +53,9 @@ postgresql_databases: []
 #   owner: # defaults to postgresql_user
 #   state: # defaults to 'present'
 
+# Whether to output db data when managing databases.
+postgres_dbs_no_log: true
+
 # Users to ensure exist.
 postgresql_users: []
 # - name: jdoe #required; the rest are optional
