@@ -1,0 +1,11 @@
+---
+__postgresql_version: "15"
+__postgresql_data_dir: "/var/lib/postgresql/{{ __postgresql_version }}/data"
+__postgresql_bin_path: "/usr/libexec/postgresql{{ __postgresql_version  }}"
+__postgresql_config_path: "/etc/postgresql{{ __postgresql_version }}"
+__postgresql_daemon: "postgresql"
+__postgresql_packages:
+  - "postgresql{{ __postgresql_version }}"
+  - "postgresql{{ __postgresql_version }}-contrib"
+  - libpq-dev
+postgresql_python_library: py3-psycopg2

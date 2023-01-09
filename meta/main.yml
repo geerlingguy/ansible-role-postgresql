@@ -39,6 +39,9 @@ galaxy_info:
         - stretch
         - buster
         - bullseye
+    - name: Alpine
+      versions:
+        - 3.17
   galaxy_tags:
     - database
     - postgresql

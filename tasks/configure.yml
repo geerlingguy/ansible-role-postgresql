@@ -1,4 +1,42 @@
 ---
+
+# NB: On Alpine, configuration files are created by rc-service postgresql setup
+- block:
+
+    - name: Ensure default configuration exists
+      ansible.builtin.copy:
+        backup: yes
+        dest: "{{ __postgresql_config_path }}/{{ item }}"
+        group: "{{ postgresql_group }}"
+        mode: 0600
+        owner: "{{ postgresql_user }}"
+        remote_src: yes
+        src: "/usr/share/postgresql{{ __postgresql_version }}/{{ item }}.sample"
+      with_items:
+        - postgresql.conf
+        - pg_ident.conf
+
+    - name: Remove default configuration
+      ansible.builtin.file:
+        path: "{{ __postgresql_data_dir }}/{{ item }}"
+        state: absent
+      with_items:
+        - postgresql.conf
+        - pg_hba.conf
+        - pg_ident.conf
+
+    - name: Link default configuration
+      ansible.builtin.file:
+        path: "{{ __postgresql_data_dir }}/{{ item }}"
+        state: link
+        src: "{{ __postgresql_config_path }}/{{ item }}"
+        force: yes  # NB: Files will be created latter on
+      with_items:
+        - postgresql.conf
+        - pg_hba.conf
+        - pg_ident.conf
+  when: ansible_os_family == 'Alpine'
+
 - name: Configure global settings.
   lineinfile:
     dest: "{{ postgresql_config_path }}/postgresql.conf"

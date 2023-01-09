@@ -1,0 +1,10 @@
+---
+- name: Ensure PostgreSQL Python libraries are installed.
+  community.general.apk:
+    name: "{{ postgresql_python_library }}"
+    state: present
+
+- name: Ensure PostgreSQL packages are installed.
+  community.general.apk:
+    name: "{{ postgresql_packages }}"
+    state: present
