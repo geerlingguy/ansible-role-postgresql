@@ -70,3 +70,8 @@ postgresql_users: []
 
 # Whether to output user data when managing users.
 postgres_users_no_log: true
+
+# Whether to enable or not ssh pipelining
+# See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+# This issue is fixed on most recent versions on Ansible, kept in here for backward compatibility.
+postgres_ssh_pipelining: true
