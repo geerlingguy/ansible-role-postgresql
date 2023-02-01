@@ -1,23 +1,23 @@
 ---
 # Variable configuration.
 - name: Include OS-specific variables (Debian).
-  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
-  when: ansible_os_family == 'Debian'
+  include_vars: "{{ ansible_facts.distribution }}-{{ ansible_facts.distribution_version.split('.')[0] }}.yml"
+  when: ansible_facts.os_family == 'Debian'
 
 - name: Include OS-specific variables (RedHat).
-  include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  include_vars: "{{ ansible_facts.os_family }}-{{ ansible_facts.distribution_version.split('.')[0] }}.yml"
   when:
-  - ansible_os_family == 'RedHat'
-  - ansible_distribution != 'Fedora'
-  - ansible_distribution != 'Amazon'
+  - ansible_facts.os_family == 'RedHat'
+  - ansible_facts.distribution != 'Fedora'
+  - ansible_facts.distribution != 'Amazon'
 
 - name: Include OS-specific variables (Amazon).
-  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-  when: ansible_distribution == 'Amazon'
+  include_vars: "{{ ansible_facts.distribution }}-{{ ansible_facts.distribution_major_version }}.yml"
+  when: ansible_facts.distribution == 'Amazon'
 
 - name: Include OS-specific variables (Fedora).
-  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
-  when: ansible_distribution == 'Fedora'
+  include_vars: "{{ ansible_facts.distribution }}-{{ ansible_facts.distribution_version.split('.')[0] }}.yml"
+  when: ansible_facts.distribution == 'Fedora'
 
 - name: Define postgresql_packages.
   set_fact:

@@ -18,13 +18,13 @@
             lc_collate: 'C.UTF-8'
             lc_ctype: 'C.UTF-8'
       when:
-        - ( ansible_distribution == 'Fedora' and ansible_distribution_major_version >= '30') or
-          ( ansible_os_family == 'RedHat' and ansible_distribution_major_version in ['8','9'])
+        - ( ansible_facts.distribution == 'Fedora' and ansible_facts.distribution_major_version >= '30') or
+          ( ansible_facts.os_family == 'RedHat' and ansible_facts.distribution_major_version in ['8','9'])
 
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       changed_when: false
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts.os_family == 'Debian'
 
   roles:
     - role: geerlingguy.postgresql
