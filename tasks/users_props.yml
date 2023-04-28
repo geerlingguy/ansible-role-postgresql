@@ -13,6 +13,7 @@
     login_unix_socket: "{{ item.login_unix_socket | default(postgresql_unix_socket_directories[0]) }}"
     port: "{{ item.port | default(omit) }}"
     state: "{{ item.state | default('present') }}"
+    conn_limit: "{{ item.conn_limit | default(omit) }}"
   with_items: "{{ postgresql_users }}"
   no_log: "{{ postgres_users_no_log }}"
   become: true
