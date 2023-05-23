@@ -76,11 +76,11 @@ If overriding, make sure you copy all of the existing entries from `defaults/mai
       - 'en_US.UTF-8'
 
 (Debian/Ubuntu only) Used to generate the locales used by PostgreSQL databases.
-
+    postgresql_default_locale: 'en_US.UTF-8' # Default `lc_collate` and `lc_ctype` value
     postgresql_databases:
       - name: exampledb # required; the rest are optional
-        lc_collate: # defaults to 'en_US.UTF-8'
-        lc_ctype: # defaults to 'en_US.UTF-8'
+        lc_collate: # defaults to {{ postgresql_default_locale }}
+        lc_ctype: # defaults to {{ postgresql_default_locale }}
         encoding: # defaults to 'UTF-8'
         template: # defaults to 'template0'
         login_host: # defaults to 'localhost'
