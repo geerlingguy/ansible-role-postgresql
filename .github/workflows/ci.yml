@@ -50,6 +50,7 @@ jobs:
           - ubuntu1804
           - debian10
           - debian11
+          - debian12
 
     steps:
       - name: Check out the codebase.
