@@ -44,11 +44,9 @@ jobs:
         distro:
           - rockylinux8
           - rockylinux9
-          - fedora36
+          - fedora38
           - ubuntu2204
           - ubuntu2004
-          - ubuntu1804
-          - debian10
           - debian11
           - debian12
 

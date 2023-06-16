@@ -19,13 +19,11 @@ galaxy_info:
         - 9
     - name: Fedora
       versions:
-        - 30
-        - 31
-        - 32
-        - 33
         - 34
         - 35
         - 36
+        - 37
+        - 38
     - name: Ubuntu
       versions:
         - xenial
