@@ -34,9 +34,6 @@ galaxy_info:
         - jammy
     - name: Debian
       versions:
-        - wheezy
-        - jessie
-        - stretch
         - buster
         - bullseye
         - bookworm
