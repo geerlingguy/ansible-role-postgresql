@@ -11,6 +11,9 @@
     content: "{{ downloaded_key.stdout }}"
     dest: /etc/apt/trusted.gpg.d/pgdg.asc
 
+- name: Update cache
+  apt:  update_cache=yes state=latest
+
 - name: Ensure PostgreSQL Python libraries are installed.
   apt:
     name: "{{ postgresql_python_library }}"
