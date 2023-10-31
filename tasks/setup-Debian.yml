@@ -9,7 +9,7 @@
     url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
     dest: /etc/apt/trusted.gpg.d/pgdg.asc
   become: true
-  when: not postresql_st_pgdg.stat.exists
+  when: not postgresql_st_pgdg.stat.exists
 
 - name: Add postgresql repository into sources list
   ansible.builtin.apt_repository:
