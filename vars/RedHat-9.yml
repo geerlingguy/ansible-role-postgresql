@@ -1,5 +1,5 @@
 ---
-__postgresql_version: "10"
+__postgresql_version: "13"
 __postgresql_data_dir: "/var/lib/pgsql/data"
 __postgresql_bin_path: "/usr/bin"
 __postgresql_config_path: "/var/lib/pgsql/data"
