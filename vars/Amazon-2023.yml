@@ -8,6 +8,7 @@ __postgresql_packages:
   - postgresql15
   - postgresql15-server
   - postgresql15-contrib
-__postgresql_unix_socket_directories_mode: '0755'
+  - libpq-devel
+__postgresql_unix_socket_directories_mode: "0755"
 # Fedora 32 containers only have python3 by default
 postgresql_python_library: python3-psycopg2
