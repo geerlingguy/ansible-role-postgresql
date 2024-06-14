@@ -1,4 +1,25 @@
 ---
+- name: Check if signing key is present
+  stat:
+    path: /etc/apt/trusted.gpg.d/pgdg.asc
+  register: postgresql_st_pgdg
+
+- name: Import and Write gpg key to pgdg.asc
+  get_url:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    dest: /etc/apt/trusted.gpg.d/pgdg.asc
+  become: true
+  when: not postgresql_st_pgdg.stat.exists
+
+- name: Add postgresql repository into sources list
+  ansible.builtin.apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt {{ ansible_distribution_release }}-pgdg main"
+    state: present
+
+- name: Update cache
+  apt: update_cache=yes state=latest
+  become: true
+
 - name: Ensure PostgreSQL Python libraries are installed.
   apt:
     name: "{{ postgresql_python_library }}"
