@@ -62,6 +62,8 @@ jobs:
 
       - name: Install test dependencies.
         run: pip3 install ansible molecule molecule-plugins[docker] docker
+      - name: Install community.postgresql
+        run: ansible-galaxy collection install community.postgresql
 
       - name: Run Molecule tests.
         run: molecule test
