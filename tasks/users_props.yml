@@ -4,7 +4,6 @@
     name: "{{ item.name }}"
     password: "{{ item.password | default(omit) }}"
     encrypted: "{{ item.encrypted | default(omit) }}"
-    priv: "{{ item.priv | default(omit) }}"
     role_attr_flags: "{{ item.role_attr_flags | default(omit) }}"
     db: "{{ item.db | default(omit) }}"
     login_host: "{{ item.login_host | default('localhost') }}"
@@ -14,6 +13,40 @@
     port: "{{ item.port | default(omit) }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ postgresql_users }}"
+  no_log: "{{ postgres_users_no_log }}"
+  become: true
+  become_user: "{{ postgresql_user }}"
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true
+  environment:
+    PGOPTIONS: "{{ (postgresql_auth_method == 'scram-sha-256') | ternary('-c password_encryption=scram-sha-256', '') }}"
+
+- name: Ensure PostgreSQL users do not use deprecated privileges settings
+  debug:
+    msg "Postgresql user {{ item.name }} uses deprecated privileges settings. See https://github.com/geerlingguy/ansible-role-postgresql/issues/254"
+  with_items: "{{ postgresql_users }}"
+  when: item.priv is defined
+
+- name: Ensure PostgreSQL users privileges are configured correctly.
+  postgresql_privs:
+    roles: "{{ item.roles }}"
+    db: "{{ item.db }}"
+    privs: "{{ item.privs | default(omit) }}"
+    type: "{{ item.type | default(omit) }}"
+    objs: "{{ item.objs | default(omit) }}"
+    schema: "{{ item.schema | default(omit) }}"
+    session_role: "{{ item.session_role | default(omit) }}"
+    login_host: "{{ item.login_host | default('localhost') }}"
+    login_password: "{{ item.login_password | default(omit) }}"
+    login_user: "{{ item.login_user | default(postgresql_user) }}"
+    login_unix_socket: "{{ item.login_unix_socket | default(postgresql_unix_socket_directories[0]) }}"
+    port: "{{ item.port | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+    fail_on_role: "{{ item.fail_on_role | default(true) }}"
+    grant_option: "{{ item.grant_option | default(omit) }}"
+    target_roles: "{{ item.target_roles | default(omit) }}"
+  with_items: "{{ postgresql_privs }}"
   no_log: "{{ postgres_users_no_log }}"
   become: true
   become_user: "{{ postgresql_user }}"
