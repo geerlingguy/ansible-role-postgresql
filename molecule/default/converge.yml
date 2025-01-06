@@ -8,6 +8,11 @@
       - name: example
     postgresql_users:
       - name: jdoe
+    postgresql_privs:
+      - db: example
+        roles: jdoe
+        type: database
+        privs: ALL
 
   pre_tasks:
     # The Fedora 30+ container images have only C.UTF-8 installed
