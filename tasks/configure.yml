@@ -1,6 +1,6 @@
 ---
 - name: Configure global settings.
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ postgresql_config_path }}/postgresql.conf"
     regexp: "^#?{{ item.option }}.+$"
     line: "{{ item.option }} = '{{ item.value }}'"
@@ -10,7 +10,7 @@
   notify: restart postgresql
 
 - name: Configure host based authentication (if entries are configured).
-  template:
+  ansible.builtin.template:
     src: "pg_hba.conf.j2"
     dest: "{{ postgresql_config_path }}/pg_hba.conf"
     owner: "{{ postgresql_user }}"
@@ -20,7 +20,7 @@
   when: postgresql_hba_entries | length > 0
 
 - name: Ensure PostgreSQL unix socket dirs exist.
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: "{{ postgresql_user }}"
