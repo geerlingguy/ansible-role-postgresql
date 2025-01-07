@@ -118,7 +118,6 @@ postgresql_users:
   - name: jdoe #required; the rest are optional
     password: # defaults to not set
     encrypted: # defaults to not set
-    priv: # defaults to not set
     role_attr_flags: # defaults to not set
     db: # defaults to not set
     login_host: # defaults to 'localhost'
@@ -130,6 +129,28 @@ postgresql_users:
 ```
 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
+
+```yaml
+postgresql_privs:
+  - db: exampledb # database (required)
+    roles: jdoe  # role(s) the privs apply to (required)
+    privs: # comma separated list of privileges - defaults to not set
+    type: # type of database object to set privileges on - defaults to not set
+    objs: # list of database objects to set privileges on - defaults to not set
+    schema: # defaults to not set
+    session_role: # defaults to not set
+    fail_on_role: # defaults to true
+    grant_option: # defaults to not set
+    target_roles: # defaults to not set
+    login_host: # defaults to 'localhost'
+    login_password: # defaults to not set
+    login_user: # defaults to '{{ postgresql_user }}'
+    login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
+    port: # defaults to not set
+    state: # defaults to 'present'
+```
+
+A list of privileges to configure (new in role version 4.0.0).
 
 ```yaml
 postgres_users_no_log: true
