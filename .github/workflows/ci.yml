@@ -5,6 +5,7 @@ name: CI
   push:
     branches:
       - master
+      - use-fqcn
   schedule:
     - cron: "0 3 * * 5"
 
