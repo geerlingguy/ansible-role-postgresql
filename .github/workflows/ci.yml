@@ -47,7 +47,7 @@ jobs:
     name: Molecule
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: ${{ !contains(github.event_name, 'pull_request') }}
+      #fail-fast: ${{ !contains(github.event_name, 'pull_request') }}
       matrix:
         distro:
           - rockylinux9
