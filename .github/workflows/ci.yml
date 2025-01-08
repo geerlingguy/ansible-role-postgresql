@@ -35,9 +35,13 @@ jobs:
       - name: Lint code - yamllint.
         run: |
           yamllint .
+          pwd
+          ls -la
 
       - name: Lint code - ansible-lint
         uses: ansible/ansible-lint@v24.12.2
+        with:
+          working_directory: 'geerlingguy.postgresql'
 
   molecule:
     name: Molecule
