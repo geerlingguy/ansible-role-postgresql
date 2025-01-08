@@ -1,4 +1,13 @@
+---
+exclude_paths:
+  - molecule/
+  - .github/
+  - meta/
+
 skip_list:
   - 'yaml'
   - 'no-handler'
   - 'role-name'
+  - no-free-form
+  - name[missing]
+  - name[casing]

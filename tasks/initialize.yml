@@ -19,7 +19,7 @@
     path: "{{ postgresql_data_dir }}/PG_VERSION"
   register: pgdata_dir_version
 
-- name: Ensure PostgreSQL database is initialized.
+- name: Ensure PostgreSQL database is initialized.  # noqa no-changed-when
   ansible.builtin.command: "{{ postgresql_bin_path }}/initdb -D {{ postgresql_data_dir }}"
   when: not pgdata_dir_version.stat.exists
   become: true
@@ -28,7 +28,7 @@
   vars:
     ansible_ssh_pipelining: true
 
-- name: Ensure PostgreSQL log directory exists.
+- name: Ensure PostgreSQL log directory exists.  # noqa fqcn[action-core]
   file:
     path: "{{ postgresql_effective_log_dir }}"
     owner: "{{ postgresql_user }}"

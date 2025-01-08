@@ -1,5 +1,5 @@
 ---
-- name: Ensure PostgreSQL packages are installed.
+- name: Ensure PostgreSQL packages are installed.  # noqa fqcn[action-core]
   ansible.builtin.yum:  # FIXME: this should be migrated to ansible.builtin.dnf
     name: "{{ postgresql_packages }}"
     state: present
@@ -9,7 +9,7 @@
     # and affects system behavior in multiple ways.
     exclude: python-unversioned-command
 
-- name: Ensure PostgreSQL Python libraries are installed.
+- name: Ensure PostgreSQL Python libraries are installed.  # noqa fqcn[action-core]
   ansible.builtin.yum:  # FIXME: this should be migrated to ansible.builtin.dnf
     name: "{{ postgresql_python_library }}"
     state: present
