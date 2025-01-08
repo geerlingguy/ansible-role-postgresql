@@ -29,7 +29,7 @@
     ansible_ssh_pipelining: true
 
 - name: Ensure PostgreSQL log directory exists.  # noqa fqcn[action-core]
-  file:
+  ansible.builtin.file:
     path: "{{ postgresql_effective_log_dir }}"
     owner: "{{ postgresql_user }}"
     group: "{{ postgresql_group }}"
