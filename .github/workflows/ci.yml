@@ -42,11 +42,11 @@ jobs:
       fail-fast: ${{ !contains(github.event_name, 'pull_request') }}
       matrix:
         distro:
-          - rockylinux9
-          - fedora39
-          - fedora40
+          # See: https://github.com/geerlingguy/docker-rockylinux9-ansible/issues/6
+          # - rockylinux9
+          # - fedora41
+          - ubuntu2404
           - ubuntu2204
-          - ubuntu2004
           - debian11
           - debian12
 
