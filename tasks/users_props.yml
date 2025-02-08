@@ -24,7 +24,7 @@
 
 - name: Ensure PostgreSQL users do not use deprecated privileges settings
   debug:
-    msg "Postgresql user {{ item.name }} uses deprecated privileges settings. See https://github.com/geerlingguy/ansible-role-postgresql/issues/254"
+    msg: "Postgresql user {{ item.name }} uses deprecated privileges settings. See https://github.com/geerlingguy/ansible-role-postgresql/issues/254"
   with_items: "{{ postgresql_users }}"
   no_log: "{{ postgres_users_no_log }}"
   when: item.priv is defined
