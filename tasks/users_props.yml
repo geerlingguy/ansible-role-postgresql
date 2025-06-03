@@ -25,7 +25,7 @@
 - name: Ensure PostgreSQL users do not use deprecated privileges settings
   debug:
     msg "Postgresql user {{ item.name }} uses deprecated privileges settings. See https://github.com/geerlingguy/ansible-role-postgresql/issues/254"
-  with_items: "{{ postgresql_users }}"
+  with_items: "{{ postgresql_users | map('combine', {'password': '***hidden***'}) | list }}"
   when: item.priv is defined
 
 - name: Ensure PostgreSQL users privileges are configured correctly.
