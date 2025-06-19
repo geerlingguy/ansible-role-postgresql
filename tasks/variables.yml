@@ -59,7 +59,7 @@
   set_fact:
     # postgresql_global_config_options is an array but its keys are unique, so it can be converted to dict,
     # to easily get the value under the 'log_directory' key
-    postgresql_log_dir: "{{ (postgresql_global_config_options | items2dict(key_name='option', value_name='value')).log_directory }}"
+    postgresql_log_dir: "{{ (postgresql_global_config_options | items2dict(key_name='option', value_name='value')).log_directory | default('log') }}"
 
 - name: Define postgresql_effective_log_dir, if postgresql_log_dir is absolute
   set_fact:
