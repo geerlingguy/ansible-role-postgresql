@@ -126,6 +126,7 @@ postgresql_users:
     login_unix_socket: # defaults to 1st of postgresql_unix_socket_directories
     port: # defaults to not set
     state: # defaults to 'present'
+    conn_limit: # defaults to not set
 ```
 
 A list of users to ensure exist on the server. Only the `name` is required; all other properties are optional.
