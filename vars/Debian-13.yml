@@ -6,6 +6,5 @@ __postgresql_config_path: "/etc/postgresql/{{ __postgresql_version }}/main"
 __postgresql_daemon: "postgresql@{{ postgresql_version }}-main"
 __postgresql_packages:
   - postgresql
-  - postgresql-contrib
   - libpq-dev
 postgresql_python_library: python3-psycopg2
