@@ -8,9 +8,11 @@
     # to be installed, which breaks later Ansible runs on Fedora 30,
     # and affects system behavior in multiple ways.
     exclude: python-unversioned-command
+  become: true
 
 - name: Ensure PostgreSQL Python libraries are installed.
   yum:
     name: "{{ postgresql_python_library }}"
     state: present
     enablerepo: "{{ postgresql_enablerepo | default(omit, true) }}"
+  become: true

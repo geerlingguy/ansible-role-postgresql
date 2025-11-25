@@ -8,6 +8,7 @@
     mode: 0644
   with_items: "{{ postgresql_global_config_options }}"
   notify: restart postgresql
+  become: true
 
 - name: Configure host based authentication (if entries are configured).
   template:
@@ -18,6 +19,7 @@
     mode: 0600
   notify: restart postgresql
   when: postgresql_hba_entries | length > 0
+  become: true
 
 - name: Ensure PostgreSQL unix socket dirs exist.
   file:
@@ -27,3 +29,4 @@
     group: "{{ postgresql_group }}"
     mode: "{{ postgresql_unix_socket_directories_mode }}"
   with_items: "{{ postgresql_unix_socket_directories }}"
+  become: true

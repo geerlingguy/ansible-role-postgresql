@@ -5,6 +5,7 @@
     dest: /etc/profile.d/postgres.sh
     mode: 0644
   notify: restart postgresql
+  become: true
 
 - name: Ensure PostgreSQL data directory exists.
   file:
@@ -13,11 +14,13 @@
     group: "{{ postgresql_group }}"
     state: directory
     mode: 0700
+  become: true
 
 - name: Check if PostgreSQL database is initialized.
   stat:
     path: "{{ postgresql_data_dir }}/PG_VERSION"
   register: pgdata_dir_version
+  become: true
 
 - name: Ensure PostgreSQL database is initialized.
   command: "{{ postgresql_bin_path }}/initdb -D {{ postgresql_data_dir }}"
@@ -35,3 +38,4 @@
     group: "{{ postgresql_group }}"
     state: directory
     mode: 0700
+  become: true
