@@ -4,13 +4,13 @@
 
 # Setup/install tasks.
 - include_tasks: setup-Archlinux.yml
-  when: ansible_os_family == 'Archlinux'
+  when: ansible_facts.os_family == 'Archlinux'
 
 - include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts.os_family == 'Debian'
 
 - include_tasks: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+  when: ansible_facts.os_family == 'RedHat'
 
 - include_tasks: initialize.yml
 - include_tasks: configure.yml
