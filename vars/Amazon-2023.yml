@@ -8,4 +8,3 @@ __postgresql_packages:
   - postgresql16
   - postgresql16-server
   - postgresql16-contrib
-
