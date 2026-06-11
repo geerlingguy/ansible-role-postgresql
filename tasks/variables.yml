@@ -19,6 +19,10 @@
   include_vars: "{{ ansible_facts.distribution }}-{{ ansible_facts.distribution_version.split('.')[0] }}.yml"
   when: ansible_facts.distribution == 'Fedora'
 
+- name: Include OS-specific variables (Arch Linux).
+  include_vars: "{{ ansible_facts.distribution }}.yml"
+  when: ansible_facts.distribution == 'Archlinux'
+
 - name: Define postgresql_packages.
   set_fact:
     postgresql_packages: "{{ __postgresql_packages | list }}"
