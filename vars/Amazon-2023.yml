@@ -1,0 +1,10 @@
+---
+__postgresql_version: "16"
+__postgresql_data_dir: "/var/lib/pgsql/data"
+__postgresql_bin_path: "/usr/bin"
+__postgresql_config_path: "/var/lib/pgsql/data"
+__postgresql_daemon: postgresql
+__postgresql_packages:
+  - postgresql16
+  - postgresql16-server
+  - postgresql16-contrib
