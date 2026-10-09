@@ -14,6 +14,10 @@ No special requirements; note that this role requires root access, so either run
     - role: geerlingguy.postgresql
       become: yes
 ```
+
+If you are running this role with `ansible-core`, install the
+`community.postgresql` collection first so the PostgreSQL modules used by the
+role are available.
 ## Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):

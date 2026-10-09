@@ -1,6 +1,6 @@
 ---
 - name: Ensure PostgreSQL databases are present.
-  postgresql_db:
+  community.postgresql.postgresql_db:
     name: "{{ item.name }}"
     lc_collate: "{{ item.lc_collate | default('en_US.UTF-8') }}"
     lc_ctype: "{{ item.lc_ctype | default('en_US.UTF-8') }}"

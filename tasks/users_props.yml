@@ -1,6 +1,6 @@
 ---
 - name: Ensure PostgreSQL users are configured correctly.
-  postgresql_user:
+  community.postgresql.postgresql_user:
     name: "{{ item.name }}"
     password: "{{ item.password | default(omit) }}"
     encrypted: "{{ item.encrypted | default(omit) }}"
@@ -32,7 +32,7 @@
   when: item.priv is defined
 
 - name: Ensure PostgreSQL users privileges are configured correctly.
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     roles: "{{ item.roles }}"
     db: "{{ item.db }}"
     privs: "{{ item.privs | default(omit) }}"
