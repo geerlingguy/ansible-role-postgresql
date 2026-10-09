@@ -6,18 +6,19 @@ Installs and configures PostgreSQL server on RHEL/CentOS or Debian/Ubuntu server
 
 ## Requirements
 
-No special requirements; note that this role requires root access, so either run it in a playbook with a global `become: yes`, or invoke the role in your playbook like:
+No special requirements; note that this role requires root access, so either run it in a playbook with a global `become: true`, or invoke the role in your playbook like:
 
 ```yaml
 - hosts: database
   roles:
     - role: geerlingguy.postgresql
-      become: yes
+      become: true
 ```
 
 If you are running this role with `ansible-core`, install the
 `community.postgresql` collection first so the PostgreSQL modules used by the
 role are available.
+
 ## Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
