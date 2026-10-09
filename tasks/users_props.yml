@@ -5,7 +5,7 @@
     password: "{{ item.password | default(omit) }}"
     encrypted: "{{ item.encrypted | default(omit) }}"
     role_attr_flags: "{{ item.role_attr_flags | default(omit) }}"
-    db: "{{ item.db | default(omit) }}"
+    login_db: "{{ item.login_db | default(item.db) | default(omit) }}"
     login_host: "{{ item.login_host | default('localhost') }}"
     login_password: "{{ item.login_password | default(omit) }}"
     login_user: "{{ item.login_user | default(postgresql_user) }}"
@@ -34,7 +34,7 @@
 - name: Ensure PostgreSQL users privileges are configured correctly.
   community.postgresql.postgresql_privs:
     roles: "{{ item.roles }}"
-    db: "{{ item.db }}"
+    login_db: "{{ item.login_db | default(item.db) }}"
     privs: "{{ item.privs | default(omit) }}"
     type: "{{ item.type | default(omit) }}"
     objs: "{{ item.objs | default(omit) }}"
