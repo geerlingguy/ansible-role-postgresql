@@ -18,6 +18,7 @@
         roles: longjohnsilver
         objs: ALL_IN_SCHEMA
         privs: ALL
+    postgresql_data_dir: /psqldata
 
   pre_tasks:
     # The Fedora 30+ container images have only C.UTF-8 installed

@@ -1,8 +1,19 @@
 ---
-- name: Configure global settings.
+# `data_directory` in postgresql.conf set to `postgresql_data_dir` variable
+# Can be overridden in next task if `data_directory` parameter is also set
+# via `postgresql_global_config_options` var
+- name: Configure data dir in postgresql.conf.
   lineinfile:
     dest: "{{ postgresql_config_path }}/postgresql.conf"
-    regexp: "^#?{{ item.option }}.+$"
+    regexp: "^#?\\s*data_directory\\s*=.+$"
+    line: "data_directory = '{{ postgresql_data_dir }}'"
+    mode: 0644
+  notify: restart postgresql
+
+- name: Configure global settings (postgresql.conf).
+  lineinfile:
+    dest: "{{ postgresql_config_path }}/postgresql.conf"
+    regexp: "^#?\\s*{{ item.option }}\\s*=.+$"
     line: "{{ item.option }} = '{{ item.value }}'"
     state: "{{ item.state | default('present') }}"
     mode: 0644
