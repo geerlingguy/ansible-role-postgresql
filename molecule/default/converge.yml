@@ -9,12 +9,14 @@
     postgresql_users:
       - name: jdoe
       - name: longjohnsilver
+      - name: ctea
+        login_db: example
     postgresql_privs:
-      - db: example
+      - db: example # old syntax
         roles: jdoe
         type: database
         privs: ALL
-      - db: example
+      - login_db: example # new syntax
         roles: longjohnsilver
         objs: ALL_IN_SCHEMA
         privs: ALL
